@@ -10,7 +10,7 @@
   <properties>
     <logger.version>2.10.0</logger.version>
     <junit.version>4.12</junit.version>
-    <assertj.version>3.9.0</assertj.version>
+    <assertj.version>3.9.1</assertj.version>
     <mockito.version>2.13.0</mockito.version>
     <lombok.version>1.16.20</lombok.version>
     <javadoc.version>3.0.0-M1</javadoc.version>
