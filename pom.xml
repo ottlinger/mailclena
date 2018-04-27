@@ -8,7 +8,7 @@
   <name>mailclena</name>
   <url>https://github.com/ottlinger/mailclena</url>
   <properties>
-    <logger.version>2.10.0</logger.version>
+    <logger.version>2.11.0</logger.version>
     <junit.version>4.12</junit.version>
     <assertj.version>3.9.1</assertj.version>
     <mockito.version>2.18.3</mockito.version>
