@@ -28,21 +28,28 @@
       <plugin>
         <groupId>org.pitest</groupId>
         <artifactId>pitest-maven</artifactId>
-        <version>1.3.1</version>
+        <version>1.4.0</version>
         <configuration>
           <timeoutConstant>8000</timeoutConstant>
           <threads>8</threads>
-          <coverageThreshold>89</coverageThreshold>
-          <mutationThreshold>43</mutationThreshold>
+          <!--coverageThreshold>89</coverageThreshold>
+          <mutationThreshold>43</mutationThreshold-->
+          <failWhenNoMutations>false</failWhenNoMutations>
           <verbose>true</verbose>
+          <targetClasses>
+            <param>de.aikiit.mailclena*</param>
+          </targetClasses>
+          <targetTests>
+            <param>de.aikiit.mailclena*</param>
+          </targetTests>
         </configuration>
         <executions>
-            <execution>
-                <id>mutationcoverage</id>
-                <goals>
-                    <goal>mutationCoverage</goal>
-                </goals>
-            </execution>
+          <execution>
+            <id>mutationcoverage</id>
+            <goals>
+              <goal>mutationCoverage</goal>
+            </goals>
+          </execution>
         </executions>
       </plugin>
       <plugin>
