@@ -4,6 +4,7 @@ Tool that logs into mail accounts and removes all mails.
 ## Stats
 
 [![Stories in Backlog](https://badge.waffle.io/ottlinger/mailclena.png?label=Inbox&title=Backlog)](https://waffle.io/ottlinger/mailclena)
+[![Finished stories](https://badge.waffle.io/ottlinger/mailclena.png?label=Done&title=Done)](https://waffle.io/ottlinger/mailclena)
 [![Stories in Ready](https://badge.waffle.io/ottlinger/mailclena.png?label=To%20Do&title=Ready)](https://waffle.io/ottlinger/mailclena)
 [![Stories in Progress](https://badge.waffle.io/ottlinger/mailclena.png?label=in%20progress&title=In%20Progress)](https://waffle.io/ottlinger/mailclena)
 [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/ottlinger/mailclena.svg)](http://isitmaintained.com/project/ottlinger/mailclena "Average time to resolve an issue")
