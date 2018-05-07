@@ -28,9 +28,10 @@ public final class MailClena {
                     mailConfigurationBuilder.host(cmd.getOptionValue(MailClenaCommandLineOptions.HOST.getOpt()));
                     mailConfigurationBuilder.username(cmd.getOptionValue(MailClenaCommandLineOptions.USERNAME.getOpt()));
                     mailConfigurationBuilder.password(cmd.getOptionValue(MailClenaCommandLineOptions.PASSWORD.getOpt()));
-                    mailConfigurationBuilder.build();
+
+                    final MailConfiguration mailConfiguration = mailConfigurationBuilder.build();
+                    log.info("Extracted configuration from given parameters : {}", mailConfiguration);
                 }
-                //                log.info("Found hostname : {}", hostname);
             }
 
         } catch (ParseException | NullPointerException e) {
