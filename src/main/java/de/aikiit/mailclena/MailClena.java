@@ -1,5 +1,6 @@
 package de.aikiit.mailclena;
 
+import com.google.common.base.Strings;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -17,12 +18,18 @@ public final class MailClena {
             CommandLine cmd = parser.parse(getAvailableOptions(), args);
             log.info(cmd.getArgList());
 
-            if(cmd.hasOption(MailClenaCommandLineOptions.HOST.getOpt())) {
-                String hostname = cmd.getOptionValue(MailClenaCommandLineOptions.HOST.getOpt());
-                log.info("Found hostname : {}", hostname);
+
+            final MailConfiguration.MailConfigurationBuilder mailConfigurationBuilder = MailConfiguration.builder();
+            if (cmd.hasOption(MailClenaCommandLineOptions.HOST.getOpt())) {
+
+                if (!Strings.isNullOrEmpty(cmd.getOptionValue(MailClenaCommandLineOptions.HOST.getOpt()))) {
+                    mailConfigurationBuilder.host(cmd.getOptionValue(MailClenaCommandLineOptions.HOST.getOpt()));
+                    log.debug("Parsed hostname.");
+                }
+                //                log.info("Found hostname : {}", hostname);
             }
 
-        } catch (ParseException  | NullPointerException e) {
+        } catch (ParseException | NullPointerException e) {
             log.error("Unable to parse given command line parameters", e);
             HelpFormatter formatter = new HelpFormatter();
             formatter.printHelp("MailClena", getAvailableOptions());
@@ -33,19 +40,19 @@ public final class MailClena {
     private static Options getAvailableOptions() {
         Options o = new Options();
 
-        for(MailClenaCommandLineOptions opt : MailClenaCommandLineOptions.values()) {
+        for (MailClenaCommandLineOptions opt : MailClenaCommandLineOptions.values()) {
             o.addOption(new Option(opt.getOpt(), opt.name().toLowerCase(), true, opt.getDescription()));
         }
         return o;
     }
 
     private enum MailClenaCommandLineOptions {
-        HOST("h","Hostname - example: http://imap.yourisp.org"),
+        HOST("h", "Hostname - example: http://imap.yourisp.org"),
         USERNAME("u", "Username - example: myuser@tld.org"),
         PASSWORD("p", "Password - example: myfancypassword");
 
-        private String opt;
-        private String desc;
+        private final String opt;
+        private final String desc;
 
         String getOpt() {
             return opt;
