@@ -29,3 +29,10 @@ In order to just play around with it I've integrated a CI run:
 ## How to run and use the application
 
 You need to checkout the application and build it with the help of [Java](https://java.sun.com) and [Maven](https://maven.apache.org/).
+
+´´´
+$ mvn
+$ java -jar target/mailclena-0.0.1-SNAPSHOT-executable.jar 
+22:58:33.294 [main] INFO  de.aikiit.mailclena.MailClena - Hello World :-)
+22:58:33.300 [main] INFO  de.aikiit.mailclena.MailClena - []
+´´´
