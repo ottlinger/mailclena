@@ -9,7 +9,7 @@ import org.apache.commons.cli.*;
 @NoArgsConstructor
 public final class MailClenaParameterParser {
 
-    public void extractConfiguration(String... args) throws IllegalArgumentException {
+    public MailConfiguration extractConfiguration(String... args) throws IllegalArgumentException {
         CommandLineParser parser = new DefaultParser();
         try {
             CommandLine cmd = parser.parse(getAvailableOptions(), args);
@@ -27,6 +27,7 @@ public final class MailClenaParameterParser {
 
                     final MailConfiguration mailConfiguration = mailConfigurationBuilder.build();
                     log.info("Extracted configuration from given parameters : {}", mailConfiguration);
+                    return mailConfiguration;
                 }
             }
 
@@ -36,6 +37,7 @@ public final class MailClenaParameterParser {
             formatter.printHelp("MailClena", getAvailableOptions());
             throw new IllegalArgumentException("Exception while parsing command line arguments");
         }
+        return null;
     }
 
     Options getAvailableOptions() {

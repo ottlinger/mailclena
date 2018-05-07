@@ -10,6 +10,7 @@ public final class MailClena {
 
     public static void main(String... args) {
         log.info("Hello World :-)");
+        MailConfiguration mailConfiguration = new MailClenaParameterParser().extractConfiguration(args);
     }
 
 }

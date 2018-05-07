@@ -3,6 +3,8 @@ package de.aikiit.mailclena;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class MailClenaParameterParserTest {
 
     private MailClenaParameterParser parser;
@@ -14,7 +16,7 @@ public class MailClenaParameterParserTest {
 
     @Test
     public void callMainWithHostnameParameter() {
-        parser.extractConfiguration("-h=boo.foo.bar");
+        assertThat(parser.extractConfiguration("-h=boo.foo.bar")).isNull();
     }
 
     @Test
