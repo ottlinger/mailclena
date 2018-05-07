@@ -12,22 +12,22 @@ public class MailConfigurationClass {
 
     @Test
     public void roundtripHostname() {
-        final MailConfiguration mailConfiguration = new MailConfiguration();
-        mailConfiguration.setHost(HOST);
-        assertThat(mailConfiguration.getHost()).isEqualTo(HOST);
+        final MailConfiguration.MailConfigurationBuilder builder = MailConfiguration.builder();
+        builder.host(HOST);
+        assertThat(builder.build().getHost()).isEqualTo(HOST);
     }
 
     @Test
     public void roundtripUsername() {
-        final MailConfiguration mailConfiguration = new MailConfiguration();
-        mailConfiguration.setUsername(USER);
-        assertThat(mailConfiguration.getUsername()).isEqualTo(USER);
+        final MailConfiguration.MailConfigurationBuilder builder = MailConfiguration.builder();
+        builder.username(USER);
+        assertThat(builder.build().getUsername()).isEqualTo(USER);
     }
 
     @Test
     public void roundtripPassword() {
-        final MailConfiguration mailConfiguration = new MailConfiguration();
-        mailConfiguration.setPassword(CRED);
-        assertThat(mailConfiguration.getPassword()).isEqualTo(CRED);
+        final MailConfiguration.MailConfigurationBuilder builder = MailConfiguration.builder();
+        builder.password(CRED);
+        assertThat(builder.build().getPassword()).isEqualTo(CRED);
     }
 }

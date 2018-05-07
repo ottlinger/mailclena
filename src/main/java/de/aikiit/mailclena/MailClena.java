@@ -22,9 +22,13 @@ public final class MailClena {
             final MailConfiguration.MailConfigurationBuilder mailConfigurationBuilder = MailConfiguration.builder();
             if (cmd.hasOption(MailClenaCommandLineOptions.HOST.getOpt())) {
 
-                if (!Strings.isNullOrEmpty(cmd.getOptionValue(MailClenaCommandLineOptions.HOST.getOpt()))) {
+                if (!Strings.isNullOrEmpty(cmd.getOptionValue(MailClenaCommandLineOptions.HOST.getOpt())) &&
+                        !Strings.isNullOrEmpty(cmd.getOptionValue(MailClenaCommandLineOptions.USERNAME.getOpt())) &&
+                        !Strings.isNullOrEmpty(cmd.getOptionValue(MailClenaCommandLineOptions.PASSWORD.getOpt()))) {
                     mailConfigurationBuilder.host(cmd.getOptionValue(MailClenaCommandLineOptions.HOST.getOpt()));
-                    log.debug("Parsed hostname.");
+                    mailConfigurationBuilder.username(cmd.getOptionValue(MailClenaCommandLineOptions.USERNAME.getOpt()));
+                    mailConfigurationBuilder.password(cmd.getOptionValue(MailClenaCommandLineOptions.PASSWORD.getOpt()));
+                    mailConfigurationBuilder.build();
                 }
                 //                log.info("Found hostname : {}", hostname);
             }
