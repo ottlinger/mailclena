@@ -4,8 +4,8 @@ import org.junit.Test;
 
 public class MailclenaTest {
 
-    @Test(expected = IllegalArgumentException.class)
-    public void callMainWithoutParametersYieldsException() {
-        MailClena.main();
+    @Test
+    public void callMainWithHostnameParameter() {
+        MailClena.main(new String[] {"-h=boo.foo.bar"});
     }
 }
