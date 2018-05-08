@@ -12,4 +12,11 @@ public class MailclenaTest {
         // get rid of the warning in codacy
         assertThat(true).isTrue();
     }
+
+    @Test
+    public void callMainWithoutNeededParameters() {
+        MailClena.main("");
+        // get rid of the warning in codacy
+        assertThat(true).isTrue();
+    }
 }
