@@ -32,7 +32,7 @@ public final class MailClenaParameterParser {
                 }
             }
 
-        } catch (ParseException | NullPointerException e) {
+        } catch (ParseException e) {
             log.error("Unable to parse given command line parameters", e);
             HelpFormatter formatter = new HelpFormatter();
             formatter.printHelp("MailClena", getAvailableOptions());

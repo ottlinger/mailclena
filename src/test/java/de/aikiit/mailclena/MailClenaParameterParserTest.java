@@ -36,6 +36,11 @@ public class MailClenaParameterParserTest {
         assertThat(parser.extractConfiguration(null)).isEmpty();
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void callWithoutParameterValuesButAllKeys() {
+        assertThat(parser.extractConfiguration("-h", "-u", "-p")).isEmpty();
+    }
+
     @Test
     public void callMainExtractParametersSuccessfully() {
         final Optional<MailConfiguration> mailConfiguration = parser.extractConfiguration("-h=boo.foo.bar", "-u=foo", "-p=bar");
