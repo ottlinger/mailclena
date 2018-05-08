@@ -3,7 +3,7 @@ Tool that logs into mail accounts and removes all mails.
 
 ## Stats
 
-[![Waffle.io - Columns and their card count](https://badge.waffle.io/ottlinger/mailclena.svg?columns=all)](https://waffle.io/ottlinger/mailclena) 
+[![Waffle.io - Columns and their card count](https://badge.waffle.io/ottlinger/mailclena.svg?columns=all)](https://waffle.io/ottlinger/mailclena)
 
 
 [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/ottlinger/mailclena.svg)](http://isitmaintained.com/project/ottlinger/mailclena "Average time to resolve an issue")
@@ -30,9 +30,8 @@ In order to just play around with it I've integrated a CI run:
 
 You need to checkout the application and build it with the help of [Java](https://java.sun.com) and [Maven](https://maven.apache.org/).
 
-´´´
+```
 $ mvn
-$ java -jar target/mailclena-0.0.1-SNAPSHOT-executable.jar 
+$ java -jar target/mailclena-0.0.1-SNAPSHOT-executable.jar
 22:58:33.294 [main] INFO  de.aikiit.mailclena.MailClena - Hello World :-)
-22:58:33.300 [main] INFO  de.aikiit.mailclena.MailClena - []
-´´´
+```
