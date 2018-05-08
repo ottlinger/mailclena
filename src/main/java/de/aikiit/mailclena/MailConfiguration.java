@@ -7,10 +7,10 @@ import lombok.NonNull;
 @Data
 @Builder
 class MailConfiguration {
-    //@NonNull
+    @NonNull
     private String host;
-    //@NonNull
+    @NonNull
     private String username;
-    //@NonNull
+    @NonNull
     private String password;
 }

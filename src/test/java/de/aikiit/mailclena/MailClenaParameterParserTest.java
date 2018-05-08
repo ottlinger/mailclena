@@ -21,16 +21,30 @@ public class MailClenaParameterParserTest {
 
     @Test
     public void callMainWithUsernameParameter() {
-        parser.extractConfiguration("-u=foo");
+        assertThat(parser.extractConfiguration("-u=foo")).isNull();
     }
 
     @Test
     public void callMainWithPasswordParameter() {
-        parser.extractConfiguration("-p=bar");
+        assertThat(parser.extractConfiguration("-p=bar")).isNull();
+    }
+
+    @Test
+    public void callWithNullParameter() {
+        assertThat(parser.extractConfiguration(null)).isNull();
     }
 
     @Test
     public void callMainExtractParametersSuccessfully() {
-        parser.extractConfiguration("-h=boo.foo.bar", "-u=foo", "-p=bar");
+        final MailConfiguration mailConfiguration = parser.extractConfiguration("-h=boo.foo.bar", "-u=foo", "-p=bar");
+        assertThat(mailConfiguration).isNotNull();
+        assertThat(mailConfiguration.getPassword()).isEqualTo("bar");
+        assertThat(mailConfiguration.getUsername()).isEqualTo("foo");
+        assertThat(mailConfiguration.getHost()).isEqualTo("boo.foo.bar");
+    }
+
+    @Test
+    public void ensureSizeOfOptionsIsUnderTest() {
+        assertThat(new MailClenaParameterParser().getAvailableOptions().getOptions()).isNotEmpty().hasSize(3);
     }
 }

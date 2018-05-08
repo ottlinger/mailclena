@@ -13,7 +13,6 @@ public final class MailClenaParameterParser {
         CommandLineParser parser = new DefaultParser();
         try {
             CommandLine cmd = parser.parse(getAvailableOptions(), args);
-            log.info(cmd.getArgList());
 
             final MailConfiguration.MailConfigurationBuilder mailConfigurationBuilder = MailConfiguration.builder();
             if (cmd.hasOption(MailClenaCommandLineOptions.HOST.getOpt())) {

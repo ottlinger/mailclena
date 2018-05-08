@@ -9,6 +9,7 @@ public class MailclenaTest {
     @Test
     public void callMainExtractParametersSuccessfully() {
         MailClena.main("-h=boo.foo.bar", "-u=foo", "-p=bar");
+        // get rid of the warning in codacy
         assertThat(true).isTrue();
     }
 }
