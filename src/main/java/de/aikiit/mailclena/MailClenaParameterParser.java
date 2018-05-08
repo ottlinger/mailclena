@@ -1,5 +1,6 @@
 package de.aikiit.mailclena;
 
+import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Strings;
 import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -38,6 +39,7 @@ public final class MailClenaParameterParser {
         return Optional.empty();
     }
 
+    @VisibleForTesting
     Options getAvailableOptions() {
         Options o = new Options();
 
