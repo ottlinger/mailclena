@@ -14,27 +14,24 @@ public final class MailClenaParameterParser {
     public Optional<MailConfiguration> extractConfiguration(String... args) throws IllegalArgumentException {
         CommandLineParser parser = new DefaultParser();
         try {
-            CommandLine cmd = parser.parse(getAvailableOptions(), args);
-
+            final CommandLine cmd = parser.parse(getAvailableOptions(), args);
             final MailConfiguration.MailConfigurationBuilder mailConfigurationBuilder = MailConfiguration.builder();
-            if (cmd.hasOption(MailClenaCommandLineOptions.HOST.getOpt())) {
 
-                if (!Strings.isNullOrEmpty(cmd.getOptionValue(MailClenaCommandLineOptions.HOST.getOpt())) &&
-                        !Strings.isNullOrEmpty(cmd.getOptionValue(MailClenaCommandLineOptions.USERNAME.getOpt())) &&
-                        !Strings.isNullOrEmpty(cmd.getOptionValue(MailClenaCommandLineOptions.PASSWORD.getOpt()))) {
-                    mailConfigurationBuilder.host(cmd.getOptionValue(MailClenaCommandLineOptions.HOST.getOpt()));
-                    mailConfigurationBuilder.username(cmd.getOptionValue(MailClenaCommandLineOptions.USERNAME.getOpt()));
-                    mailConfigurationBuilder.password(cmd.getOptionValue(MailClenaCommandLineOptions.PASSWORD.getOpt()));
+            if (!Strings.isNullOrEmpty(cmd.getOptionValue(MailClenaCommandLineOptions.HOST.getOpt())) &&
+                !Strings.isNullOrEmpty(cmd.getOptionValue(MailClenaCommandLineOptions.USERNAME.getOpt())) &&
+                !Strings.isNullOrEmpty(cmd.getOptionValue(MailClenaCommandLineOptions.PASSWORD.getOpt()))) {
+                mailConfigurationBuilder.host(cmd.getOptionValue(MailClenaCommandLineOptions.HOST.getOpt()));
+                mailConfigurationBuilder.username(cmd.getOptionValue(MailClenaCommandLineOptions.USERNAME.getOpt()));
+                mailConfigurationBuilder.password(cmd.getOptionValue(MailClenaCommandLineOptions.PASSWORD.getOpt()));
 
-                    final MailConfiguration mailConfiguration = mailConfigurationBuilder.build();
-                    log.info("Extracted configuration from given parameters : {}", mailConfiguration);
-                    return Optional.of(mailConfiguration);
-                }
+                final MailConfiguration mailConfiguration = mailConfigurationBuilder.build();
+                log.info("Extracted configuration from given parameters : {}", mailConfiguration);
+                return Optional.of(mailConfiguration);
             }
 
         } catch (ParseException e) {
             log.error("Unable to parse given command line parameters", e);
-            HelpFormatter formatter = new HelpFormatter();
+            final HelpFormatter formatter = new HelpFormatter();
             formatter.printHelp("MailClena", getAvailableOptions());
             throw new IllegalArgumentException("Exception while parsing command line arguments");
         }
