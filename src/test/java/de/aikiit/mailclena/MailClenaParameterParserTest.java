@@ -3,6 +3,8 @@ package de.aikiit.mailclena;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Optional;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class MailClenaParameterParserTest {
@@ -16,31 +18,33 @@ public class MailClenaParameterParserTest {
 
     @Test
     public void callMainWithHostnameParameter() {
-        assertThat(parser.extractConfiguration("-h=boo.foo.bar")).isNull();
+        assertThat(parser.extractConfiguration("-h=boo.foo.bar")).isEmpty();
     }
 
     @Test
     public void callMainWithUsernameParameter() {
-        assertThat(parser.extractConfiguration("-u=foo")).isNull();
+        assertThat(parser.extractConfiguration("-u=foo")).isEmpty();
     }
 
     @Test
     public void callMainWithPasswordParameter() {
-        assertThat(parser.extractConfiguration("-p=bar")).isNull();
+        assertThat(parser.extractConfiguration("-p=bar")).isEmpty();
     }
 
     @Test
     public void callWithNullParameter() {
-        assertThat(parser.extractConfiguration(null)).isNull();
+        assertThat(parser.extractConfiguration(null)).isEmpty();
     }
 
     @Test
     public void callMainExtractParametersSuccessfully() {
-        final MailConfiguration mailConfiguration = parser.extractConfiguration("-h=boo.foo.bar", "-u=foo", "-p=bar");
-        assertThat(mailConfiguration).isNotNull();
-        assertThat(mailConfiguration.getPassword()).isEqualTo("bar");
-        assertThat(mailConfiguration.getUsername()).isEqualTo("foo");
-        assertThat(mailConfiguration.getHost()).isEqualTo("boo.foo.bar");
+        final Optional<MailConfiguration> mailConfiguration = parser.extractConfiguration("-h=boo.foo.bar", "-u=foo", "-p=bar");
+        assertThat(mailConfiguration).isPresent();
+
+        final MailConfiguration configuration = mailConfiguration.get();
+        assertThat(configuration.getPassword()).isEqualTo("bar");
+        assertThat(configuration.getUsername()).isEqualTo("foo");
+        assertThat(configuration.getHost()).isEqualTo("boo.foo.bar");
     }
 
     @Test
