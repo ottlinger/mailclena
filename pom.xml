@@ -24,6 +24,10 @@
   <name>mailclena</name>
   <description>Tool to erase mails from postboxes.</description>
   <url>https://github.com/ottlinger/mailclena</url>
+  <organization>
+    <name>Aiki IT</name>
+    <url>http://www.aiki-it.de</url>
+  </organization>
   <licenses>
     <license>
       <name>GNU GENERAL PUBLIC LICENSE, Version 3, 29 June 2007</name>
