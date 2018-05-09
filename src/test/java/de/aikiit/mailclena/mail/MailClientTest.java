@@ -15,19 +15,15 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
  */
-package de.aikiit.mailclena;
+package de.aikiit.mailclena.mail;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.NonNull;
+import de.aikiit.mailclena.MailConfiguration;
+import org.junit.Test;
 
-@Data
-@Builder
-public class MailConfiguration {
-    @NonNull
-    private String host;
-    @NonNull
-    private String username;
-    @NonNull
-    private String password;
+public class MailClientTest {
+
+    @Test
+    public void initWithConfig() {
+        new MailClient(MailConfiguration.builder().build());
+    }
 }

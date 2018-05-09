@@ -17,5 +17,17 @@
  */
 package de.aikiit.mailclena.mail;
 
+import de.aikiit.mailclena.MailConfiguration;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.extern.log4j.Log4j2;
+
+@AllArgsConstructor
+@Log4j2
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class MailClient {
+
+    private MailConfiguration mailConfiguration;
+
 }
