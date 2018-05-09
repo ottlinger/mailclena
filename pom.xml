@@ -6,7 +6,18 @@
   <packaging>jar</packaging>
   <version>0.0.1-SNAPSHOT</version>
   <name>mailclena</name>
+    <description>Tool to erase mails from postboxes.</description>
   <url>https://github.com/ottlinger/mailclena</url>
+    <licenses>
+        <license>
+            <name>GNU GENERAL PUBLIC LICENSE, Version 3, 29 June 2007</name>
+            <url>https://www.gnu.org/licenses/gpl-3.0.txt</url>
+        </license>
+    </licenses>
+    <issueManagement>
+        <system>GitHub issues</system>
+        <url>https://github.com/ottlinger/mailclena/issues</url>
+    </issueManagement>
   <properties>
     <logger.version>2.11.0</logger.version>
     <junit.version>4.12</junit.version>
@@ -15,6 +26,7 @@
     <lombok.version>1.16.20</lombok.version>
     <javadoc.version>3.0.0-M1</javadoc.version>
     <surefire.version>2.20.1</surefire.version>
+    <cobertura.version>2.7</cobertura.version>
     <rat.version>0.12</rat.version>
     <guava.version>25.0-jre</guava.version>
     <encoding.utf8>UTF-8</encoding.utf8>
@@ -25,6 +37,11 @@
   <build>
     <defaultGoal>clean versions:display-dependency-updates enforcer:display-info install org.pitest:pitest-maven:mutationCoverage</defaultGoal>
     <plugins>
+        <!-- Licence compliance for GPL, configuration is performed in reporting section
+        <plugin>
+            <groupId>org.apache.rat</groupId>
+            <artifactId>apache-rat-plugin</artifactId>
+        </plugin-->
       <plugin>
         <groupId>org.pitest</groupId>
         <artifactId>pitest-maven</artifactId>
@@ -33,7 +50,7 @@
           <timeoutConstant>8000</timeoutConstant>
           <threads>8</threads>
           <coverageThreshold>90</coverageThreshold>
-          <mutationThreshold>25</mutationThreshold>
+          <!--mutationThreshold>25</mutationThreshold-->
           <failWhenNoMutations>false</failWhenNoMutations>
           <verbose>true</verbose>
           <targetClasses>
@@ -156,6 +173,77 @@
         </executions>
       </plugin>
     </plugins>
+    <pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.rat</groupId>
+                <artifactId>apache-rat-plugin</artifactId>
+                <version>${rat.version}</version>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <ignoreErrors>false</ignoreErrors>
+                    <useDefaultExcludes>true</useDefaultExcludes>
+                    <useEclipseDefaultExcludes>true</useEclipseDefaultExcludes>
+                    <useMavenDefaultExcludes>true</useMavenDefaultExcludes>
+                    <useIdeaDefaultExcludes>true</useIdeaDefaultExcludes>
+                    <addDefaultLicenseMatchers>true</addDefaultLicenseMatchers>
+                    <excludes>
+                        <exclude>.travis.yml</exclude>
+                        <exclude>LICENSE.txt</exclude>
+                        <exclude>*.md</exclude>
+                        <exclude>src/main/resources/**/*</exclude>
+                        <exclude>src/test/resources/**/*</exclude>
+                        <exclude>**/webpage/**/*</exclude>
+                        <exclude>**/webpage/**</exclude>
+                        <exclude>**/webpage/*</exclude>
+                        <exclude>webpage/**</exclude>
+                        <exclude>webpage/**/*</exclude>
+                        <exclude>webpage/*</exclude>
+                        <exclude>**/out*/**</exclude>
+                        <exclude>**/site*/**</exclude>
+                        <exclude>**/*.log</exclude>
+                        <exclude>**/.checkstyle/**/*</exclude>
+                        <exclude>**/.gitignore</exclude>
+                    </excludes>
+                    <!-- approve GPL3 license -->
+                    <licenseFamilies>
+                        <licenseFamily implementation="org.apache.rat.license.GPL3LicenseFamily">
+                            <familyName>GNU General Public License, version 3</familyName>
+                        </licenseFamily>
+                    </licenseFamilies>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.0.1</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${surefire.version}</version>
+                <configuration>
+                    <enableAssertions>true</enableAssertions>
+                    <forkCount>1</forkCount>
+                    <reuseForks>true</reuseForks>
+                </configuration>
+            </plugin>
+        </plugins>
+    </pluginManagement>
   </build>
   <dependencies>
     <dependency>
@@ -226,6 +314,101 @@
       <version>2.0</version>
     </dependency>
   </dependencies>
+    <reporting>
+        <plugins>
+            <!-- Licence compliance for GPL -->
+            <plugin>
+                <groupId>org.apache.rat</groupId>
+                <artifactId>apache-rat-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>3.0.0</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>${javadoc.version}</version>
+                <configuration>
+                    <encoding>${encoding.utf8}</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jxr-plugin</artifactId>
+                <version>2.5</version>
+                <configuration>
+                    <aggregate>true</aggregate>
+                    <linkJavadoc>true</linkJavadoc>
+                    <encoding>${encoding.utf8}</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-report-plugin</artifactId>
+                <version>${surefire.version}</version>
+            </plugin>
+            <plugin>
+                <artifactId>maven-pmd-plugin</artifactId>
+                <version>3.6</version>
+                <configuration>
+                    <linkXRef>true</linkXRef>
+                    <sourceEncoding>${encoding.utf8}</sourceEncoding>
+                    <minimumTokens>100</minimumTokens>
+                    <targetJdk>1.8</targetJdk>
+                    <excludes>
+                        <exclude>**/generated/**/*.java</exclude>
+                        <exclude>**/target/clover/**/*.java</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+            <!-- jdepend plugin -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>jdepend-maven-plugin</artifactId>
+                <version>2.0</version>
+            </plugin>
+            <!-- 20090805  disabled due to a bug in Cobertura leading to CI error mails, http://jira.codehaus.org/browse/MCOBERTURA-73 -->
+            <!-- cobertura plugin -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>cobertura-maven-plugin</artifactId>
+                <version>${cobertura.version}</version>
+            </plugin>
+            <!-- catch code tags -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>taglist-maven-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <encoding>${encoding.utf8}</encoding>
+                    <tags>
+                        <tag>TODO</tag>
+                        <tag>todo</tag>
+                        <tag>FIXME</tag>
+                        <tag>fixme</tag>
+                        <tag>REFACTOR</tag>
+                        <tag>refactor</tag>
+                        <tag>REVIEW</tag>
+                        <tag>review</tag>
+                        <tag>@todo</tag>
+                        <tag>@deprecated</tag>
+                    </tags>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>findbugs-maven-plugin</artifactId>
+                <version>3.0.5</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>2.9</version>
+            </plugin>
+        </plugins>
+    </reporting>
   <!-- To be able to use the latest version/release candidate -->
   <repositories>
     <repository>
