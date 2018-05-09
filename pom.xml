@@ -211,8 +211,9 @@
             <useIdeaDefaultExcludes>true</useIdeaDefaultExcludes>
             <addDefaultLicenseMatchers>true</addDefaultLicenseMatchers>
             <excludes>
-              <exclude>.editorconfig</exclude>
-              <exclude>.travis.yml</exclude>
+              <exclude>**/*.md</exclude>
+              <exclude>**/.editorconfig</exclude>
+              <exclude>**/.travis.yml</exclude>
               <exclude>LICENSE.txt</exclude>
               <exclude>*.md</exclude>
               <exclude>src/main/resources/**/*</exclude>
@@ -225,6 +226,7 @@
               <exclude>webpage/*</exclude>
               <exclude>**/out*/**</exclude>
               <exclude>**/site*/**</exclude>
+              <exclude>**/log*.xml</exclude>
               <exclude>**/*.log</exclude>
               <exclude>**/.checkstyle/**/*</exclude>
               <exclude>**/.gitignore</exclude>
