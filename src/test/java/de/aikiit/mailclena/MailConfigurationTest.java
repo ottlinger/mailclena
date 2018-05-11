@@ -29,4 +29,17 @@ public class MailConfigurationTest {
         String password = UUID.randomUUID().toString();
         assertThat(MailConfiguration.builder().password(password).username("username").host("host").build().toString()).doesNotContain(password);
     }
+
+    @Test
+    public void regularObjectCreation() {
+        final MailConfiguration configuration = new MailConfiguration("host", "username", "password");
+        configuration.setPassword("p");
+        assertThat(configuration.getPassword()).isEqualTo("p");
+
+        configuration.setUsername("u");
+        assertThat(configuration.getUsername()).isEqualTo("u");
+
+        configuration.setHost("h");
+        assertThat(configuration.getHost()).isEqualTo("h");
+    }
 }
