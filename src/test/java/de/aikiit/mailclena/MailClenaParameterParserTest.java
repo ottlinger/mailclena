@@ -20,6 +20,7 @@ package de.aikiit.mailclena;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -54,8 +55,9 @@ public class MailClenaParameterParserTest {
     }
 
     @Test
-    public void callWithNullParameter() {
+    public void callWithNullOrEmptyParameter() {
         assertThat(parser.extractConfiguration((String[]) null)).isEmpty();
+        assertThat(parser.extractConfiguration(new String[] {})).isEmpty();
     }
 
     @Test(expected = IllegalArgumentException.class)
