@@ -46,7 +46,7 @@ usage: MailClena
 
 ```
 
-### Command line parameters
+### Example call
 
 ```
 $ java -jar target/mailclena-0.0.1-SNAPSHOT-executable.jar -h=host.tld.org -u=yourmail@yourtld.org -p=yourpassword
