@@ -30,7 +30,7 @@ import java.util.Optional;
 public final class MailClenaParameterParser {
 
     public Optional&lt;MailConfiguration&gt; extractConfiguration(String... args) throws IllegalArgumentException {
-<span class="pc bpc" id="L33" title="1 of 4 branches missed.">        if (args == null || args.length == 0) {</span>
+<span class="fc bfc" id="L33" title="All 4 branches covered.">        if (args == null || args.length == 0) {</span>
 <span class="fc" id="L34">            printHelp();</span>
         } else {
 
@@ -41,7 +41,7 @@ public final class MailClenaParameterParser {
 
 <span class="fc bfc" id="L42" title="All 2 branches covered.">                if (!Strings.isNullOrEmpty(cmd.getOptionValue(MailClenaCommandLineOptions.HOST.getOpt())) &amp;&amp;</span>
 <span class="fc bfc" id="L43" title="All 2 branches covered.">                    !Strings.isNullOrEmpty(cmd.getOptionValue(MailClenaCommandLineOptions.USERNAME.getOpt())) &amp;&amp;</span>
-<span class="pc bpc" id="L44" title="1 of 2 branches missed.">                    !Strings.isNullOrEmpty(cmd.getOptionValue(MailClenaCommandLineOptions.PASSWORD.getOpt()))) {</span>
+<span class="fc bfc" id="L44" title="All 2 branches covered.">                    !Strings.isNullOrEmpty(cmd.getOptionValue(MailClenaCommandLineOptions.PASSWORD.getOpt()))) {</span>
 <span class="fc" id="L45">                    mailConfigurationBuilder.host(cmd.getOptionValue(MailClenaCommandLineOptions.HOST.getOpt()));</span>
 <span class="fc" id="L46">                    mailConfigurationBuilder.username(cmd.getOptionValue(MailClenaCommandLineOptions.USERNAME.getOpt()));</span>
 <span class="fc" id="L47">                    mailConfigurationBuilder.password(cmd.getOptionValue(MailClenaCommandLineOptions.PASSWORD.getOpt()));</span>
@@ -76,26 +76,27 @@ public final class MailClenaParameterParser {
 <span class="fc" id="L76">        return o;</span>
     }
 
-<span class="fc" id="L79">    private enum MailClenaCommandLineOptions {</span>
-<span class="fc" id="L80">        HOST(&quot;h&quot;, &quot;Hostname - example: http://imap.yourisp.org&quot;),</span>
-<span class="fc" id="L81">        USERNAME(&quot;u&quot;, &quot;Username - example: myuser@tld.org&quot;),</span>
-<span class="fc" id="L82">        PASSWORD(&quot;p&quot;, &quot;Password - example: myfancypassword&quot;);</span>
+<span class="fc" id="L79">    @VisibleForTesting</span>
+    enum MailClenaCommandLineOptions {
+<span class="fc" id="L81">        HOST(&quot;h&quot;, &quot;Hostname - example: http://imap.yourisp.org&quot;),</span>
+<span class="fc" id="L82">        USERNAME(&quot;u&quot;, &quot;Username - example: myuser@tld.org&quot;),</span>
+<span class="fc" id="L83">        PASSWORD(&quot;p&quot;, &quot;Password - example: myfancypassword&quot;);</span>
 
         private final String opt;
         private final String desc;
 
         String getOpt() {
-<span class="fc" id="L88">            return opt;</span>
+<span class="fc" id="L89">            return opt;</span>
         }
 
         String getDescription() {
-<span class="fc" id="L92">            return desc;</span>
+<span class="fc" id="L93">            return desc;</span>
         }
 
-<span class="fc" id="L95">        MailClenaCommandLineOptions(String opt, String desc) {</span>
-<span class="fc" id="L96">            this.opt = opt;</span>
-<span class="fc" id="L97">            this.desc = desc;</span>
-<span class="fc" id="L98">        }</span>
+<span class="fc" id="L96">        MailClenaCommandLineOptions(String opt, String desc) {</span>
+<span class="fc" id="L97">            this.opt = opt;</span>
+<span class="fc" id="L98">            this.desc = desc;</span>
+<span class="fc" id="L99">        }</span>
     }
 
 }

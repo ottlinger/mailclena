@@ -16,20 +16,23 @@
  */
 package de.aikiit.mailclena.mail;
 
+import com.google.common.annotations.VisibleForTesting;
 import de.aikiit.mailclena.MailConfiguration;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.apache.commons.lang3.tuple.Pair;
 
 import javax.mail.*;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.Properties;
 
-<span class="fc" id="L30">@AllArgsConstructor</span>
-<span class="fc" id="L31">@Log4j2</span>
-<span class="nc" id="L32">@NoArgsConstructor(access = AccessLevel.PRIVATE)</span>
+<span class="fc" id="L33">@AllArgsConstructor</span>
+<span class="fc" id="L34">@Log4j2</span>
+<span class="fc" id="L35">@NoArgsConstructor(access = AccessLevel.PRIVATE)</span>
 public class MailClient {
 
     private static final String INBOX = &quot;INBOX&quot;;
@@ -38,74 +41,85 @@ public class MailClient {
     private MailConfiguration mailConfiguration;
 
     private Properties getProperties() {
-<span class="fc" id="L41">        Properties properties = new Properties();</span>
-<span class="fc" id="L42">        properties.put(&quot;mail.pop3s.host&quot;, mailConfiguration.getHost());</span>
-<span class="fc" id="L43">        properties.put(&quot;mail.pop3.starttls.enable&quot;, &quot;true&quot;);</span>
-<span class="fc" id="L44">        properties.put(&quot;mail.pop3s.port&quot;, &quot;995&quot;);</span>
-<span class="fc" id="L45">        properties.put(&quot;mail.store.protocol&quot;, &quot;pop3&quot;);</span>
-<span class="fc" id="L46">        return properties;</span>
+<span class="fc" id="L44">        Properties properties = new Properties();</span>
+<span class="fc" id="L45">        properties.put(&quot;mail.pop3s.host&quot;, mailConfiguration.getHost());</span>
+<span class="fc" id="L46">        properties.put(&quot;mail.pop3.starttls.enable&quot;, &quot;true&quot;);</span>
+<span class="fc" id="L47">        properties.put(&quot;mail.pop3s.port&quot;, &quot;995&quot;);</span>
+<span class="fc" id="L48">        properties.put(&quot;mail.store.protocol&quot;, &quot;pop3&quot;);</span>
+<span class="fc" id="L49">        return properties;</span>
+    }
+
+    @VisibleForTesting
+    Optional&lt;Pair&lt;Store, Folder&gt;&gt; openFolder(int mode) throws MessagingException {
+<span class="fc" id="L54">        Session emailSession = Session.getDefaultInstance(getProperties());</span>
+        // emailSession.setDebug(true);
+
+<span class="fc" id="L57">        Store store = emailSession.getStore(POP3S);</span>
+<span class="nc" id="L58">        store.connect(mailConfiguration.getHost(), mailConfiguration.getUsername(), mailConfiguration.getPassword());</span>
+
+<span class="nc" id="L60">        Folder emailFolder = store.getFolder(INBOX);</span>
+<span class="nc" id="L61">        emailFolder.open(mode);</span>
+<span class="nc" id="L62">        return Optional.of(Pair.of(store, emailFolder));</span>
     }
 
     // TODO show date of mails YYYYMMDD
-
     public void list() {
         try {
-<span class="fc" id="L53">            Session emailSession = Session.getDefaultInstance(getProperties());</span>
-            // emailSession.setDebug(true);
+<span class="fc" id="L68">            Optional&lt;Pair&lt;Store, Folder&gt;&gt; folder = openFolder(Folder.READ_ONLY);</span>
 
-<span class="fc" id="L56">            Store store = emailSession.getStore(POP3S);</span>
+<span class="pc bpc" id="L70" title="1 of 2 branches missed.">            if (!folder.isPresent()) {</span>
+<span class="nc" id="L71">                log.error(&quot;Unable to open folder in read-only mode to list mails, will abort.&quot;);</span>
+<span class="nc" id="L72">                return;</span>
+            }
 
-<span class="nc" id="L58">            store.connect(mailConfiguration.getHost(), mailConfiguration.getUsername(), mailConfiguration.getPassword());</span>
-<span class="nc" id="L59">            Folder emailFolder = store.getFolder(INBOX);</span>
-<span class="nc" id="L60">            emailFolder.open(Folder.READ_ONLY);</span>
+<span class="fc" id="L75">            Pair&lt;Store, Folder&gt; storeAndFolder = folder.get();</span>
+<span class="fc" id="L76">            List&lt;Message&gt; messages = Arrays.asList(storeAndFolder.getRight().getMessages());</span>
+<span class="fc" id="L77">            log.info(&quot;Found {} messages.&quot;, messages.size());</span>
 
-<span class="nc" id="L62">            List&lt;Message&gt; messages = Arrays.asList(emailFolder.getMessages());</span>
-<span class="nc" id="L63">            log.info(&quot;Found {} messages.&quot;, messages.size());</span>
-
-<span class="nc" id="L65">            messages.forEach(m -&gt; {</span>
+<span class="fc" id="L79">            messages.forEach(m -&gt; {</span>
                 try {
-<span class="nc" id="L67">                    log.info(&quot;Message: &quot; + m.getSubject() + &quot; From: &quot; + Arrays.toString(m.getFrom()));</span>
-<span class="nc" id="L68">                } catch (MessagingException e) {</span>
-<span class="nc" id="L69">                    log.error(e);</span>
-<span class="nc" id="L70">                }</span>
-<span class="nc" id="L71">            });</span>
+<span class="fc" id="L81">                    log.info(&quot;Message: &quot; + m.getSubject() + &quot; From: &quot; + Arrays.toString(m.getFrom()));</span>
+<span class="nc" id="L82">                } catch (MessagingException e) {</span>
+<span class="nc" id="L83">                    log.error(e);</span>
+<span class="fc" id="L84">                }</span>
+<span class="fc" id="L85">            });</span>
 
-<span class="nc" id="L73">            store.close();</span>
-<span class="fc" id="L74">        } catch (MessagingException e) {</span>
-<span class="fc" id="L75">            log.error(e);</span>
-<span class="nc" id="L76">        }</span>
-<span class="fc" id="L77">    }</span>
+<span class="fc" id="L87">            storeAndFolder.getLeft().close();</span>
+<span class="fc" id="L88">        } catch (MessagingException e) {</span>
+<span class="fc" id="L89">            log.error(e);</span>
+<span class="fc" id="L90">        }</span>
+<span class="fc" id="L91">    }</span>
 
     public void delete() {
         try {
-<span class="fc" id="L81">            Session emailSession = Session.getDefaultInstance(getProperties());</span>
-            // emailSession.setDebug(true);
+<span class="nc" id="L95">            Optional&lt;Pair&lt;Store, Folder&gt;&gt; folder = openFolder(Folder.READ_WRITE);</span>
 
-<span class="fc" id="L84">            Store store = emailSession.getStore(POP3S);</span>
+<span class="nc bnc" id="L97" title="All 2 branches missed.">            if (!folder.isPresent()) {</span>
+<span class="nc" id="L98">                log.error(&quot;Unable to open folder in write mode to remove mails, will abort.&quot;);</span>
+<span class="nc" id="L99">                return;</span>
+            }
 
-<span class="nc" id="L86">            store.connect(mailConfiguration.getHost(), mailConfiguration.getUsername(), mailConfiguration.getPassword());</span>
-<span class="nc" id="L87">            Folder emailFolder = store.getFolder(INBOX);</span>
-<span class="nc" id="L88">            emailFolder.open(Folder.READ_WRITE);</span>
+<span class="nc" id="L102">            Pair&lt;Store, Folder&gt; storeAndFolder = folder.get();</span>
+<span class="nc" id="L103">            final Folder f = storeAndFolder.getRight();</span>
+<span class="nc" id="L104">            List&lt;Message&gt; messages = Arrays.asList(f.getMessages());</span>
+<span class="nc" id="L105">            log.info(&quot;Starting to delete {} messages.&quot;, messages.size());</span>
 
-<span class="nc" id="L90">            List&lt;Message&gt; messages = Arrays.asList(emailFolder.getMessages());</span>
-<span class="nc" id="L91">            log.info(&quot;Starting to delete {} messages.&quot;, messages.size());</span>
-
-<span class="nc" id="L93">            messages.forEach(message -&gt; {</span>
+<span class="nc" id="L107">            messages.forEach(message -&gt; {</span>
                 try {
-<span class="nc" id="L95">                    log.debug(&quot;Marking for deletion &quot; + message.getSubject() + &quot; From: &quot; + Arrays.toString(message.getFrom()));</span>
-<span class="nc" id="L96">                    message.setFlag(Flags.Flag.DELETED, true);</span>
-<span class="nc" id="L97">                } catch (MessagingException e) {</span>
-<span class="nc" id="L98">                    log.error(e);</span>
-<span class="nc" id="L99">                }</span>
-<span class="nc" id="L100">            });</span>
+<span class="nc" id="L109">                    log.debug(&quot;Marking for deletion &quot; + message.getSubject() + &quot; From: &quot; + Arrays.toString(message.getFrom()));</span>
+<span class="nc" id="L110">                    message.setFlag(Flags.Flag.DELETED, true);</span>
+<span class="nc" id="L111">                } catch (MessagingException e) {</span>
+<span class="nc" id="L112">                    log.error(e);</span>
+<span class="nc" id="L113">                }</span>
+<span class="nc" id="L114">            });</span>
 
-<span class="nc" id="L102">            emailFolder.close(true);</span>
-<span class="nc" id="L103">            log.info(&quot;Expunge folder to actually remove messages.&quot;);</span>
-<span class="nc" id="L104">            store.close();</span>
-<span class="nc" id="L105">            log.info(&quot;Finished to delete {} messages.&quot;, messages.size());</span>
-<span class="fc" id="L106">        } catch (MessagingException e) {</span>
-<span class="fc" id="L107">            log.error(e);</span>
-<span class="nc" id="L108">        }</span>
-<span class="fc" id="L109">    }</span>
+<span class="nc" id="L116">            f.close(true);</span>
+<span class="nc" id="L117">            log.info(&quot;Expunge folder to actually remove messages.&quot;);</span>
+<span class="nc" id="L118">            storeAndFolder.getLeft().close();</span>
+<span class="nc" id="L119">            log.info(&quot;Finished to delete {} messages.&quot;, messages.size());</span>
+<span class="fc" id="L120">        } catch (MessagingException e) {</span>
+<span class="fc" id="L121">            log.error(e);</span>
+<span class="nc" id="L122">        }</span>
+<span class="fc" id="L123">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>
