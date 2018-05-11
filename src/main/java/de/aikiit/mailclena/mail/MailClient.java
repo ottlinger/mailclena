@@ -16,6 +16,7 @@
  */
 package de.aikiit.mailclena.mail;
 
+import com.google.common.annotations.VisibleForTesting;
 import de.aikiit.mailclena.MailConfiguration;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -48,7 +49,8 @@ public class MailClient {
         return properties;
     }
 
-    private Optional<Pair<Store, Folder>> openFolder(int mode) throws MessagingException {
+    @VisibleForTesting
+    Optional<Pair<Store, Folder>> openFolder(int mode) throws MessagingException {
         Session emailSession = Session.getDefaultInstance(getProperties());
         // emailSession.setDebug(true);
 

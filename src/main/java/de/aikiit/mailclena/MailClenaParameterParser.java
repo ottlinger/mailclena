@@ -76,7 +76,8 @@ public final class MailClenaParameterParser {
         return o;
     }
 
-    private enum MailClenaCommandLineOptions {
+    @VisibleForTesting
+    enum MailClenaCommandLineOptions {
         HOST("h", "Hostname - example: http://imap.yourisp.org"),
         USERNAME("u", "Username - example: myuser@tld.org"),
         PASSWORD("p", "Password - example: myfancypassword");
