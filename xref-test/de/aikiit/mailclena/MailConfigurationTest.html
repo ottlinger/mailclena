@@ -1,11 +1,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head><meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-<title>MailClientTest xref</title>
-<link type="text/css" rel="stylesheet" href="../../../../stylesheet.css" />
+<title>MailConfigurationTest xref</title>
+<link type="text/css" rel="stylesheet" href="../../../stylesheet.css" />
 </head>
 <body>
-<div id="overview"><a href="../../../../../testapidocs/de/aikiit/mailclena/mail/MailClientTest.html">View Javadoc</a></div><pre>
+<div id="overview"><a href="../../../../testapidocs/de/aikiit/mailclena/MailConfigurationTest.html">View Javadoc</a></div><pre>
 <a class="jxr_linenumber" name="L1" href="#L1">1</a>   <em class="jxr_comment">/*</em>
 <a class="jxr_linenumber" name="L2" href="#L2">2</a>   <em class="jxr_comment">  MailClena - Copyright (C) 2018, Aiki IT</em>
 <a class="jxr_linenumber" name="L3" href="#L3">3</a>   <em class="jxr_comment">  &lt;p&gt;</em>
@@ -22,20 +22,20 @@
 <a class="jxr_linenumber" name="L14" href="#L14">14</a>  <em class="jxr_comment">  You should have received a copy of the GNU General Public License</em>
 <a class="jxr_linenumber" name="L15" href="#L15">15</a>  <em class="jxr_comment">  along with this program.  If not, see &lt;<a href="http://www.gnu.org/licenses/&gt;" target="alexandria_uri">http://www.gnu.org/licenses/&gt;</a>.</em>
 <a class="jxr_linenumber" name="L16" href="#L16">16</a>  <em class="jxr_comment"> */</em>
-<a class="jxr_linenumber" name="L17" href="#L17">17</a>  <strong class="jxr_keyword">package</strong> de.aikiit.mailclena.mail;
+<a class="jxr_linenumber" name="L17" href="#L17">17</a>  <strong class="jxr_keyword">package</strong> de.aikiit.mailclena;
 <a class="jxr_linenumber" name="L18" href="#L18">18</a>  
-<a class="jxr_linenumber" name="L19" href="#L19">19</a>  <strong class="jxr_keyword">import</strong> de.aikiit.mailclena.MailConfiguration;
-<a class="jxr_linenumber" name="L20" href="#L20">20</a>  <strong class="jxr_keyword">import</strong> org.junit.Test;
-<a class="jxr_linenumber" name="L21" href="#L21">21</a>  
-<a class="jxr_linenumber" name="L22" href="#L22">22</a>  <strong class="jxr_keyword">import</strong> <strong class="jxr_keyword">static</strong> org.assertj.core.api.Assertions.assertThat;
-<a class="jxr_linenumber" name="L23" href="#L23">23</a>  
-<a class="jxr_linenumber" name="L24" href="#L24">24</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../de/aikiit/mailclena/mail/MailClientTest.html">MailClientTest</a> {
-<a class="jxr_linenumber" name="L25" href="#L25">25</a>  
-<a class="jxr_linenumber" name="L26" href="#L26">26</a>      @Test
-<a class="jxr_linenumber" name="L27" href="#L27">27</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> initWithConfig() {
-<a class="jxr_linenumber" name="L28" href="#L28">28</a>          <strong class="jxr_keyword">final</strong> MailConfiguration configuration = MailConfiguration.builder().host(<span class="jxr_string">"h"</span>).username(<span class="jxr_string">"u"</span>).password(<span class="jxr_string">"p"</span>).build();
-<a class="jxr_linenumber" name="L29" href="#L29">29</a>          assertThat(configuration).isNotNull();
-<a class="jxr_linenumber" name="L30" href="#L30">30</a>          <strong class="jxr_keyword">new</strong> MailClient(configuration);
+<a class="jxr_linenumber" name="L19" href="#L19">19</a>  <strong class="jxr_keyword">import</strong> org.junit.Test;
+<a class="jxr_linenumber" name="L20" href="#L20">20</a>  
+<a class="jxr_linenumber" name="L21" href="#L21">21</a>  <strong class="jxr_keyword">import</strong> java.util.UUID;
+<a class="jxr_linenumber" name="L22" href="#L22">22</a>  
+<a class="jxr_linenumber" name="L23" href="#L23">23</a>  <strong class="jxr_keyword">import</strong> <strong class="jxr_keyword">static</strong> org.assertj.core.api.Assertions.assertThat;
+<a class="jxr_linenumber" name="L24" href="#L24">24</a>  
+<a class="jxr_linenumber" name="L25" href="#L25">25</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../de/aikiit/mailclena/MailConfigurationTest.html">MailConfigurationTest</a> {
+<a class="jxr_linenumber" name="L26" href="#L26">26</a>  
+<a class="jxr_linenumber" name="L27" href="#L27">27</a>      @Test
+<a class="jxr_linenumber" name="L28" href="#L28">28</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> ensurePasswordNotInToString() {
+<a class="jxr_linenumber" name="L29" href="#L29">29</a>          String password = UUID.randomUUID().toString();
+<a class="jxr_linenumber" name="L30" href="#L30">30</a>          assertThat(MailConfiguration.builder().password(password).username(<span class="jxr_string">"username"</span>).host(<span class="jxr_string">"host"</span>).build().toString()).doesNotContain(password);
 <a class="jxr_linenumber" name="L31" href="#L31">31</a>      }
 <a class="jxr_linenumber" name="L32" href="#L32">32</a>  }
 </pre>

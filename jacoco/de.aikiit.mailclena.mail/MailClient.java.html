@@ -1,19 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="de"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MailClient.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">mailclena</a> &gt; <a href="index.source.html" class="el_package">de.aikiit.mailclena.mail</a> &gt; <span class="el_source">MailClient.java</span></div><h1>MailClient.java</h1><pre class="source lang-java linenums">/**
- MailClena - Copyright (C) 2018, Aiki IT
-
- This program is free software: you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation, either version 3 of the License, or
- (at your option) any later version.
-
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
-
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="de"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MailClient.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">mailclena</a> &gt; <a href="index.source.html" class="el_package">de.aikiit.mailclena.mail</a> &gt; <span class="el_source">MailClient.java</span></div><h1>MailClient.java</h1><pre class="source lang-java linenums">/*
+  MailClena - Copyright (C) 2018, Aiki IT
+  &lt;p&gt;
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+  &lt;p&gt;
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+  &lt;p&gt;
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
  */
 package de.aikiit.mailclena.mail;
 
@@ -23,12 +22,90 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
-<span class="fc" id="L26">@AllArgsConstructor</span>
-<span class="fc" id="L27">@Log4j2</span>
-<span class="nc" id="L28">@NoArgsConstructor(access = AccessLevel.PRIVATE)</span>
+import javax.mail.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Properties;
+
+<span class="fc" id="L30">@AllArgsConstructor</span>
+<span class="fc" id="L31">@Log4j2</span>
+<span class="nc" id="L32">@NoArgsConstructor(access = AccessLevel.PRIVATE)</span>
 public class MailClient {
+
+    private static final String INBOX = &quot;INBOX&quot;;
+    private static final String POP3S = &quot;pop3s&quot;;
 
     private MailConfiguration mailConfiguration;
 
+    private Properties getProperties() {
+<span class="fc" id="L41">        Properties properties = new Properties();</span>
+<span class="fc" id="L42">        properties.put(&quot;mail.pop3s.host&quot;, mailConfiguration.getHost());</span>
+<span class="fc" id="L43">        properties.put(&quot;mail.pop3.starttls.enable&quot;, &quot;true&quot;);</span>
+<span class="fc" id="L44">        properties.put(&quot;mail.pop3s.port&quot;, &quot;995&quot;);</span>
+<span class="fc" id="L45">        properties.put(&quot;mail.store.protocol&quot;, &quot;pop3&quot;);</span>
+<span class="fc" id="L46">        return properties;</span>
+    }
+
+    // TODO show date of mails YYYYMMDD
+
+    public void list() {
+        try {
+<span class="fc" id="L53">            Session emailSession = Session.getDefaultInstance(getProperties());</span>
+            // emailSession.setDebug(true);
+
+<span class="fc" id="L56">            Store store = emailSession.getStore(POP3S);</span>
+
+<span class="nc" id="L58">            store.connect(mailConfiguration.getHost(), mailConfiguration.getUsername(), mailConfiguration.getPassword());</span>
+<span class="nc" id="L59">            Folder emailFolder = store.getFolder(INBOX);</span>
+<span class="nc" id="L60">            emailFolder.open(Folder.READ_ONLY);</span>
+
+<span class="nc" id="L62">            List&lt;Message&gt; messages = Arrays.asList(emailFolder.getMessages());</span>
+<span class="nc" id="L63">            log.info(&quot;Found {} messages.&quot;, messages.size());</span>
+
+<span class="nc" id="L65">            messages.forEach(m -&gt; {</span>
+                try {
+<span class="nc" id="L67">                    log.info(&quot;Message: &quot; + m.getSubject() + &quot; From: &quot; + Arrays.toString(m.getFrom()));</span>
+<span class="nc" id="L68">                } catch (MessagingException e) {</span>
+<span class="nc" id="L69">                    log.error(e);</span>
+<span class="nc" id="L70">                }</span>
+<span class="nc" id="L71">            });</span>
+
+<span class="nc" id="L73">            store.close();</span>
+<span class="fc" id="L74">        } catch (MessagingException e) {</span>
+<span class="fc" id="L75">            log.error(e);</span>
+<span class="nc" id="L76">        }</span>
+<span class="fc" id="L77">    }</span>
+
+    public void delete() {
+        try {
+<span class="fc" id="L81">            Session emailSession = Session.getDefaultInstance(getProperties());</span>
+            // emailSession.setDebug(true);
+
+<span class="fc" id="L84">            Store store = emailSession.getStore(POP3S);</span>
+
+<span class="nc" id="L86">            store.connect(mailConfiguration.getHost(), mailConfiguration.getUsername(), mailConfiguration.getPassword());</span>
+<span class="nc" id="L87">            Folder emailFolder = store.getFolder(INBOX);</span>
+<span class="nc" id="L88">            emailFolder.open(Folder.READ_WRITE);</span>
+
+<span class="nc" id="L90">            List&lt;Message&gt; messages = Arrays.asList(emailFolder.getMessages());</span>
+<span class="nc" id="L91">            log.info(&quot;Starting to delete {} messages.&quot;, messages.size());</span>
+
+<span class="nc" id="L93">            messages.forEach(message -&gt; {</span>
+                try {
+<span class="nc" id="L95">                    log.debug(&quot;Marking for deletion &quot; + message.getSubject() + &quot; From: &quot; + Arrays.toString(message.getFrom()));</span>
+<span class="nc" id="L96">                    message.setFlag(Flags.Flag.DELETED, true);</span>
+<span class="nc" id="L97">                } catch (MessagingException e) {</span>
+<span class="nc" id="L98">                    log.error(e);</span>
+<span class="nc" id="L99">                }</span>
+<span class="nc" id="L100">            });</span>
+
+<span class="nc" id="L102">            emailFolder.close(true);</span>
+<span class="nc" id="L103">            log.info(&quot;Expunge folder to actually remove messages.&quot;);</span>
+<span class="nc" id="L104">            store.close();</span>
+<span class="nc" id="L105">            log.info(&quot;Finished to delete {} messages.&quot;, messages.size());</span>
+<span class="fc" id="L106">        } catch (MessagingException e) {</span>
+<span class="fc" id="L107">            log.error(e);</span>
+<span class="nc" id="L108">        }</span>
+<span class="fc" id="L109">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.1.201803210924</span></div></body></html>
