@@ -74,7 +74,7 @@
         <configuration>
           <timeoutConstant>8000</timeoutConstant>
           <threads>8</threads>
-          <coverageThreshold>90</coverageThreshold>
+          <coverageThreshold>80</coverageThreshold>
           <!--mutationThreshold>25</mutationThreshold-->
           <failWhenNoMutations>false</failWhenNoMutations>
           <verbose>true</verbose>
