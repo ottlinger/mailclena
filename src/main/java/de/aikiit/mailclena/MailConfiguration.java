@@ -1,4 +1,4 @@
-/**
+/*
  MailClena - Copyright (C) 2018, Aiki IT
 
  This program is free software: you can redistribute it and/or modify
@@ -20,9 +20,11 @@ package de.aikiit.mailclena;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
+import lombok.ToString;
 
 @Data
 @Builder
+@ToString(exclude = "password")
 public class MailConfiguration {
     @NonNull
     private String host;
