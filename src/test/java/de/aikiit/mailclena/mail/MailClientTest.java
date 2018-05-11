@@ -19,10 +19,14 @@ package de.aikiit.mailclena.mail;
 import de.aikiit.mailclena.MailConfiguration;
 import org.junit.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class MailClientTest {
 
     @Test
     public void initWithConfig() {
-        new MailClient(MailConfiguration.builder().host("h").username("u").password("p").build());
+        final MailConfiguration configuration = MailConfiguration.builder().host("h").username("u").password("p").build();
+        assertThat(configuration).isNotNull();
+        new MailClient(configuration);
     }
 }
