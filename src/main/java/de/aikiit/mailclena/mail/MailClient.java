@@ -90,16 +90,20 @@ public class MailClient {
 
     public void delete() {
         try {
+            Optional<Pair<Store, Folder>> folder = openFolder(Folder.READ_WRITE);
+
+            if (!folder.isPresent()) {
+                log.error("Unable to open folder in write mode to remove mails, will abort.");
+                return;
+            }
+
+            Pair<Store, Folder> storeAndFolder = folder.get();
+
             Session emailSession = Session.getDefaultInstance(getProperties());
             // emailSession.setDebug(true);
 
-            Store store = emailSession.getStore(POP3S);
-
-            store.connect(mailConfiguration.getHost(), mailConfiguration.getUsername(), mailConfiguration.getPassword());
-            Folder emailFolder = store.getFolder(INBOX);
-            emailFolder.open(Folder.READ_WRITE);
-
-            List<Message> messages = Arrays.asList(emailFolder.getMessages());
+            final Folder f = storeAndFolder.getRight();
+            List<Message> messages = Arrays.asList(f.getMessages());
             log.info("Starting to delete {} messages.", messages.size());
 
             messages.forEach(message -> {
@@ -111,9 +115,9 @@ public class MailClient {
                 }
             });
 
-            emailFolder.close(true);
+            f.close(true);
             log.info("Expunge folder to actually remove messages.");
-            store.close();
+            storeAndFolder.getLeft().close();
             log.info("Finished to delete {} messages.", messages.size());
         } catch (MessagingException e) {
             log.error(e);
