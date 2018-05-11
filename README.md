@@ -36,6 +36,16 @@ $ java -jar target/mailclena-0.0.1-SNAPSHOT-executable.jar
 22:58:33.294 [main] INFO  de.aikiit.mailclena.MailClena - Hello World :-)
 ```
 
+### Command line parameters
+
+```
+usage: MailClena
+ -h,--host <arg>       Hostname - example: http://imap.yourisp.org
+ -p,--password <arg>   Password - example: myfancypassword
+ -u,--username <arg>   Username - example: myuser@tld.org
+
+```
+
 ## Project webpage
 
 A Maven-generated site report is also available [here](https://ottlinger.github.io/mailclena/).
