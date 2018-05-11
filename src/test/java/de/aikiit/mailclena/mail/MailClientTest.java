@@ -17,16 +17,57 @@
 package de.aikiit.mailclena.mail;
 
 import de.aikiit.mailclena.MailConfiguration;
+import org.apache.commons.lang3.tuple.Pair;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.Spy;
+import org.mockito.junit.MockitoJUnitRunner;
+
+import javax.mail.Folder;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Store;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.*;
 
+@RunWith(MockitoJUnitRunner.class)
 public class MailClientTest {
+
+    private static final MailConfiguration CONFIGURATION = MailConfiguration.builder().host("h").username("u").password("p").build();
+    @Spy
+    private MailClient mailClient;
+
+    @Mock
+    private Pair<Store, Folder> storeAndFolder;
+    @Mock
+    private Store store;
+    @Mock
+    private Folder folder;
+    @Mock
+    private Message message;
 
     @Test
     public void initWithConfig() {
-        final MailConfiguration configuration = MailConfiguration.builder().host("h").username("u").password("p").build();
-        assertThat(configuration).isNotNull();
-        new MailClient(configuration);
+        assertThat(CONFIGURATION).isNotNull();
+        new MailClient(CONFIGURATION);
+    }
+
+    @Test
+    public void listWithMockedMailInteraction() throws MessagingException {
+        doReturn(Optional.of(storeAndFolder)).when(mailClient).openFolder(Folder.READ_ONLY);
+
+        when(storeAndFolder.getLeft()).thenReturn(store);
+        when(storeAndFolder.getRight()).thenReturn(folder);
+        when(folder.getMessages()).thenReturn(new Message[]{message});
+
+        mailClient.list();
+
+        verify(folder).getMessages();
+        verify(message).getFrom();
+        verify(message).getSubject();
     }
 }
