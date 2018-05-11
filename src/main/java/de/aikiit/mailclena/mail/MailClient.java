@@ -53,20 +53,19 @@ public class MailClient {
         // emailSession.setDebug(true);
 
         Store store = emailSession.getStore(POP3S);
-
         store.connect(mailConfiguration.getHost(), mailConfiguration.getUsername(), mailConfiguration.getPassword());
+
         Folder emailFolder = store.getFolder(INBOX);
-        emailFolder.open(Folder.READ_ONLY);
+        emailFolder.open(mode);
         return Optional.of(Pair.of(store, emailFolder));
     }
 
     // TODO show date of mails YYYYMMDD
     public void list() {
         try {
-            Optional<Pair<Store, Folder>> folder
-                = openFolder(Folder.READ_ONLY);
+            Optional<Pair<Store, Folder>> folder = openFolder(Folder.READ_ONLY);
 
-            if(!folder.isPresent()) {
+            if (!folder.isPresent()) {
                 log.error("Unable to open folder in read-only mode to list mails, will abort.");
                 return;
             }
