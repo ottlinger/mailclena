@@ -1,4 +1,4 @@
-/**
+/*
  MailClena - Copyright (C) 2018, Aiki IT
 
  This program is free software: you can redistribute it and/or modify
@@ -17,6 +17,7 @@
  */
 package de.aikiit.mailclena;
 
+import de.aikiit.mailclena.mail.MailClient;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -28,12 +29,16 @@ import java.util.Optional;
 public final class MailClena {
 
     public static void main(String... args) {
-        log.info("Hello World :-)");
         Optional<MailConfiguration> mailConfiguration = new MailClenaParameterParser().extractConfiguration(args);
 
         if(mailConfiguration.isPresent()) {
-            log.info("Deleting mails ....");
+            log.info("MailClena is launching with the given configuration ....");
+            final MailClient client = new MailClient(mailConfiguration.get());
+            client.list();
+            client.delete();
+            client.list();
         }
+        log.info("MailClena is shutting down .... bye bye :-)");
     }
 
 }
