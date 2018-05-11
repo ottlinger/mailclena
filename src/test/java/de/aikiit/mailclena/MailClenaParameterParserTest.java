@@ -49,6 +49,11 @@ public class MailClenaParameterParserTest {
     }
 
     @Test
+    public void callMainWithTwoParametersOneMissing() {
+        assertThat(parser.extractConfiguration("-h=bar", "-u=usr")).isEmpty();
+    }
+
+    @Test
     public void callWithNullParameter() {
         assertThat(parser.extractConfiguration((String[]) null)).isEmpty();
     }
