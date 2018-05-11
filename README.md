@@ -46,6 +46,20 @@ usage: MailClena
 
 ```
 
+### Command line parameters
+
+```
+$ java -jar target/mailclena-0.0.1-SNAPSHOT-executable.jar -h=host.tld.org -u=yourmail@yourtld.org -p=yourpassword
+
+00:04:20.144 [main] INFO  de.aikiit.mailclena.MailClena - MailClena is launching with the given configuration ....
+00:04:20.972 [main] INFO  de.aikiit.mailclena.mail.MailClient - Found 0 messages.
+00:04:21.422 [main] INFO  de.aikiit.mailclena.mail.MailClient - Starting to delete 0 messages.
+00:04:21.455 [main] INFO  de.aikiit.mailclena.mail.MailClient - Expunge folder to actually remove messages.
+00:04:21.455 [main] INFO  de.aikiit.mailclena.mail.MailClient - Finished to delete 0 messages.
+00:04:21.866 [main] INFO  de.aikiit.mailclena.mail.MailClient - Found 0 messages.
+00:04:21.898 [main] INFO  de.aikiit.mailclena.MailClena - MailClena is shutting down .... bye bye :-)
+```
+
 ## Project webpage
 
 A Maven-generated site report is also available [here](https://ottlinger.github.io/mailclena/).
