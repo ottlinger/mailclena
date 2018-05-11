@@ -20,3 +20,4 @@ target
 *.log
 # Prevent accidentally checking in real configurations
 **/javaconfiguration.properties
+local.sh
