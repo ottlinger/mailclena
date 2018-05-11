@@ -42,4 +42,12 @@ public class MailConfigurationTest {
         configuration.setHost("h");
         assertThat(configuration.getHost()).isEqualTo("h");
     }
+
+    @Test
+    public void builderForObjectCreation() {
+        final MailConfiguration configuration = MailConfiguration.builder().host("h").username("u").password("p").build();
+        assertThat(configuration.getPassword()).isEqualTo("p");
+        assertThat(configuration.getUsername()).isEqualTo("u");
+        assertThat(configuration.getHost()).isEqualTo("h");
+    }
 }
