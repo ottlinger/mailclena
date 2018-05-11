@@ -98,10 +98,6 @@ public class MailClient {
             }
 
             Pair<Store, Folder> storeAndFolder = folder.get();
-
-            Session emailSession = Session.getDefaultInstance(getProperties());
-            // emailSession.setDebug(true);
-
             final Folder f = storeAndFolder.getRight();
             List<Message> messages = Arrays.asList(f.getMessages());
             log.info("Starting to delete {} messages.", messages.size());
