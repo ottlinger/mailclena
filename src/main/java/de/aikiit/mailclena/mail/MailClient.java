@@ -21,10 +21,12 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.apache.commons.lang3.tuple.Pair;
 
 import javax.mail.*;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.Properties;
 
 @AllArgsConstructor
@@ -46,20 +48,31 @@ public class MailClient {
         return properties;
     }
 
-    // TODO show date of mails YYYYMMDD
+    private Optional<Pair<Store, Folder>> openFolder(int mode) throws MessagingException {
+        Session emailSession = Session.getDefaultInstance(getProperties());
+        // emailSession.setDebug(true);
 
+        Store store = emailSession.getStore(POP3S);
+
+        store.connect(mailConfiguration.getHost(), mailConfiguration.getUsername(), mailConfiguration.getPassword());
+        Folder emailFolder = store.getFolder(INBOX);
+        emailFolder.open(Folder.READ_ONLY);
+        return Optional.of(Pair.of(store, emailFolder));
+    }
+
+    // TODO show date of mails YYYYMMDD
     public void list() {
         try {
-            Session emailSession = Session.getDefaultInstance(getProperties());
-            // emailSession.setDebug(true);
+            Optional<Pair<Store, Folder>> folder
+                = openFolder(Folder.READ_ONLY);
 
-            Store store = emailSession.getStore(POP3S);
+            if(!folder.isPresent()) {
+                log.error("Unable to open folder in read-only mode to list mails, will abort.");
+                return;
+            }
 
-            store.connect(mailConfiguration.getHost(), mailConfiguration.getUsername(), mailConfiguration.getPassword());
-            Folder emailFolder = store.getFolder(INBOX);
-            emailFolder.open(Folder.READ_ONLY);
-
-            List<Message> messages = Arrays.asList(emailFolder.getMessages());
+            Pair<Store, Folder> storeAndFolder = folder.get();
+            List<Message> messages = Arrays.asList(storeAndFolder.getRight().getMessages());
             log.info("Found {} messages.", messages.size());
 
             messages.forEach(m -> {
@@ -70,7 +83,7 @@ public class MailClient {
                 }
             });
 
-            store.close();
+            storeAndFolder.getLeft().close();
         } catch (MessagingException e) {
             log.error(e);
         }
