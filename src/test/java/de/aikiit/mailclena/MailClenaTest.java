@@ -21,7 +21,7 @@ import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class MailclenaTest {
+public class MailClenaTest {
 
     @Test
     public void callMainExtractParametersSuccessfully() {
