@@ -1,4 +1,4 @@
-/**
+/*
  MailClena - Copyright (C) 2018, Aiki IT
 
  This program is free software: you can redistribute it and/or modify
@@ -50,7 +50,7 @@ public class MailClenaParameterParserTest {
 
     @Test
     public void callWithNullParameter() {
-        assertThat(parser.extractConfiguration(null)).isEmpty();
+        assertThat(parser.extractConfiguration((String[]) null)).isEmpty();
     }
 
     @Test(expected = IllegalArgumentException.class)
