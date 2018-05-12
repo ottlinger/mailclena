@@ -24,14 +24,10 @@ import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import javax.mail.Folder;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Store;
+import javax.mail.*;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -69,5 +65,24 @@ public class MailClientTest {
         verify(folder).getMessages();
         verify(message).getFrom();
         verify(message).getSubject();
+        verify(store).close();
+    }
+
+    @Test
+    public void deleteWithMockedMailInteraction() throws MessagingException {
+        doReturn(Optional.of(storeAndFolder)).when(mailClient).openFolder(Folder.READ_WRITE);
+
+        when(storeAndFolder.getLeft()).thenReturn(store);
+        when(storeAndFolder.getRight()).thenReturn(folder);
+        when(folder.getMessages()).thenReturn(new Message[]{message});
+
+        mailClient.delete();
+
+        verify(folder).getMessages();
+        verify(folder).close(true);
+        verify(message).getFrom();
+        verify(message).getSubject();
+        verify(message).setFlag(Flags.Flag.DELETED, true);
+        verify(store).close();
     }
 }
