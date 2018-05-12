@@ -33,7 +33,7 @@ import static org.mockito.Mockito.*;
 @RunWith(MockitoJUnitRunner.class)
 public class MailClientTest {
 
-    private static final MailConfiguration CONFIGURATION = MailConfiguration.builder().host("h").username("u").password("p").build();
+    private static final MailConfiguration CONFIGURATION = MailConfiguration.builder().host("h").username("u").password("p").command("c").build();
     @Spy
     private MailClient mailClient;
 
