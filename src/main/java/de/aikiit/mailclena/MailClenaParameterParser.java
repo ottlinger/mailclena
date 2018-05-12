@@ -46,6 +46,12 @@ public final class MailClenaParameterParser {
                     mailConfigurationBuilder.username(cmd.getOptionValue(MailClenaCommandLineOptions.USERNAME.getOpt()));
                     mailConfigurationBuilder.password(cmd.getOptionValue(MailClenaCommandLineOptions.PASSWORD.getOpt()));
 
+                    if(!Strings.isNullOrEmpty(cmd.getOptionValue(MailClenaCommandLineOptions.COMMAND.getOpt()))) {
+                        mailConfigurationBuilder.command(cmd.getOptionValue(MailClenaCommandLineOptions.COMMAND.getOpt()));
+                    } else {
+                        mailConfigurationBuilder.command("list");
+                    }
+
                     final MailConfiguration mailConfiguration = mailConfigurationBuilder.build();
                     log.debug("Extracted configuration from given parameters : {}", mailConfiguration);
                     return Optional.of(mailConfiguration);
@@ -80,7 +86,8 @@ public final class MailClenaParameterParser {
     enum MailClenaCommandLineOptions {
         HOST("h", "Hostname - example: http://imap.yourisp.org"),
         USERNAME("u", "Username - example: myuser@tld.org"),
-        PASSWORD("p", "Password - example: myfancypassword");
+        PASSWORD("p", "Password - example: myfancypassword"),
+        COMMAND("c", "Command to execute - example: list");
 
         private final String opt;
         private final String desc;

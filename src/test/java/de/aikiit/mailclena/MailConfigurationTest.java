@@ -32,7 +32,7 @@ public class MailConfigurationTest {
 
     @Test
     public void regularObjectCreation() {
-        final MailConfiguration configuration = new MailConfiguration("host", "username", "password");
+        final MailConfiguration configuration = new MailConfiguration("host", "username", "password", "myCommand");
         configuration.setPassword("p");
         assertThat(configuration.getPassword()).isEqualTo("p");
 
@@ -41,13 +41,18 @@ public class MailConfigurationTest {
 
         configuration.setHost("h");
         assertThat(configuration.getHost()).isEqualTo("h");
+
+        configuration.setCommand("c");
+        assertThat(configuration.getCommand()).isEqualTo("c");
     }
 
     @Test
-    public void builderForObjectCreation() {
+    public void builderForObjectCreationWithDefaultCommand() {
         final MailConfiguration configuration = MailConfiguration.builder().host("h").username("u").password("p").build();
         assertThat(configuration.getPassword()).isEqualTo("p");
         assertThat(configuration.getUsername()).isEqualTo("u");
         assertThat(configuration.getHost()).isEqualTo("h");
+
+        assertThat(configuration.getCommand()).isEqualTo("list");
     }
 }

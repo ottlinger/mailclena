@@ -31,12 +31,21 @@ public final class MailClena {
     public static void main(String... args) {
         Optional<MailConfiguration> mailConfiguration = new MailClenaParameterParser().extractConfiguration(args);
 
-        if(mailConfiguration.isPresent()) {
+        if (mailConfiguration.isPresent()) {
             log.info("MailClena is launching with the given configuration ....");
-            final MailClient client = new MailClient(mailConfiguration.get());
-            client.list();
-            client.delete();
-            client.list();
+            final MailConfiguration configuration = mailConfiguration.get();
+            final MailClient client = new MailClient(configuration);
+
+            switch (configuration.getCommand()) {
+                case "clean":
+                    client.list();
+                    client.delete();
+                    client.list();
+                    break;
+
+                default:
+                    client.list();
+            }
         }
         log.info("MailClena is shutting down .... bye bye :-)");
     }

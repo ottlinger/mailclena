@@ -24,6 +24,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class MailClenaCommandLineOptionsTest {
     @Test
     public void ensureNumberOfOptionsRemainsTheSame() {
-        assertThat(MailClenaParameterParser.MailClenaCommandLineOptions.values()).hasSize(3);
+        assertThat(MailClenaParameterParser.MailClenaCommandLineOptions.values()).hasSize(4);
     }
 }

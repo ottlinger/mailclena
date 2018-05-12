@@ -74,7 +74,13 @@ public class MailClient {
 
             Pair<Store, Folder> storeAndFolder = folder.get();
             List<Message> messages = Arrays.asList(storeAndFolder.getRight().getMessages());
-            log.info("Found {} messages.", messages.size());
+            // TODO add test
+            final int size = messages.size();
+            if (size == 0) {
+                log.info("No messages found - nothing to do here.");
+                return;
+            }
+            log.info("Found {} messages.", size);
 
             messages.forEach(m -> {
                 try {

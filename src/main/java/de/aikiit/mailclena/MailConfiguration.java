@@ -32,4 +32,6 @@ public class MailConfiguration {
     private String username;
     @NonNull
     private String password;
+    @NonNull
+    private String command;
 }
