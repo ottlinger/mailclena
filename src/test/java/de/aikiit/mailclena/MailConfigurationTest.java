@@ -27,7 +27,7 @@ public class MailConfigurationTest {
     @Test
     public void ensurePasswordNotInToString() {
         String password = UUID.randomUUID().toString();
-        assertThat(MailConfiguration.builder().password(password).username("username").host("host").build().toString()).doesNotContain(password);
+        assertThat(MailConfiguration.builder().password(password).username("username").host("host").command("cmd").build().toString()).doesNotContain(password);
     }
 
     @Test
@@ -48,11 +48,10 @@ public class MailConfigurationTest {
 
     @Test
     public void builderForObjectCreationWithDefaultCommand() {
-        final MailConfiguration configuration = MailConfiguration.builder().host("h").username("u").password("p").build();
+        final MailConfiguration configuration = MailConfiguration.builder().host("h").username("u").password("p").command("c").build();
         assertThat(configuration.getPassword()).isEqualTo("p");
         assertThat(configuration.getUsername()).isEqualTo("u");
         assertThat(configuration.getHost()).isEqualTo("h");
-
-        assertThat(configuration.getCommand()).isEqualTo("list");
+        assertThat(configuration.getCommand()).isEqualTo("c");
     }
 }
