@@ -64,7 +64,7 @@ $ java -jar target/mailclena-0.0.1-SNAPSHOT-executable.jar -h=host.tld.org -u=yo
 ```
 $ java -jar target/mailclena-0.0.1-SNAPSHOT-executable.jar -h=host.tld.org -u=yourmail@yourtld.org -p=yourpassword 
 17:19:09.802 [main] INFO  de.aikiit.mailclena.MailClena - MailClena is launching with the given configuration ....
-17:19:11.410 [main] INFO  de.aikiit.mailclena.mail.MailClient - No messages found - nothing to do here.
+17:19:11.410 [main] INFO  de.aikiit.mailclena.mail.MailClient - No messages found - nothing to be done here.
 17:19:11.410 [main] INFO  de.aikiit.mailclena.MailClena - MailClena is shutting down .... bye bye :-)
 ```
 
