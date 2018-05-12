@@ -46,57 +46,64 @@ public final class MailClenaParameterParser {
 <span class="fc" id="L46">                    mailConfigurationBuilder.username(cmd.getOptionValue(MailClenaCommandLineOptions.USERNAME.getOpt()));</span>
 <span class="fc" id="L47">                    mailConfigurationBuilder.password(cmd.getOptionValue(MailClenaCommandLineOptions.PASSWORD.getOpt()));</span>
 
-<span class="fc" id="L49">                    final MailConfiguration mailConfiguration = mailConfigurationBuilder.build();</span>
-<span class="fc" id="L50">                    log.debug(&quot;Extracted configuration from given parameters : {}&quot;, mailConfiguration);</span>
-<span class="fc" id="L51">                    return Optional.of(mailConfiguration);</span>
+<span class="pc bpc" id="L49" title="1 of 2 branches missed.">                    if(!Strings.isNullOrEmpty(cmd.getOptionValue(MailClenaCommandLineOptions.COMMAND.getOpt()))) {</span>
+<span class="nc" id="L50">                        mailConfigurationBuilder.command(cmd.getOptionValue(MailClenaCommandLineOptions.COMMAND.getOpt()));</span>
+                    } else {
+<span class="fc" id="L52">                        mailConfigurationBuilder.command(&quot;list&quot;);</span>
+                    }
+
+<span class="fc" id="L55">                    final MailConfiguration mailConfiguration = mailConfigurationBuilder.build();</span>
+<span class="fc" id="L56">                    log.debug(&quot;Extracted configuration from given parameters : {}&quot;, mailConfiguration);</span>
+<span class="fc" id="L57">                    return Optional.of(mailConfiguration);</span>
                 }
 
-<span class="fc" id="L54">            } catch (ParseException | NullPointerException e) {</span>
-<span class="fc" id="L55">                log.error(&quot;Unable to parse given command line parameters&quot;, e);</span>
-<span class="fc" id="L56">                printHelp();</span>
-<span class="fc" id="L57">                throw new IllegalArgumentException(&quot;Exception while parsing command line arguments&quot;);</span>
-<span class="fc" id="L58">            }</span>
+<span class="fc" id="L60">            } catch (ParseException | NullPointerException e) {</span>
+<span class="fc" id="L61">                log.error(&quot;Unable to parse given command line parameters&quot;, e);</span>
+<span class="fc" id="L62">                printHelp();</span>
+<span class="fc" id="L63">                throw new IllegalArgumentException(&quot;Exception while parsing command line arguments&quot;);</span>
+<span class="fc" id="L64">            }</span>
         }
-<span class="fc" id="L60">        return Optional.empty();</span>
+<span class="fc" id="L66">        return Optional.empty();</span>
     }
 
     private void printHelp() {
-<span class="fc" id="L64">        final HelpFormatter formatter = new HelpFormatter();</span>
-<span class="fc" id="L65">        formatter.printHelp(&quot;MailClena&quot;, getAvailableOptions());</span>
-<span class="fc" id="L66">    }</span>
+<span class="fc" id="L70">        final HelpFormatter formatter = new HelpFormatter();</span>
+<span class="fc" id="L71">        formatter.printHelp(&quot;MailClena&quot;, getAvailableOptions());</span>
+<span class="fc" id="L72">    }</span>
 
 
     @VisibleForTesting
     Options getAvailableOptions() {
-<span class="fc" id="L71">        Options o = new Options();</span>
+<span class="fc" id="L77">        Options o = new Options();</span>
 
-<span class="fc bfc" id="L73" title="All 2 branches covered.">        for (MailClenaCommandLineOptions opt : MailClenaCommandLineOptions.values()) {</span>
-<span class="fc" id="L74">            o.addOption(new Option(opt.getOpt(), opt.name().toLowerCase(), true, opt.getDescription()));</span>
+<span class="fc bfc" id="L79" title="All 2 branches covered.">        for (MailClenaCommandLineOptions opt : MailClenaCommandLineOptions.values()) {</span>
+<span class="fc" id="L80">            o.addOption(new Option(opt.getOpt(), opt.name().toLowerCase(), true, opt.getDescription()));</span>
         }
-<span class="fc" id="L76">        return o;</span>
+<span class="fc" id="L82">        return o;</span>
     }
 
-<span class="fc" id="L79">    @VisibleForTesting</span>
+<span class="fc" id="L85">    @VisibleForTesting</span>
     enum MailClenaCommandLineOptions {
-<span class="fc" id="L81">        HOST(&quot;h&quot;, &quot;Hostname - example: http://imap.yourisp.org&quot;),</span>
-<span class="fc" id="L82">        USERNAME(&quot;u&quot;, &quot;Username - example: myuser@tld.org&quot;),</span>
-<span class="fc" id="L83">        PASSWORD(&quot;p&quot;, &quot;Password - example: myfancypassword&quot;);</span>
+<span class="fc" id="L87">        HOST(&quot;h&quot;, &quot;Hostname - example: http://imap.yourisp.org&quot;),</span>
+<span class="fc" id="L88">        USERNAME(&quot;u&quot;, &quot;Username - example: myuser@tld.org&quot;),</span>
+<span class="fc" id="L89">        PASSWORD(&quot;p&quot;, &quot;Password - example: myfancypassword&quot;),</span>
+<span class="fc" id="L90">        COMMAND(&quot;c&quot;, &quot;Command to execute - example: 'list' or 'clean', if no operation is given defaults to 'list'&quot;);</span>
 
         private final String opt;
         private final String desc;
 
         String getOpt() {
-<span class="fc" id="L89">            return opt;</span>
+<span class="fc" id="L96">            return opt;</span>
         }
 
         String getDescription() {
-<span class="fc" id="L93">            return desc;</span>
+<span class="fc" id="L100">            return desc;</span>
         }
 
-<span class="fc" id="L96">        MailClenaCommandLineOptions(String opt, String desc) {</span>
-<span class="fc" id="L97">            this.opt = opt;</span>
-<span class="fc" id="L98">            this.desc = desc;</span>
-<span class="fc" id="L99">        }</span>
+<span class="fc" id="L103">        MailClenaCommandLineOptions(String opt, String desc) {</span>
+<span class="fc" id="L104">            this.opt = opt;</span>
+<span class="fc" id="L105">            this.desc = desc;</span>
+<span class="fc" id="L106">        }</span>
     }
 
 }
