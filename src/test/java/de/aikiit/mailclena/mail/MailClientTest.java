@@ -69,6 +69,21 @@ public class MailClientTest {
     }
 
     @Test
+    public void listWithMockedMailInteractionAndNoMessages() throws MessagingException {
+        doReturn(Optional.of(storeAndFolder)).when(mailClient).openFolder(Folder.READ_ONLY);
+
+        when(storeAndFolder.getLeft()).thenReturn(store);
+        when(storeAndFolder.getRight()).thenReturn(folder);
+        when(folder.getMessages()).thenReturn(new Message[]{});
+
+        mailClient.list();
+
+        verify(folder).getMessages();
+        verifyNoMoreInteractions(message);
+        verify(store).close();
+    }
+
+    @Test
     public void deleteWithMockedMailInteraction() throws MessagingException {
         doReturn(Optional.of(storeAndFolder)).when(mailClient).openFolder(Folder.READ_WRITE);
 
