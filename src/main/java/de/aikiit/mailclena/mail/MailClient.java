@@ -74,21 +74,22 @@ public class MailClient {
 
             Pair<Store, Folder> storeAndFolder = folder.get();
             List<Message> messages = Arrays.asList(storeAndFolder.getRight().getMessages());
-            // TODO add test
             final int size = messages.size();
-            if (size == 0) {
-                log.info("No messages found - nothing to do here.");
-                return;
-            }
-            log.info("Found {} messages.", size);
 
-            messages.forEach(m -> {
-                try {
-                    log.info("Message: " + m.getSubject() + " From: " + Arrays.toString(m.getFrom()));
-                } catch (MessagingException e) {
-                    log.error(e);
-                }
-            });
+            if (size == 0) {
+                log.info("No messages found - nothing to be done here.");
+            } else {
+
+                log.info("Found {} messages.", size);
+
+                messages.forEach(m -> {
+                    try {
+                        log.info("Message: " + m.getSubject() + " From: " + Arrays.toString(m.getFrom()));
+                    } catch (MessagingException e) {
+                        log.error(e);
+                    }
+                });
+            }
 
             storeAndFolder.getLeft().close();
         } catch (MessagingException e) {
@@ -108,23 +109,32 @@ public class MailClient {
             Pair<Store, Folder> storeAndFolder = folder.get();
             final Folder f = storeAndFolder.getRight();
             List<Message> messages = Arrays.asList(f.getMessages());
-            log.info("Starting to delete {} messages.", messages.size());
 
-            messages.forEach(message -> {
-                try {
-                    log.debug("Marking for deletion " + message.getSubject() + " From: " + Arrays.toString(message.getFrom()));
-                    message.setFlag(Flags.Flag.DELETED, true);
-                } catch (MessagingException e) {
-                    log.error(e);
-                }
-            });
+            // TODO add test
+            final int size = messages.size();
+            if (size == 0) {
+                log.info("No messages found - nothing to be done here.");
+            } else {
+                log.info("Starting to delete {} messages.", messages.size());
 
-            f.close(true);
-            log.info("Expunge folder to actually remove messages.");
+                messages.forEach(message -> {
+                    try {
+                        log.debug("Marking for deletion " + message.getSubject() + " From: " + Arrays.toString(message.getFrom()));
+                        message.setFlag(Flags.Flag.DELETED, true);
+                    } catch (MessagingException e) {
+                        log.error(e);
+                    }
+                });
+
+                f.close(true);
+                log.info("Expunge folder to actually remove messages.");
+                log.info("Finished to delete {} messages.", messages.size());
+            }
             storeAndFolder.getLeft().close();
-            log.info("Finished to delete {} messages.", messages.size());
         } catch (MessagingException e) {
             log.error(e);
         }
     }
+
+    // TODO: public void execute(String command) to keep logics our of MailClena.main()
 }
