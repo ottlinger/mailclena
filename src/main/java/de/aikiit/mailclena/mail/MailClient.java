@@ -110,7 +110,6 @@ public class MailClient {
             final Folder f = storeAndFolder.getRight();
             List<Message> messages = Arrays.asList(f.getMessages());
 
-            // TODO add test
             final int size = messages.size();
             if (size == 0) {
                 log.info("No messages found - nothing to be done here.");
