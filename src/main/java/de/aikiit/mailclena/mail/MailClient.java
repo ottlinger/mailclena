@@ -17,6 +17,7 @@
 package de.aikiit.mailclena.mail;
 
 import com.google.common.annotations.VisibleForTesting;
+import com.google.common.base.Strings;
 import de.aikiit.mailclena.MailConfiguration;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -136,4 +137,24 @@ public class MailClient {
     }
 
     // TODO: public void execute(String command) to keep logics our of MailClena.main()
+    @VisibleForTesting
+    enum MailClientCommands {
+        LIST,
+        CLEAN;
+
+        static Optional<MailClientCommands> parse(String command) {
+            if (!Strings.isNullOrEmpty(command)) {
+                String normalized = command.trim();
+                for (MailClientCommands cmd : values()) {
+                    if (normalized.equalsIgnoreCase(cmd.toString())) {
+                        return Optional.of(cmd);
+                    }
+                }
+            }
+
+            return Optional.empty();
+        }
+
+    }
+
 }
