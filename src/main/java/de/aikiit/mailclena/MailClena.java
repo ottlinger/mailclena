@@ -45,6 +45,7 @@ public final class MailClena {
 
                 default:
                     client.list();
+                    break;
             }
         }
         log.info("MailClena is shutting down .... bye bye :-)");
