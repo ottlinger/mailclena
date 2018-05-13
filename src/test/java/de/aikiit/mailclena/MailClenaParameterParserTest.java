@@ -76,7 +76,7 @@ public class MailClenaParameterParserTest {
     }
 
     @Test
-    public void ensureSizeOfOptionsIsUnderTest() {
-        assertThat(new MailClenaParameterParser().getAvailableOptions().getOptions()).isNotEmpty().hasSize(4);
+    public void ensureAllOptionsAreMentionedAndParsed() {
+        assertThat(new MailClenaParameterParser().getAvailableOptions().getOptions()).isNotEmpty().hasSize(MailClenaParameterParser.MailClenaCommandLineOptions.values().length);
     }
 }
