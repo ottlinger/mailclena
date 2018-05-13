@@ -100,4 +100,21 @@ public class MailClientTest {
         verify(message).setFlag(Flags.Flag.DELETED, true);
         verify(store).close();
     }
+
+    @Test
+    public void deleteWithMockedMailInteractionAndNoMessages() throws MessagingException {
+        doReturn(Optional.of(storeAndFolder)).when(mailClient).openFolder(Folder.READ_WRITE);
+
+        when(storeAndFolder.getLeft()).thenReturn(store);
+        when(storeAndFolder.getRight()).thenReturn(folder);
+        when(folder.getMessages()).thenReturn(new Message[]{});
+
+        mailClient.delete();
+
+        verify(folder).getMessages();
+        verify(store).close();
+
+        verify(folder, times(0)).close(true);
+        verifyNoMoreInteractions(message);
+    }
 }
