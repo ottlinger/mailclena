@@ -117,4 +117,17 @@ public class MailClientTest {
         verify(folder, times(0)).close(true);
         verifyNoMoreInteractions(message);
     }
+
+    @Test
+    public void parseUnknownCommandAndChoseFallback() {
+
+    }
+
+    @Test
+    public void parseList() {
+
+    }
+
+    @Test
+    public void parse
 }
