@@ -31,6 +31,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Properties;
 
+import static de.aikiit.mailclena.mail.MailClient.MailClientCommands.LIST;
+import static de.aikiit.mailclena.mail.MailClient.MailClientCommands.parse;
+
 @AllArgsConstructor
 @Log4j2
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
@@ -137,6 +140,30 @@ public class MailClient {
     }
 
     // TODO: public void execute(String command) to keep logics our of MailClena.main()
+    public void execute(String command) {
+        Optional<MailClientCommands> cmd = parse(command);
+        if (!cmd.isPresent()) {
+            log.info("No explicit command given, will fallback to 'list'");
+            cmd = Optional.of(LIST);
+        }
+
+        switch (cmd.get()) {
+            case CLEAN:
+                list();
+                delete();
+                list();
+                break;
+            case LIST:
+                list();
+                break;
+            default:
+                log.error("If you see this message, please report a bug since the CLI parser has new commands.");
+                // NOOP: avoid findbugs warning
+                break;
+        }
+    }
+
+
     @VisibleForTesting
     enum MailClientCommands {
         LIST,
