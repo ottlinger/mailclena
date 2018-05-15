@@ -129,5 +129,7 @@ public class MailClientTest {
     }
 
     @Test
-    public void parse
+    public void parseDelete() {
+        
+    }
 }
