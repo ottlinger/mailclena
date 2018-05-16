@@ -128,7 +128,10 @@ public class MailClientTest {
 
     @Test
     public void parseList() {
+        doNothing().when(mailClient).list();
+        mailClient.execute("lIsT");
 
+        verify(mailClient).list();
     }
 
     @Test
