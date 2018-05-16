@@ -136,6 +136,11 @@ public class MailClientTest {
 
     @Test
     public void parseDelete() {
+        doNothing().when(mailClient).list();
+        doNothing().when(mailClient).delete();
+        mailClient.execute("   ClEAn ");
 
+        verify(mailClient, times(2)).list();
+        verify(mailClient).delete();
     }
 }
