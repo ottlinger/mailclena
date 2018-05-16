@@ -119,8 +119,11 @@ public class MailClientTest {
     }
 
     @Test
-    public void parseUnknownCommandAndChoseFallback() {
+    public void parseUnknownCommandAndChooseFallback() throws MessagingException {
+        doNothing().when(mailClient).list();
+        mailClient.execute("notAValidOperation");
 
+        verify(mailClient).list();
     }
 
     @Test
@@ -130,6 +133,6 @@ public class MailClientTest {
 
     @Test
     public void parseDelete() {
-        
+
     }
 }
