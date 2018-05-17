@@ -1,7 +1,9 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
-mailclena,de.aikiit.mailclena.mail,MailClient,573,617,2,8,14,48,5,13,3,10
+mailclena,de.aikiit.mailclena.mail,MailClient.MailClientCommands,115,205,0,8,0,10,3,8,3,4
+mailclena,de.aikiit.mailclena.mail,MailClient,696,779,7,14,15,60,9,16,3,11
+mailclena,de.aikiit.mailclena.mail,MailClient.new Object() {...},30,35,1,1,0,1,4,2,3,2
 mailclena,de.aikiit.mailclena,MailClenaParameterParser,279,503,2,14,1,31,5,12,3,6
-mailclena,de.aikiit.mailclena,MailClena,420,0,18,0,15,0,16,0,7,0
+mailclena,de.aikiit.mailclena,MailClena,99,130,0,4,1,9,4,5,4,3
 mailclena,de.aikiit.mailclena,MailClenaParameterParser.MailClenaCommandLineOptions,100,163,0,2,0,11,3,6,3,5
 mailclena,de.aikiit.mailclena,MailConfiguration,878,283,46,10,0,7,33,14,6,13
 mailclena,de.aikiit.mailclena,MailConfiguration.MailConfigurationBuilder,100,99,1,1,0,1,5,8,4,8
