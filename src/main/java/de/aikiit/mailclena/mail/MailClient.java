@@ -67,7 +67,8 @@ public class MailClient {
     }
 
     // TODO show date of mails YYYYMMDD
-    public void list() {
+    @VisibleForTesting
+    void list() {
         try {
             Optional<Pair<Store, Folder>> folder = openFolder(Folder.READ_ONLY);
 
@@ -101,7 +102,8 @@ public class MailClient {
         }
     }
 
-    public void delete() {
+    @VisibleForTesting
+    void delete() {
         try {
             Optional<Pair<Store, Folder>> folder = openFolder(Folder.READ_WRITE);
 
