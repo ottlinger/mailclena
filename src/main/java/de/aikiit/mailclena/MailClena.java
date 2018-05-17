@@ -36,17 +36,7 @@ public final class MailClena {
             final MailConfiguration configuration = mailConfiguration.get();
             final MailClient client = new MailClient(configuration);
 
-            switch (configuration.getCommand()) {
-                case "clean":
-                    client.list();
-                    client.delete();
-                    client.list();
-                    break;
-
-                default:
-                    client.list();
-                    break;
-            }
+            client.execute(configuration.getCommand());
         }
         log.info("MailClena is shutting down .... bye bye :-)");
     }
