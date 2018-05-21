@@ -141,7 +141,6 @@ public class MailClient {
         }
     }
 
-    // TODO: public void execute(String command) to keep logics our of MailClena.main()
     public void execute(String command) {
         Optional<MailClientCommands> cmd = parse(command);
         if (!cmd.isPresent()) {
