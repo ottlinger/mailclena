@@ -79,4 +79,11 @@ public class MailClenaParameterParserTest {
     public void ensureAllOptionsAreMentionedAndParsed() {
         assertThat(new MailClenaParameterParser().getAvailableOptions().getOptions()).isNotEmpty().hasSize(MailClenaParameterParser.MailClenaCommandLineOptions.values().length);
     }
+
+    @Test
+    public void verifyFallbackToListIfNoCommandIsGiven() {
+        final Optional<MailConfiguration> configuration = new MailClenaParameterParser().extractConfiguration("-h=host", "-u=user", "-p=password");
+        assertThat(configuration).isPresent();
+        assertThat(configuration.get().getCommand()).isEqualTo("list");
+    }
 }
