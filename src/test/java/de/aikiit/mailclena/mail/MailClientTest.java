@@ -160,4 +160,19 @@ public class MailClientTest {
         verify(store).close();
     }
 
+    @Test
+    public void verifyDeletingMessagesIsExceptionProof() throws MessagingException {
+        doReturn(Optional.of(storeAndFolder)).when(mailClient).openFolder(Folder.READ_WRITE);
+
+        when(storeAndFolder.getLeft()).thenReturn(store);
+        when(storeAndFolder.getRight()).thenReturn(folder);
+        when(folder.getMessages()).thenReturn(new Message[]{message});
+        when(message.getFrom()).thenThrow(new MessagingException("verifyDeletingMessagesIsExceptionProof"));
+
+        mailClient.delete();
+
+        verify(folder).getMessages();
+        verify(store).close();
+        verify(message).getFrom();
+    }
 }
