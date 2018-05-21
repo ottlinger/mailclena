@@ -81,9 +81,11 @@ public class MailClenaParameterParserTest {
     }
 
     @Test
-    public void verifyFallbackToListIfNoCommandIsGiven() {
-        final Optional<MailConfiguration> configuration = new MailClenaParameterParser().extractConfiguration("-h=host", "-u=user", "-p=password");
+    public void verifyCommandIsParsedIfPresent() {
+        final String unknown = "unknown";
+        final Optional<MailConfiguration> configuration = new MailClenaParameterParser().extractConfiguration("-h=host", "-u=user", "-p=password", "-c=" + unknown);
         assertThat(configuration).isPresent();
-        assertThat(configuration.get().getCommand()).isEqualTo("list");
+        assertThat(configuration.get().getCommand()).isEqualTo(unknown);
     }
+
 }
