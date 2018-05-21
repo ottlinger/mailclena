@@ -91,7 +91,7 @@ public class MailClient {
                     try {
                         log.info("Message: " + m.getSubject() + " From: " + Arrays.toString(m.getFrom()));
                     } catch (MessagingException e) {
-                        log.error(e);
+                        log.error("Error while traversing messages", e);
                     }
                 });
             }
@@ -127,7 +127,7 @@ public class MailClient {
                         log.debug("Marking for deletion " + message.getSubject() + " From: " + Arrays.toString(message.getFrom()));
                         message.setFlag(Flags.Flag.DELETED, true);
                     } catch (MessagingException e) {
-                        log.error(e);
+                        log.error("Error while traversing messages for deletion", e);
                     }
                 });
 
