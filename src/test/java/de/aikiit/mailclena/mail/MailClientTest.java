@@ -175,4 +175,13 @@ public class MailClientTest {
         verify(store).close();
         verify(message).getFrom();
     }
+
+    @Test
+    public void verifyDeleteWorksExceptionlessWhenFolderCannotBeOpened() throws MessagingException {
+        doReturn(Optional.empty()).when(mailClient).openFolder(Folder.READ_WRITE);
+
+        mailClient.delete();
+        verifyNoMoreInteractions(store);
+    }
+
 }
