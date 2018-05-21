@@ -184,4 +184,12 @@ public class MailClientTest {
         verifyNoMoreInteractions(store);
     }
 
+    @Test
+    public void verifyListWorksExceptionlessWhenFolderCannotBeOpened() throws MessagingException {
+        doReturn(Optional.empty()).when(mailClient).openFolder(Folder.READ_ONLY);
+
+        mailClient.list();
+        verifyNoMoreInteractions(store);
+    }
+
 }
