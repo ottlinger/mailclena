@@ -180,7 +180,6 @@ public class MailClientTest {
     public void verifyDeletingMessagesIsExceptionProofWithExceptionWhileFolderAccess() throws MessagingException {
         doReturn(Optional.of(storeAndFolder)).when(mailClient).openFolder(Folder.READ_WRITE);
 
-        when(storeAndFolder.getLeft()).thenReturn(store);
         when(storeAndFolder.getRight()).thenReturn(folder);
         when(folder.getMessages()).thenReturn(new Message[]{message});
         when(folder.getMessages()).thenThrow(new MessagingException("verifyDeletingMessagesIsExceptionProofWithExceptionWhileFolderAccess"));
