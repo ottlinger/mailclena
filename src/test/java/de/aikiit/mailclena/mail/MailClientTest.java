@@ -18,6 +18,8 @@ package de.aikiit.mailclena.mail;
 
 import de.aikiit.mailclena.MailConfiguration;
 import org.apache.commons.lang3.tuple.Pair;
+import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -25,6 +27,7 @@ import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import javax.mail.*;
+import java.sql.Date;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -45,6 +48,11 @@ public class MailClientTest {
     private Folder folder;
     @Mock
     private Message message;
+
+    @Before
+    public void prepareMocks() throws MessagingException {
+        when(message.getSentDate()).thenReturn(new Date(1234));
+    }
 
     @Test
     public void initWithConfig() {
@@ -203,6 +211,11 @@ public class MailClientTest {
 
         mailClient.list();
         verifyNoMoreInteractions(store);
+    }
+
+    @Ignore("TBD")
+    public void openFolderInnerworkings() {
+        // test     Optional<Pair<Store, Folder>> openFolder(int mode) throws MessagingException
     }
 
 }
