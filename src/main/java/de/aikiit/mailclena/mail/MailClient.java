@@ -89,7 +89,7 @@ public class MailClient {
 
                 messages.forEach(m -> {
                     try {
-                        log.info("Message: " + m.getSubject() + " From: " + Arrays.toString(m.getFrom()));
+                        log.info("" + m.getSentDate() + " / Message: " + m.getSubject() + " / From: " + Arrays.toString(m.getFrom()));
                     } catch (MessagingException e) {
                         log.error("Error while traversing messages", e);
                     }
