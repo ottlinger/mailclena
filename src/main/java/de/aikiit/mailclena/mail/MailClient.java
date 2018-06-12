@@ -89,7 +89,7 @@ public class MailClient {
 
                 messages.forEach(m -> {
                     try {
-                        log.info("" + m.getSentDate() + " / Message: " + m.getSubject() + " / From: " + Arrays.toString(m.getFrom()));
+                        log.info(m.getSize() + " bytes / " + m.getSentDate() + " / Message: " + m.getSubject() + " / From: " + Arrays.toString(m.getFrom()));
                     } catch (MessagingException e) {
                         log.error("Error while traversing messages", e);
                     }
@@ -124,7 +124,7 @@ public class MailClient {
 
                 messages.forEach(message -> {
                     try {
-                        log.debug("Marking for deletion " + message.getSubject() + " From: " + Arrays.toString(message.getFrom()));
+                        log.debug("Marking for deletion " + message.getSize() + " bytes, " + message.getSubject() + " From: " + Arrays.toString(message.getFrom()));
                         message.setFlag(Flags.Flag.DELETED, true);
                     } catch (MessagingException e) {
                         log.error("Error while traversing messages for deletion", e);
