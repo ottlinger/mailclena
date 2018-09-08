@@ -47,7 +47,7 @@
     <logger.version>2.11.1</logger.version>
     <junit.version>4.12</junit.version>
     <assertj.version>3.11.1</assertj.version>
-    <mockito.version>2.20.0</mockito.version>
+    <mockito.version>2.21.0</mockito.version>
     <lombok.version>1.18.0</lombok.version>
     <javadoc.version>3.0.1</javadoc.version>
     <surefire.version>2.22.0</surefire.version>
