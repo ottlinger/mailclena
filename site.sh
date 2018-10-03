@@ -2,4 +2,6 @@
 echo "Generating new mvn site ..."
 mvn clean site:site 
 echo "DONE - ready to commit and push"
-git checkout gh-pages && ./copy-site.sh 
+cp -rf target/site/* docs
+git add docs
+git commit -a -m "Issue #7: Update site"
