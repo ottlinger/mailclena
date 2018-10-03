@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="de"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MailClient.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">mailclena</a> &gt; <a href="index.source.html" class="el_package">de.aikiit.mailclena.mail</a> &gt; <span class="el_source">MailClient.java</span></div><h1>MailClient.java</h1><pre class="source lang-java linenums">/*
+  MailClena - Copyright (C) 2018, Aiki IT
+  &lt;p&gt;
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+  &lt;p&gt;
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+  &lt;p&gt;
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ */
+package de.aikiit.mailclena.mail;
+
+import com.google.common.annotations.VisibleForTesting;
+import com.google.common.base.Strings;
+import de.aikiit.mailclena.MailConfiguration;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.extern.log4j.Log4j2;
+import org.apache.commons.lang3.tuple.Pair;
+
+import javax.mail.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+import java.util.Properties;
+
+import static de.aikiit.mailclena.mail.MailClient.MailClientCommands.LIST;
+import static de.aikiit.mailclena.mail.MailClient.MailClientCommands.parse;
+
+<span class="nc" id="L37">@AllArgsConstructor</span>
+<span class="nc" id="L38">@Log4j2</span>
+<span class="nc" id="L39">@NoArgsConstructor(access = AccessLevel.PRIVATE)</span>
+public class MailClient {
+
+    private static final String INBOX = &quot;INBOX&quot;;
+    private static final String POP3S = &quot;pop3s&quot;;
+
+    private MailConfiguration mailConfiguration;
+
+    private Properties getProperties() {
+<span class="nc" id="L48">        Properties properties = new Properties();</span>
+<span class="nc" id="L49">        properties.put(&quot;mail.pop3s.host&quot;, mailConfiguration.getHost());</span>
+<span class="nc" id="L50">        properties.put(&quot;mail.pop3.starttls.enable&quot;, &quot;true&quot;);</span>
+<span class="nc" id="L51">        properties.put(&quot;mail.pop3s.port&quot;, &quot;995&quot;);</span>
+<span class="nc" id="L52">        properties.put(&quot;mail.store.protocol&quot;, &quot;pop3&quot;);</span>
+<span class="nc" id="L53">        return properties;</span>
+    }
+
+    @VisibleForTesting
+    Optional&lt;Pair&lt;Store, Folder&gt;&gt; openFolder(int mode) throws MessagingException {
+<span class="nc" id="L58">        Session emailSession = Session.getDefaultInstance(getProperties());</span>
+        // emailSession.setDebug(true);
+
+<span class="nc" id="L61">        Store store = emailSession.getStore(POP3S);</span>
+<span class="nc" id="L62">        store.connect(mailConfiguration.getHost(), mailConfiguration.getUsername(), mailConfiguration.getPassword());</span>
+
+<span class="nc" id="L64">        Folder emailFolder = store.getFolder(INBOX);</span>
+<span class="nc" id="L65">        emailFolder.open(mode);</span>
+<span class="nc" id="L66">        return Optional.of(Pair.of(store, emailFolder));</span>
+    }
+
+    // TODO show date of mails YYYYMMDD
+    @VisibleForTesting
+    void list() {
+        try {
+<span class="nc" id="L73">            Optional&lt;Pair&lt;Store, Folder&gt;&gt; folder = openFolder(Folder.READ_ONLY);</span>
+
+<span class="nc bnc" id="L75" title="All 2 branches missed.">            if (!folder.isPresent()) {</span>
+<span class="nc" id="L76">                log.error(&quot;Unable to open folder in read-only mode to list mails, will abort.&quot;);</span>
+<span class="nc" id="L77">                return;</span>
+            }
+
+<span class="nc" id="L80">            Pair&lt;Store, Folder&gt; storeAndFolder = folder.get();</span>
+<span class="nc" id="L81">            List&lt;Message&gt; messages = Arrays.asList(storeAndFolder.getRight().getMessages());</span>
+<span class="nc" id="L82">            final int size = messages.size();</span>
+
+<span class="nc bnc" id="L84" title="All 2 branches missed.">            if (size == 0) {</span>
+<span class="nc" id="L85">                log.info(&quot;No messages found - nothing to be done here.&quot;);</span>
+            } else {
+
+<span class="nc" id="L88">                log.info(&quot;Found {} messages.&quot;, size);</span>
+
+<span class="nc" id="L90">                messages.forEach(m -&gt; {</span>
+                    try {
+<span class="nc" id="L92">                        log.info(m.getSize() + &quot; bytes / &quot; + m.getSentDate() + &quot; / Message: &quot; + m.getSubject() + &quot; / From: &quot; + Arrays.toString(m.getFrom()));</span>
+<span class="nc" id="L93">                    } catch (MessagingException e) {</span>
+<span class="nc" id="L94">                        log.error(&quot;Error while traversing messages&quot;, e);</span>
+<span class="nc" id="L95">                    }</span>
+<span class="nc" id="L96">                });</span>
+            }
+
+<span class="nc" id="L99">            storeAndFolder.getLeft().close();</span>
+<span class="nc" id="L100">        } catch (MessagingException e) {</span>
+<span class="nc" id="L101">            log.error(e);</span>
+<span class="nc" id="L102">        }</span>
+<span class="nc" id="L103">    }</span>
+
+    @VisibleForTesting
+    void delete() {
+        try {
+<span class="nc" id="L108">            Optional&lt;Pair&lt;Store, Folder&gt;&gt; folder = openFolder(Folder.READ_WRITE);</span>
+
+<span class="nc bnc" id="L110" title="All 2 branches missed.">            if (!folder.isPresent()) {</span>
+<span class="nc" id="L111">                log.error(&quot;Unable to open folder in write mode to remove mails, will abort.&quot;);</span>
+<span class="nc" id="L112">                return;</span>
+            }
+
+<span class="nc" id="L115">            Pair&lt;Store, Folder&gt; storeAndFolder = folder.get();</span>
+<span class="nc" id="L116">            final Folder f = storeAndFolder.getRight();</span>
+<span class="nc" id="L117">            List&lt;Message&gt; messages = Arrays.asList(f.getMessages());</span>
+
+<span class="nc" id="L119">            final int size = messages.size();</span>
+<span class="nc bnc" id="L120" title="All 2 branches missed.">            if (size == 0) {</span>
+<span class="nc" id="L121">                log.info(&quot;No messages found - nothing to be done here.&quot;);</span>
+            } else {
+<span class="nc" id="L123">                log.info(&quot;Starting to delete {} messages.&quot;, messages.size());</span>
+
+<span class="nc" id="L125">                messages.forEach(message -&gt; {</span>
+                    try {
+<span class="nc" id="L127">                        log.debug(&quot;Marking for deletion &quot; + message.getSize() + &quot; bytes, &quot; + message.getSubject() + &quot; From: &quot; + Arrays.toString(message.getFrom()));</span>
+<span class="nc" id="L128">                        message.setFlag(Flags.Flag.DELETED, true);</span>
+<span class="nc" id="L129">                    } catch (MessagingException e) {</span>
+<span class="nc" id="L130">                        log.error(&quot;Error while traversing messages for deletion&quot;, e);</span>
+<span class="nc" id="L131">                    }</span>
+<span class="nc" id="L132">                });</span>
+
+<span class="nc" id="L134">                f.close(true);</span>
+<span class="nc" id="L135">                log.info(&quot;Expunge folder to actually remove messages.&quot;);</span>
+<span class="nc" id="L136">                log.info(&quot;Finished to delete {} messages.&quot;, messages.size());</span>
+            }
+<span class="nc" id="L138">            storeAndFolder.getLeft().close();</span>
+<span class="nc" id="L139">        } catch (MessagingException e) {</span>
+<span class="nc" id="L140">            log.error(e);</span>
+<span class="nc" id="L141">        }</span>
+<span class="nc" id="L142">    }</span>
+
+    public void execute(String command) {
+<span class="nc" id="L145">        Optional&lt;MailClientCommands&gt; cmd = parse(command);</span>
+<span class="nc bnc" id="L146" title="All 2 branches missed.">        if (!cmd.isPresent()) {</span>
+<span class="nc" id="L147">            log.info(&quot;No explicit command given, will fallback to 'list'&quot;);</span>
+<span class="nc" id="L148">            cmd = Optional.of(LIST);</span>
+        }
+
+<span class="nc bnc" id="L151" title="All 3 branches missed.">        switch (cmd.get()) {</span>
+            case CLEAN:
+<span class="nc bnc" id="L153" title="All 2 branches missed.">                list();</span>
+<span class="nc" id="L154">                delete();</span>
+<span class="nc" id="L155">                list();</span>
+<span class="nc" id="L156">                break;</span>
+            case LIST:
+<span class="nc bnc" id="L158" title="All 2 branches missed.">                list();</span>
+<span class="nc" id="L159">                break;</span>
+            default:
+<span class="nc bnc" id="L161" title="All 2 branches missed.">                log.error(&quot;If you see this message, please report a bug since the CLI parser has new commands.&quot;);</span>
+                // NOOP: avoid findbugs warning
+                break;
+        }
+<span class="nc" id="L165">    }</span>
+
+
+<span class="fc" id="L168">    @VisibleForTesting</span>
+<span class="fc" id="L169">    enum MailClientCommands {</span>
+<span class="fc" id="L170">        LIST,</span>
+<span class="fc" id="L171">        CLEAN;</span>
+
+        static Optional&lt;MailClientCommands&gt; parse(String command) {
+<span class="fc bfc" id="L174" title="All 2 branches covered.">            if (!Strings.isNullOrEmpty(command)) {</span>
+<span class="fc" id="L175">                String normalized = command.trim();</span>
+<span class="fc bfc" id="L176" title="All 2 branches covered.">                for (MailClientCommands cmd : values()) {</span>
+<span class="fc bfc" id="L177" title="All 2 branches covered.">                    if (normalized.equalsIgnoreCase(cmd.toString())) {</span>
+<span class="fc" id="L178">                        return Optional.of(cmd);</span>
+                    }
+                }
+            }
+
+<span class="fc" id="L183">            return Optional.empty();</span>
+        }
+
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
