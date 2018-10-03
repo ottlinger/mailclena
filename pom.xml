@@ -244,20 +244,14 @@
             <useIdeaDefaultExcludes>true</useIdeaDefaultExcludes>
             <addDefaultLicenseMatchers>true</addDefaultLicenseMatchers>
             <excludes>
-              <exclude>**/docs/**</exclude>
+              <exclude>**/docs/**/*</exclude>
               <exclude>**/*.md</exclude>
-              <exclude>**/.editorconfig</exclude>
-              <exclude>**/.travis.yml</exclude>
+              <exclude>.editorconfig</exclude>
+              <exclude>.travis.yml</exclude>
               <exclude>LICENSE.txt</exclude>
               <exclude>*.md</exclude>
-              <exclude>src/main/resources/**/*</exclude>
-              <exclude>src/test/resources/**/*</exclude>
-              <exclude>**/webpage/**/*</exclude>
-              <exclude>**/webpage/**</exclude>
-              <exclude>**/webpage/*</exclude>
-              <exclude>webpage/**</exclude>
-              <exclude>webpage/**/*</exclude>
-              <exclude>webpage/*</exclude>
+              <exclude>src/main/resources</exclude>
+              <exclude>src/test/resources</exclude>
               <exclude>**/out*/**</exclude>
               <exclude>**/site*/**</exclude>
               <exclude>**/log*.xml</exclude>
