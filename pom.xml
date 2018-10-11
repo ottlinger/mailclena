@@ -141,7 +141,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
-        <version>3.0.2</version>
+        <version>3.1.0</version>
         <configuration>
           <archive>
             <manifest>
@@ -157,7 +157,7 @@
       </plugin>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.7.0</version>
+        <version>3.8.0</version>
         <configuration>
           <encoding>${encoding.utf8}</encoding>
           <source>1.8</source>
@@ -452,7 +452,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-project-info-reports-plugin</artifactId>
-        <version>2.9</version>
+        <version>3.0.0</version>
       </plugin>
     </plugins>
   </reporting>
