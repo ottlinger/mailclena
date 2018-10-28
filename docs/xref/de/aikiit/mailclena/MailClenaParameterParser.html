@@ -20,7 +20,7 @@
 <a class="jxr_linenumber" name="L12" href="#L12">12</a>  <em class="jxr_comment"> GNU General Public License for more details.</em>
 <a class="jxr_linenumber" name="L13" href="#L13">13</a>  
 <a class="jxr_linenumber" name="L14" href="#L14">14</a>  <em class="jxr_comment"> You should have received a copy of the GNU General Public License</em>
-<a class="jxr_linenumber" name="L15" href="#L15">15</a>  <em class="jxr_comment"> along with this program.  If not, see &lt;<a href="http://www.gnu.org/licenses/&gt;" target="alexandria_uri">http://www.gnu.org/licenses/&gt;</a>.</em>
+<a class="jxr_linenumber" name="L15" href="#L15">15</a>  <em class="jxr_comment"> along with this program.  If not, see &lt;<a href="http://www.gnu.org/licenses/&gt;." target="alexandria_uri">http://www.gnu.org/licenses/&gt;.</a></em>
 <a class="jxr_linenumber" name="L16" href="#L16">16</a>  
 <a class="jxr_linenumber" name="L17" href="#L17">17</a>  <em class="jxr_comment"> */</em>
 <a class="jxr_linenumber" name="L18" href="#L18">18</a>  <strong class="jxr_keyword">package</strong> de.aikiit.mailclena;
@@ -35,7 +35,7 @@
 <a class="jxr_linenumber" name="L27" href="#L27">27</a>  
 <a class="jxr_linenumber" name="L28" href="#L28">28</a>  @Log4j2
 <a class="jxr_linenumber" name="L29" href="#L29">29</a>  @NoArgsConstructor
-<a class="jxr_linenumber" name="L30" href="#L30">30</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">class</strong> <a href="../../../de/aikiit/mailclena/MailClenaParameterParser.html">MailClenaParameterParser</a> {
+<a class="jxr_linenumber" name="L30" href="#L30">30</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">class</strong> <a name="MailClenaParameterParser" href="../../../de/aikiit/mailclena/MailClenaParameterParser.html#MailClenaParameterParser">MailClenaParameterParser</a> {
 <a class="jxr_linenumber" name="L31" href="#L31">31</a>  
 <a class="jxr_linenumber" name="L32" href="#L32">32</a>      <strong class="jxr_keyword">public</strong> Optional&lt;MailConfiguration&gt; extractConfiguration(String... args) <strong class="jxr_keyword">throws</strong> IllegalArgumentException {
 <a class="jxr_linenumber" name="L33" href="#L33">33</a>          <strong class="jxr_keyword">if</strong> (args == <strong class="jxr_keyword">null</strong> || args.length == 0) {
@@ -60,7 +60,7 @@
 <a class="jxr_linenumber" name="L52" href="#L52">52</a>                          mailConfigurationBuilder.command(<span class="jxr_string">"list"</span>);
 <a class="jxr_linenumber" name="L53" href="#L53">53</a>                      }
 <a class="jxr_linenumber" name="L54" href="#L54">54</a>  
-<a class="jxr_linenumber" name="L55" href="#L55">55</a>                      <strong class="jxr_keyword">final</strong> <a href="../../../de/aikiit/mailclena/MailConfiguration.html">MailConfiguration</a> mailConfiguration = mailConfigurationBuilder.build();
+<a class="jxr_linenumber" name="L55" href="#L55">55</a>                      <strong class="jxr_keyword">final</strong> <a name="MailConfiguration" href="../../../de/aikiit/mailclena/MailConfiguration.html#MailConfiguration">MailConfiguration</a> mailConfiguration = mailConfigurationBuilder.build();
 <a class="jxr_linenumber" name="L56" href="#L56">56</a>                      log.debug(<span class="jxr_string">"Extracted configuration from given parameters : {}"</span>, mailConfiguration);
 <a class="jxr_linenumber" name="L57" href="#L57">57</a>                      <strong class="jxr_keyword">return</strong> Optional.of(mailConfiguration);
 <a class="jxr_linenumber" name="L58" href="#L58">58</a>                  }
@@ -91,7 +91,7 @@
 <a class="jxr_linenumber" name="L83" href="#L83">83</a>      }
 <a class="jxr_linenumber" name="L84" href="#L84">84</a>  
 <a class="jxr_linenumber" name="L85" href="#L85">85</a>      @VisibleForTesting
-<a class="jxr_linenumber" name="L86" href="#L86">86</a>      enum <a href="../../../de/aikiit/mailclena/MailClenaParameterParser.html">MailClenaCommandLineOptions</a> {
+<a class="jxr_linenumber" name="L86" href="#L86">86</a>      enum MailClenaCommandLineOptions {
 <a class="jxr_linenumber" name="L87" href="#L87">87</a>          HOST(<span class="jxr_string">"h"</span>, <span class="jxr_string">"Hostname - example: http://imap.yourisp.org"</span>),
 <a class="jxr_linenumber" name="L88" href="#L88">88</a>          USERNAME(<span class="jxr_string">"u"</span>, <span class="jxr_string">"Username - example: myuser@tld.org"</span>),
 <a class="jxr_linenumber" name="L89" href="#L89">89</a>          PASSWORD(<span class="jxr_string">"p"</span>, <span class="jxr_string">"Password - example: myfancypassword"</span>),
@@ -108,7 +108,7 @@
 <a class="jxr_linenumber" name="L100" href="#L100">100</a>             <strong class="jxr_keyword">return</strong> desc;
 <a class="jxr_linenumber" name="L101" href="#L101">101</a>         }
 <a class="jxr_linenumber" name="L102" href="#L102">102</a> 
-<a class="jxr_linenumber" name="L103" href="#L103">103</a>         <a href="../../../de/aikiit/mailclena/MailClenaParameterParser.html">MailClenaCommandLineOptions</a>(String opt, String desc) {
+<a class="jxr_linenumber" name="L103" href="#L103">103</a>         MailClenaCommandLineOptions(String opt, String desc) {
 <a class="jxr_linenumber" name="L104" href="#L104">104</a>             <strong class="jxr_keyword">this</strong>.opt = opt;
 <a class="jxr_linenumber" name="L105" href="#L105">105</a>             <strong class="jxr_keyword">this</strong>.desc = desc;
 <a class="jxr_linenumber" name="L106" href="#L106">106</a>         }

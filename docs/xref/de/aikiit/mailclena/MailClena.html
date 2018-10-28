@@ -20,7 +20,7 @@
 <a class="jxr_linenumber" name="L12" href="#L12">12</a>  <em class="jxr_comment"> GNU General Public License for more details.</em>
 <a class="jxr_linenumber" name="L13" href="#L13">13</a>  
 <a class="jxr_linenumber" name="L14" href="#L14">14</a>  <em class="jxr_comment"> You should have received a copy of the GNU General Public License</em>
-<a class="jxr_linenumber" name="L15" href="#L15">15</a>  <em class="jxr_comment"> along with this program.  If not, see &lt;<a href="http://www.gnu.org/licenses/&gt;" target="alexandria_uri">http://www.gnu.org/licenses/&gt;</a>.</em>
+<a class="jxr_linenumber" name="L15" href="#L15">15</a>  <em class="jxr_comment"> along with this program.  If not, see &lt;<a href="http://www.gnu.org/licenses/&gt;." target="alexandria_uri">http://www.gnu.org/licenses/&gt;.</a></em>
 <a class="jxr_linenumber" name="L16" href="#L16">16</a>  
 <a class="jxr_linenumber" name="L17" href="#L17">17</a>  <em class="jxr_comment"> */</em>
 <a class="jxr_linenumber" name="L18" href="#L18">18</a>  <strong class="jxr_keyword">package</strong> de.aikiit.mailclena;
@@ -34,15 +34,15 @@
 <a class="jxr_linenumber" name="L26" href="#L26">26</a>  
 <a class="jxr_linenumber" name="L27" href="#L27">27</a>  @Log4j2
 <a class="jxr_linenumber" name="L28" href="#L28">28</a>  @NoArgsConstructor(access = AccessLevel.PRIVATE)
-<a class="jxr_linenumber" name="L29" href="#L29">29</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">class</strong> <a href="../../../de/aikiit/mailclena/MailClena.html">MailClena</a> {
+<a class="jxr_linenumber" name="L29" href="#L29">29</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">class</strong> <a name="MailClena" href="../../../de/aikiit/mailclena/MailClena.html#MailClena">MailClena</a> {
 <a class="jxr_linenumber" name="L30" href="#L30">30</a>  
 <a class="jxr_linenumber" name="L31" href="#L31">31</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">void</strong> main(String... args) {
-<a class="jxr_linenumber" name="L32" href="#L32">32</a>          Optional&lt;MailConfiguration&gt; mailConfiguration = <strong class="jxr_keyword">new</strong> <a href="../../../de/aikiit/mailclena/MailClenaParameterParser.html">MailClenaParameterParser</a>().extractConfiguration(args);
+<a class="jxr_linenumber" name="L32" href="#L32">32</a>          Optional&lt;MailConfiguration&gt; mailConfiguration = <strong class="jxr_keyword">new</strong> <a name="MailClenaParameterParser" href="../../../de/aikiit/mailclena/MailClenaParameterParser.html#MailClenaParameterParser">MailClenaParameterParser</a>().extractConfiguration(args);
 <a class="jxr_linenumber" name="L33" href="#L33">33</a>  
 <a class="jxr_linenumber" name="L34" href="#L34">34</a>          <strong class="jxr_keyword">if</strong> (mailConfiguration.isPresent()) {
 <a class="jxr_linenumber" name="L35" href="#L35">35</a>              log.info(<span class="jxr_string">"MailClena is launching with the given configuration ...."</span>);
-<a class="jxr_linenumber" name="L36" href="#L36">36</a>              <strong class="jxr_keyword">final</strong> <a href="../../../de/aikiit/mailclena/MailConfiguration.html">MailConfiguration</a> configuration = mailConfiguration.get();
-<a class="jxr_linenumber" name="L37" href="#L37">37</a>              <strong class="jxr_keyword">final</strong> <a href="../../../de/aikiit/mailclena/mail/MailClient.html">MailClient</a> client = <strong class="jxr_keyword">new</strong> <a href="../../../de/aikiit/mailclena/mail/MailClient.html">MailClient</a>(configuration);
+<a class="jxr_linenumber" name="L36" href="#L36">36</a>              <strong class="jxr_keyword">final</strong> <a name="MailConfiguration" href="../../../de/aikiit/mailclena/MailConfiguration.html#MailConfiguration">MailConfiguration</a> configuration = mailConfiguration.get();
+<a class="jxr_linenumber" name="L37" href="#L37">37</a>              <strong class="jxr_keyword">final</strong> <a name="MailClient" href="../../../de/aikiit/mailclena/mail/<a name="MailClient" href="../../../de/aikiit/mailclena/mail/MailClient.html#MailClient">MailClient</a>.html#MailClient">MailClient</a> client = <strong class="jxr_keyword">new</strong> <a name="MailClient" href="../../../de/aikiit/mailclena/mail/MailClient.html#MailClient">MailClient</a>(configuration);
 <a class="jxr_linenumber" name="L38" href="#L38">38</a>              client.execute(configuration.getCommand());
 <a class="jxr_linenumber" name="L39" href="#L39">39</a>          }
 <a class="jxr_linenumber" name="L40" href="#L40">40</a>          log.info(<span class="jxr_string">"MailClena is shutting down .... bye bye :-)"</span>);
