@@ -48,7 +48,7 @@
     <junit.version>4.12</junit.version>
     <assertj.version>3.11.1</assertj.version>
     <mockito.version>2.23.0</mockito.version>
-    <lombok.version>1.18.2</lombok.version>
+    <lombok.version>1.18.4</lombok.version>
     <javadoc.version>3.0.1</javadoc.version>
     <surefire.version>2.22.0</surefire.version>
     <cobertura.version>2.7</cobertura.version>
