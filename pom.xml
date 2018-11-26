@@ -52,7 +52,7 @@
     <javadoc.version>3.0.1</javadoc.version>
     <surefire.version>2.22.0</surefire.version>
     <cobertura.version>2.7</cobertura.version>
-    <rat.version>0.12</rat.version>
+    <rat.version>0.13</rat.version>
     <guava.version>27.0-jre</guava.version>
     <encoding.utf8>UTF-8</encoding.utf8>
     <shade.version>3.2.0</shade.version>
