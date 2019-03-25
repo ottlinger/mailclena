@@ -50,7 +50,7 @@
     <mockito.version>2.25.0</mockito.version>
     <lombok.version>1.18.4</lombok.version>
     <javadoc.version>3.0.1</javadoc.version>
-    <surefire.version>3.0.0-M1</surefire.version>
+    <surefire.version>3.0.0-M3</surefire.version>
     <cobertura.version>2.7</cobertura.version>
     <rat.version>0.13</rat.version>
     <guava.version>27.1-jre</guava.version>
