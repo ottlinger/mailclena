@@ -46,7 +46,7 @@
   <properties>
     <logger.version>2.11.2</logger.version>
     <junit.version>4.12</junit.version>
-    <assertj.version>3.12.1</assertj.version>
+    <assertj.version>3.12.2</assertj.version>
     <mockito.version>2.25.0</mockito.version>
     <lombok.version>1.18.4</lombok.version>
     <javadoc.version>3.0.1</javadoc.version>
