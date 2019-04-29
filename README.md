@@ -1,15 +1,17 @@
 # mailclena
 Tool that logs into mail accounts and removes all mails.
 
-## Stats
-
-[![Waffle.io - Columns and their card count](https://badge.waffle.io/ottlinger/mailclena.svg?columns=all)](https://waffle.io/ottlinger/mailclena)
-
+## Integrations
 
 [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/ottlinger/mailclena.svg)](http://isitmaintained.com/project/ottlinger/mailclena "Average time to resolve an issue")
+
 [![Percentage of issues still open](http://isitmaintained.com/badge/open/ottlinger/mailclena.svg)](http://isitmaintained.com/project/ottlinger/mailclena "Percentage of issues still open")
+
 [![Known Vulnerabilities](https://snyk.io/test/github/ottlinger/mailclena/badge.svg)](https://snyk.io/test/github/ottlinger/mailclena)
+
 [![GPL v3.0](https://img.shields.io/github/license/ottlinger/mailclena.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
+
+https://github.com/users/ottlinger/projects/7
 
 ## Github integrations
 ### Travis / CI
