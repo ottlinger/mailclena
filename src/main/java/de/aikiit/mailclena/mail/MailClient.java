@@ -154,7 +154,6 @@ public class MailClient {
 
         switch (cmd.get()) {
             case CLEAN:
-                list();
                 delete();
                 list();
                 break;
