@@ -117,11 +117,11 @@ public class MailClient {
             final Folder f = storeAndFolder.getRight();
             List<Message> messages = Arrays.asList(f.getMessages());
 
-            final int size = messages.size();
-            if (size == 0) {
+            final int count = messages.size();
+            if (count == 0) {
                 log.info("No messages found - nothing to be done here.");
             } else {
-                log.info("Starting to delete {} messages.", messages.size());
+                log.info("Starting to delete {} messages.", count);
 
                 AtomicLong mailSize = new AtomicLong(0L);
                 messages.forEach(message -> {
@@ -137,7 +137,7 @@ public class MailClient {
 
                 f.close(true);
                 log.info("Expunge folder to actually remove messages.");
-                log.info("Finished to delete {} messages, set {} bytes free", messages.size(), mailSize.get());
+                log.info("Finished to delete {} messages, set {} bytes free", count, mailSize.get());
             }
             storeAndFolder.getLeft().close();
         } catch (MessagingException e) {
