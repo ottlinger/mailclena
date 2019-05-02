@@ -30,6 +30,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.Properties;
+import java.util.concurrent.atomic.AtomicLong;
 
 import static de.aikiit.mailclena.mail.MailClient.MailClientCommands.LIST;
 import static de.aikiit.mailclena.mail.MailClient.MailClientCommands.parse;
@@ -122,10 +123,13 @@ public class MailClient {
             } else {
                 log.info("Starting to delete {} messages.", messages.size());
 
+                AtomicLong mailSize = new AtomicLong(0L);
                 messages.forEach(message -> {
                     try {
-                        log.debug("Marking for deletion " + message.getSize() + " bytes, " + message.getSubject() + " From: " + Arrays.toString(message.getFrom()));
+                        long messageSize = Long.getLong("" + message.getSize());
+                        log.debug("Marking for deletion " + messageSize + " bytes, " + message.getSubject() + " From: " + Arrays.toString(message.getFrom()));
                         message.setFlag(Flags.Flag.DELETED, true);
+                        mailSize.addAndGet(messageSize);
                     } catch (MessagingException e) {
                         log.error("Error while traversing messages for deletion", e);
                     }
@@ -133,7 +137,7 @@ public class MailClient {
 
                 f.close(true);
                 log.info("Expunge folder to actually remove messages.");
-                log.info("Finished to delete {} messages.", messages.size());
+                log.info("Finished to delete {} messages, set {} bytes free", messages.size(), mailSize.get());
             }
             storeAndFolder.getLeft().close();
         } catch (MessagingException e) {
