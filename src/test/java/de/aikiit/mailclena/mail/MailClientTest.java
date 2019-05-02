@@ -148,7 +148,7 @@ public class MailClientTest {
         doNothing().when(mailClient).delete();
         mailClient.execute("   ClEAn ");
 
-        verify(mailClient, times(2)).list();
+        verify(mailClient, times(1)).list();
         verify(mailClient).delete();
     }
 
