@@ -126,7 +126,7 @@ public class MailClient {
                 AtomicLong mailSize = new AtomicLong(0L);
                 messages.forEach(message -> {
                     try {
-                        Long messageSize = Long.valueOf(message.getSize());
+                        long messageSize = message.getSize();
                         log.debug("Marking for deletion " + messageSize + " bytes, " + message.getSubject() + " From: " + Arrays.toString(message.getFrom()));
                         message.setFlag(Flags.Flag.DELETED, true);
                         mailSize.addAndGet(messageSize);
