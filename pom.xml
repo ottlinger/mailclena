@@ -60,12 +60,16 @@
     <project.build.sourceEncoding>${encoding.utf8}</project.build.sourceEncoding>
   </properties>
   <build>
-    <defaultGoal>clean versions:display-dependency-updates versions:display-plugin-updates versions:plugin-updates-report enforcer:display-info install org.pitest:pitest-maven:mutationCoverage</defaultGoal>
+    <defaultGoal>clean versions:display-dependency-updates versions:display-plugin-updates versions:plugin-updates-report enforcer:display-info cyclonedx:makeBom cyclonedx:makeAggregateBom install org.pitest:pitest-maven:mutationCoverage</defaultGoal>
     <plugins>
       <!-- Licence compliance for GPL, configuration is performed in reporting section -->
       <plugin>
         <groupId>org.apache.rat</groupId>
         <artifactId>apache-rat-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.cyclonedx</groupId>
+        <artifactId>cyclonedx-maven-plugin</artifactId>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -208,6 +212,11 @@
     </plugins>
     <pluginManagement>
       <plugins>
+        <plugin>
+          <groupId>org.cyclonedx</groupId>
+          <artifactId>cyclonedx-maven-plugin</artifactId>
+          <version>1.3.1</version>
+        </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-enforcer-plugin</artifactId>
