@@ -28,6 +28,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import javax.mail.*;
 import java.sql.Date;
+import java.util.Arrays;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -92,21 +93,27 @@ public class MailClientTest {
     }
 
     @Test
-    public void deleteWithMockedMailInteraction() throws MessagingException {
+    public void deleteWithMockedMailInteractionAndSizes() throws MessagingException {
         doReturn(Optional.of(storeAndFolder)).when(mailClient).openFolder(Folder.READ_WRITE);
 
         when(storeAndFolder.getLeft()).thenReturn(store);
         when(storeAndFolder.getRight()).thenReturn(folder);
-        // TODO test with message size to verify returned size
-        when(folder.getMessages()).thenReturn(new Message[]{message});
+
+        Message message1 = mock(Message.class);
+        when(message1.getSize()).thenReturn(5);
+        Message message2 = mock(Message.class);
+        when(message2.getSize()).thenReturn(3);
+        when(folder.getMessages()).thenReturn(new Message[]{message1, message2});
 
         mailClient.delete();
 
         verify(folder).getMessages();
         verify(folder).close(true);
-        verify(message).getFrom();
-        verify(message).getSubject();
-        verify(message).setFlag(Flags.Flag.DELETED, true);
+        for (Message m : Arrays.asList(message1, message2)) {
+            verify(m).getFrom();
+            verify(m).getSubject();
+            verify(m).setFlag(Flags.Flag.DELETED, true);
+        }
         verify(store).close();
     }
 
