@@ -105,7 +105,7 @@ public class MailClientTest {
         when(message2.getSize()).thenReturn(3);
         when(folder.getMessages()).thenReturn(new Message[]{message1, message2});
 
-        mailClient.delete();
+        assertThat(mailClient.delete()).isPresent().hasValue(8L);
 
         verify(folder).getMessages();
         verify(folder).close(true);
