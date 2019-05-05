@@ -104,13 +104,13 @@ public class MailClient {
     }
 
     @VisibleForTesting
-    void delete() {
+    Optional<Long> delete() {
         try {
             Optional<Pair<Store, Folder>> folder = openFolder(Folder.READ_WRITE);
 
             if (!folder.isPresent()) {
                 log.error("Unable to open folder in write mode to remove mails, will abort.");
-                return;
+                return Optional.empty();
             }
 
             Pair<Store, Folder> storeAndFolder = folder.get();
@@ -118,12 +118,12 @@ public class MailClient {
             List<Message> messages = Arrays.asList(f.getMessages());
 
             final int count = messages.size();
+            final AtomicLong mailSize = new AtomicLong(0L);
             if (count == 0) {
                 log.info("No messages found - nothing to be done here.");
             } else {
                 log.info("Starting to delete {} messages.", count);
 
-                AtomicLong mailSize = new AtomicLong(0L);
                 messages.forEach(message -> {
                     try {
                         long messageSize = message.getSize();
@@ -140,9 +140,12 @@ public class MailClient {
                 log.info("Finished to delete {} messages, set {} bytes free", count, mailSize.get());
             }
             storeAndFolder.getLeft().close();
+
+            return Optional.of(mailSize.longValue());
         } catch (MessagingException e) {
             log.error(e);
         }
+        return Optional.empty();
     }
 
     public void execute(String command) {

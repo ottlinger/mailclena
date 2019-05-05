@@ -97,6 +97,7 @@ public class MailClientTest {
 
         when(storeAndFolder.getLeft()).thenReturn(store);
         when(storeAndFolder.getRight()).thenReturn(folder);
+        // TODO test with message size to verify returned size
         when(folder.getMessages()).thenReturn(new Message[]{message});
 
         mailClient.delete();
@@ -145,7 +146,7 @@ public class MailClientTest {
     @Test
     public void parseDelete() {
         doNothing().when(mailClient).list();
-        doNothing().when(mailClient).delete();
+        doReturn(Optional.empty()).when(mailClient).delete();
         mailClient.execute("   ClEAn ");
 
         verify(mailClient).list();
