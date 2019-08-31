@@ -44,7 +44,7 @@
     <url>https://github.com/ottlinger/mailclena</url>
   </scm>
   <properties>
-    <logger.version>2.12.0</logger.version>
+    <logger.version>2.12.1</logger.version>
     <junit.version>4.12</junit.version>
     <assertj.version>3.13.2</assertj.version>
     <mockito.version>3.0.0</mockito.version>
