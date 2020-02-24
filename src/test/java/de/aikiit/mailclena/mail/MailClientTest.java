@@ -197,7 +197,6 @@ public class MailClientTest {
         doReturn(Optional.of(storeAndFolder)).when(mailClient).openFolder(Folder.READ_WRITE);
 
         when(storeAndFolder.getRight()).thenReturn(folder);
-        when(folder.getMessages()).thenReturn(new Message[]{message});
         when(folder.getMessages()).thenThrow(new MessagingException("verifyDeletingMessagesIsExceptionProofWithExceptionWhileFolderAccess"));
 
         mailClient.delete();
