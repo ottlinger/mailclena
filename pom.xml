@@ -475,11 +475,11 @@
       </plugin>
     </plugins>
   </reporting>
-  <!-- To be able to use the latest version/release candidate -->
+  <!-- To be able to use the latest version/release candidate 
   <repositories>
     <repository>
       <id>staged-releases</id>
       <url>https://repository.apache.org/content/repositories/orgapachetamaya-1026/</url>
     </repository>
-  </repositories>
+  </repositories -->
 </project>
