@@ -24,6 +24,10 @@ In order to just play around with it I've integrated a CI run:
 
 [![codecov](https://codecov.io/gh/ottlinger/mailclena/branch/master/graph/badge.svg)](https://codecov.io/gh/ottlinger/mailclena)
 
+### LGTM - quality measures
+
+[![Language grade: Java](https://img.shields.io/lgtm/grade/java/g/ottlinger/mailclena.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/ottlinger/mailclena/context:java)
+
 ### Codacy - code quality and static analysis
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/c8fc0c6ef3d14192a2a8f84a670ccb92)](https://www.codacy.com/app/github_25/mailclena)
@@ -64,7 +68,7 @@ $ java -jar target/mailclena-0.0.1-SNAPSHOT-executable.jar -h=host.tld.org -u=yo
 
 #### no operation / defaults to list
 ```
-$ java -jar target/mailclena-0.0.1-SNAPSHOT-executable.jar -h=host.tld.org -u=yourmail@yourtld.org -p=yourpassword 
+$ java -jar target/mailclena-0.0.1-SNAPSHOT-executable.jar -h=host.tld.org -u=yourmail@yourtld.org -p=yourpassword
 17:19:09.802 [main] INFO  de.aikiit.mailclena.MailClena - MailClena is launching with the given configuration ....
 17:19:11.410 [main] INFO  de.aikiit.mailclena.mail.MailClient - No messages found - nothing to be done here.
 17:19:11.410 [main] INFO  de.aikiit.mailclena.MailClena - MailClena is shutting down .... bye bye :-)
