@@ -53,7 +53,7 @@
     <surefire.version>3.0.0-M4</surefire.version>
     <cobertura.version>2.7</cobertura.version>
     <rat.version>0.13</rat.version>
-    <guava.version>28.2-jre</guava.version>
+    <guava.version>29.0-jre</guava.version>
     <encoding.utf8>UTF-8</encoding.utf8>
     <shade.version>3.2.2</shade.version>
     <project.reporting.outputEncoding>${encoding.utf8}</project.reporting.outputEncoding>
