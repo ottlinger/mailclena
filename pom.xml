@@ -250,6 +250,7 @@
             </execution>
           </executions>
           <configuration>
+            <consoleOutput>true</consoleOutput>
             <ignoreErrors>false</ignoreErrors>
             <useDefaultExcludes>true</useDefaultExcludes>
             <useEclipseDefaultExcludes>true</useEclipseDefaultExcludes>
