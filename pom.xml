@@ -187,6 +187,8 @@
         </executions>
         <configuration>
           <encoding>${encoding.utf8}</encoding>
+          <!-- https://bugs.java.com/bugdatabase/view_bug.do?bug_id=8212233 -->
+          <source>8</source>
         </configuration>
       </plugin>
       <plugin>
