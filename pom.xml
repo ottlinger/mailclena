@@ -51,7 +51,6 @@
     <lombok.version>1.18.12</lombok.version>
     <javadoc.version>3.2.0</javadoc.version>
     <surefire.version>3.0.0-M5</surefire.version>
-    <cobertura.version>2.7</cobertura.version>
     <rat.version>0.13</rat.version>
     <guava.version>29.0-jre</guava.version>
     <encoding.utf8>UTF-8</encoding.utf8>
@@ -436,13 +435,13 @@
         <artifactId>jdepend-maven-plugin</artifactId>
         <version>2.0</version>
       </plugin>
-      <!-- 20090805  disabled due to a bug in Cobertura leading to CI error mails, http://jira.codehaus.org/browse/MCOBERTURA-73 -->
-      <!-- cobertura plugin -->
+      <!-- 202006: diabled as tools.jar is missing in newer JDKs -->
+      <!-- cobertura plugin 
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>cobertura-maven-plugin</artifactId>
-        <version>${cobertura.version}</version>
-      </plugin>
+        <version>2.7</version>
+      </plugin -->
       <!-- catch code tags -->
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
