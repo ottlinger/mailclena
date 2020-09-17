@@ -89,19 +89,6 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
-        <version>3.2.0</version>
-        <configuration>
-          <archive>
-            <manifest>
-              <addClasspath>true</addClasspath>
-              <mainClass>de.aikiit.mailclena.MailClena</mainClass>
-            </manifest>
-            <manifestEntries>
-              <Codebase>*</Codebase>
-              <Permissions>sandbox</Permissions>
-            </manifestEntries>
-          </archive>
-        </configuration>
       </plugin>
       <plugin>
         <artifactId>maven-site-plugin</artifactId>
@@ -158,6 +145,23 @@
     </plugins>
     <pluginManagement>
       <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>3.2.0</version>
+          <configuration>
+            <archive>
+              <manifest>
+                <addClasspath>true</addClasspath>
+                <mainClass>de.aikiit.mailclena.MailClena</mainClass>
+              </manifest>
+              <manifestEntries>
+                <Codebase>*</Codebase>
+                <Permissions>sandbox</Permissions>
+              </manifestEntries>
+            </archive>
+          </configuration>
+        </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-shade-plugin</artifactId>
