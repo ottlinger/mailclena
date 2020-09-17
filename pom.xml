@@ -96,25 +96,9 @@
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
       </plugin>
-      <!--  generate source and javadoc.jar -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
-        <version>${javadoc.version}</version>
-        <executions>
-          <execution>
-            <phase>package</phase>
-            <goals>
-              <goal>javadoc</goal>
-              <goal>jar</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <encoding>${encoding.utf8}</encoding>
-          <!-- https://bugs.java.com/bugdatabase/view_bug.do?bug_id=8212233 -->
-          <source>8</source>
-        </configuration>
       </plugin>
       <plugin>
         <groupId>org.jacoco</groupId>
@@ -123,6 +107,26 @@
     </plugins>
     <pluginManagement>
       <plugins>
+        <!--  generate source and javadoc.jar -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-javadoc-plugin</artifactId>
+          <version>${javadoc.version}</version>
+          <executions>
+            <execution>
+              <phase>package</phase>
+              <goals>
+                <goal>javadoc</goal>
+                <goal>jar</goal>
+              </goals>
+            </execution>
+          </executions>
+          <configuration>
+            <encoding>${encoding.utf8}</encoding>
+            <!-- https://bugs.java.com/bugdatabase/view_bug.do?bug_id=8212233 -->
+            <source>8</source>
+          </configuration>
+        </plugin>
         <plugin>
           <artifactId>maven-compiler-plugin</artifactId>
           <version>3.8.1</version>
