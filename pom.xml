@@ -293,7 +293,7 @@
               <exclude>**/*.md</exclude>
               <exclude>.editorconfig</exclude>
               <exclude>.travis.yml</exclude>
-              <exclude>.github</exclude>
+              <exclude>.github/**</exclude>
               <exclude>LICENSE.txt</exclude>
               <exclude>*.md</exclude>
               <exclude>src/main/resources</exclude>
