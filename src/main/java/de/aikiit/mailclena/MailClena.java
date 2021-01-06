@@ -26,6 +26,9 @@ import java.util.Optional;
 
 @Log4j2
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
+/**
+ * Main application, startable with command line parameters - see documentation/README for details and examples.
+ */
 public final class MailClena {
 
     public static void main(String... args) {
