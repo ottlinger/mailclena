@@ -25,6 +25,9 @@ import org.apache.commons.cli.*;
 
 import java.util.Optional;
 
+/**
+ * Extract application configuration from given main()-arguments.
+ */
 @Log4j2
 @NoArgsConstructor
 public final class MailClenaParameterParser {
