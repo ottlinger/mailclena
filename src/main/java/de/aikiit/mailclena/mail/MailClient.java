@@ -38,6 +38,9 @@ import static de.aikiit.mailclena.mail.MailClient.MailClientCommands.parse;
 @AllArgsConstructor
 @Log4j2
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
+/**
+ * Encapsulates technical access to mail inbox based on the given application/mail configuration.
+ */
 public class MailClient {
 
     private static final String INBOX = "INBOX";
@@ -169,7 +172,6 @@ public class MailClient {
                 break;
         }
     }
-
 
     @VisibleForTesting
     enum MailClientCommands {
