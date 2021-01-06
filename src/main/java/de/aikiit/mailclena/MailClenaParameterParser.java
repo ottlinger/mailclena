@@ -29,7 +29,7 @@ import java.util.Optional;
 @NoArgsConstructor
 public final class MailClenaParameterParser {
 
-    public Optional<MailConfiguration> extractConfiguration(String... args) throws IllegalArgumentException {
+    Optional<MailConfiguration> extractConfiguration(String... args) throws IllegalArgumentException {
         if (args == null || args.length == 0) {
             printHelp();
         } else {
