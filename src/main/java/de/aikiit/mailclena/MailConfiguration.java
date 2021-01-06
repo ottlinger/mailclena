@@ -25,6 +25,9 @@ import lombok.ToString;
 @Data
 @Builder
 @ToString(exclude = "password")
+/**
+ * All available configuration options of this application.
+ */
 public class MailConfiguration {
     @NonNull
     private String host;
