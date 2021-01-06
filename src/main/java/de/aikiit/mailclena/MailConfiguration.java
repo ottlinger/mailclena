@@ -22,12 +22,12 @@ import lombok.Data;
 import lombok.NonNull;
 import lombok.ToString;
 
-@Data
-@Builder
-@ToString(exclude = "password")
 /**
  * All available configuration options of this application.
  */
+@Data
+@Builder
+@ToString(exclude = "password")
 public class MailConfiguration {
     @NonNull
     private String host;

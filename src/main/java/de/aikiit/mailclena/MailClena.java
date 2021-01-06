@@ -24,13 +24,17 @@ import lombok.extern.log4j.Log4j2;
 
 import java.util.Optional;
 
-@Log4j2
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
 /**
  * Main application, startable with command line parameters - see documentation/README for details and examples.
  */
+@Log4j2
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class MailClena {
 
+    /**
+     * Launch the application with the given configuration options.
+     * @param args command line arguments.
+     */
     public static void main(String... args) {
         Optional<MailConfiguration> mailConfiguration = new MailClenaParameterParser().extractConfiguration(args);
 

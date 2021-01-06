@@ -35,12 +35,12 @@ import java.util.concurrent.atomic.AtomicLong;
 import static de.aikiit.mailclena.mail.MailClient.MailClientCommands.LIST;
 import static de.aikiit.mailclena.mail.MailClient.MailClientCommands.parse;
 
+/**
+  Encapsulates technical access to mail inbox based on the given application/mail configuration.
+ */
 @AllArgsConstructor
 @Log4j2
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-/**
- * Encapsulates technical access to mail inbox based on the given application/mail configuration.
- */
 public class MailClient {
 
     private static final String INBOX = "INBOX";
@@ -151,6 +151,10 @@ public class MailClient {
         return Optional.empty();
     }
 
+    /**
+     * Execute the given command or print an error message if the command is unknown.
+     * @param command command to execute, should be one of {@link MailClientCommands}.
+     */
     public void execute(String command) {
         Optional<MailClientCommands> cmd = parse(command);
         if (!cmd.isPresent()) {
