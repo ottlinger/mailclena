@@ -30,7 +30,7 @@ In order to just play around with it I've integrated a CI run:
 
 ### Codacy - code quality and static analysis
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/c8fc0c6ef3d14192a2a8f84a670ccb92)](https://www.codacy.com/app/github_25/mailclena)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/658661b0051e42518a91298797e372bd)](https://www.codacy.com/gh/ottlinger/mailclena/dashboard)
 
 ## How to run and use the application
 
