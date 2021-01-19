@@ -24,21 +24,28 @@ import lombok.extern.log4j.Log4j2;
 
 import java.util.Optional;
 
-<span class="fc" id="L27">@Log4j2</span>
+/**
+ * Main application, startable with command line parameters - see documentation/README for details and examples.
+ */
+<span class="fc" id="L30">@Log4j2</span>
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class MailClena {
 
+    /**
+     * Launch the application with the given configuration options.
+     * @param args command line arguments.
+     */
     public static void main(String... args) {
-<span class="fc" id="L32">        Optional&lt;MailConfiguration&gt; mailConfiguration = new MailClenaParameterParser().extractConfiguration(args);</span>
+<span class="fc" id="L39">        Optional&lt;MailConfiguration&gt; mailConfiguration = new MailClenaParameterParser().extractConfiguration(args);</span>
 
-<span class="fc bfc" id="L34" title="All 2 branches covered.">        if (mailConfiguration.isPresent()) {</span>
-<span class="fc" id="L35">            log.info(&quot;MailClena is launching with the given configuration ....&quot;);</span>
-<span class="fc" id="L36">            final MailConfiguration configuration = mailConfiguration.get();</span>
-<span class="fc" id="L37">            final MailClient client = new MailClient(configuration);</span>
-<span class="fc" id="L38">            client.execute(configuration.getCommand());</span>
+<span class="fc bfc" id="L41" title="All 2 branches covered.">        if (mailConfiguration.isPresent()) {</span>
+<span class="fc" id="L42">            log.info(&quot;MailClena is launching with the given configuration ....&quot;);</span>
+<span class="fc" id="L43">            final MailConfiguration configuration = mailConfiguration.get();</span>
+<span class="fc" id="L44">            final MailClient client = new MailClient(configuration);</span>
+<span class="fc" id="L45">            client.execute(configuration.getCommand());</span>
         }
-<span class="fc" id="L40">        log.info(&quot;MailClena is shutting down .... bye bye :-)&quot;);</span>
-<span class="fc" id="L41">    }</span>
+<span class="fc" id="L47">        log.info(&quot;MailClena is shutting down .... bye bye :-)&quot;);</span>
+<span class="fc" id="L48">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>
