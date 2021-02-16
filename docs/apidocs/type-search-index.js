@@ -1,1 +1,1 @@
-typeSearchIndex = [{"l":"All Classes","u":"allclasses-index.html"},{"p":"de.aikiit.mailclena","l":"MailClena"},{"p":"de.aikiit.mailclena","l":"MailClenaParameterParser"},{"p":"de.aikiit.mailclena.mail","l":"MailClient"},{"p":"de.aikiit.mailclena","l":"MailConfiguration"}];updateSearchResults();
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"de.aikiit.mailclena","l":"MailClena"},{"p":"de.aikiit.mailclena","l":"MailClenaParameterParser"},{"p":"de.aikiit.mailclena.mail","l":"MailClient"},{"p":"de.aikiit.mailclena","l":"MailConfiguration"}]
