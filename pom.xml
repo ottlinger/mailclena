@@ -52,7 +52,7 @@
     <javadoc.version>3.2.0</javadoc.version>
     <surefire.version>3.0.0-M5</surefire.version>
     <rat.version>0.13</rat.version>
-    <guava.version>30.1-jre</guava.version>
+    <guava.version>30.1.1-jre</guava.version>
     <encoding.utf8>UTF-8</encoding.utf8>
     <shade.version>3.2.4</shade.version>
     <project.reporting.outputEncoding>${encoding.utf8}</project.reporting.outputEncoding>
