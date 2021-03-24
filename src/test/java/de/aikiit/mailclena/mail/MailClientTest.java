@@ -33,7 +33,7 @@ import static org.mockito.Mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
-public class MailClientTest {
+class MailClientTest {
 
     private static final MailConfiguration CONFIGURATION = MailConfiguration.builder().host("h").username("u").password("p").command("c").build();
     @Spy
@@ -49,18 +49,18 @@ public class MailClientTest {
     private Message message;
 
     @BeforeEach
-    public void prepareMocks() throws MessagingException {
+    void prepareMocks() throws MessagingException {
         when(message.getSentDate()).thenReturn(new Date(1234));
     }
 
     @Test
-    public void initWithConfig() {
+    void initWithConfig() {
         assertThat(CONFIGURATION).isNotNull();
         new MailClient(CONFIGURATION);
     }
 
     @Test
-    public void listWithMockedMailInteraction() throws MessagingException {
+    void listWithMockedMailInteraction() throws MessagingException {
         doReturn(Optional.of(storeAndFolder)).when(mailClient).openFolder(Folder.READ_ONLY);
 
         when(storeAndFolder.getLeft()).thenReturn(store);
@@ -76,7 +76,7 @@ public class MailClientTest {
     }
 
     @Test
-    public void listWithMockedMailInteractionAndNoMessages() throws MessagingException {
+    void listWithMockedMailInteractionAndNoMessages() throws MessagingException {
         doReturn(Optional.of(storeAndFolder)).when(mailClient).openFolder(Folder.READ_ONLY);
 
         when(storeAndFolder.getLeft()).thenReturn(store);
@@ -91,7 +91,7 @@ public class MailClientTest {
     }
 
     @Test
-    public void deleteWithMockedMailInteractionAndSizes() throws MessagingException {
+    void deleteWithMockedMailInteractionAndSizes() throws MessagingException {
         doReturn(Optional.of(storeAndFolder)).when(mailClient).openFolder(Folder.READ_WRITE);
 
         when(storeAndFolder.getLeft()).thenReturn(store);
@@ -116,7 +116,7 @@ public class MailClientTest {
     }
 
     @Test
-    public void deleteWithMockedMailInteractionAndNoMessages() throws MessagingException {
+    void deleteWithMockedMailInteractionAndNoMessages() throws MessagingException {
         doReturn(Optional.of(storeAndFolder)).when(mailClient).openFolder(Folder.READ_WRITE);
 
         when(storeAndFolder.getLeft()).thenReturn(store);
@@ -133,7 +133,7 @@ public class MailClientTest {
     }
 
     @Test
-    public void parseUnknownCommandAndChooseFallback() {
+    void parseUnknownCommandAndChooseFallback() {
         doNothing().when(mailClient).list();
         mailClient.execute("notAValidOperation");
 
@@ -141,7 +141,7 @@ public class MailClientTest {
     }
 
     @Test
-    public void parseList() {
+    void parseList() {
         doNothing().when(mailClient).list();
         mailClient.execute("lIsT");
 
@@ -149,7 +149,7 @@ public class MailClientTest {
     }
 
     @Test
-    public void parseDelete() {
+    void parseDelete() {
         doNothing().when(mailClient).list();
         doReturn(Optional.empty()).when(mailClient).delete();
         mailClient.execute("   ClEAn ");
@@ -159,7 +159,7 @@ public class MailClientTest {
     }
 
     @Test
-    public void verifyListingMessagesIsExceptionProof() throws MessagingException {
+    void verifyListingMessagesIsExceptionProof() throws MessagingException {
         doReturn(Optional.of(storeAndFolder)).when(mailClient).openFolder(Folder.READ_ONLY);
 
         when(storeAndFolder.getLeft()).thenReturn(store);
@@ -175,7 +175,7 @@ public class MailClientTest {
     }
 
     @Test
-    public void verifyDeletingMessagesIsExceptionProof() throws MessagingException {
+    void verifyDeletingMessagesIsExceptionProof() throws MessagingException {
         doReturn(Optional.of(storeAndFolder)).when(mailClient).openFolder(Folder.READ_WRITE);
 
         when(storeAndFolder.getLeft()).thenReturn(store);
@@ -191,7 +191,7 @@ public class MailClientTest {
     }
 
     @Test
-    public void verifyDeletingMessagesIsExceptionProofWithExceptionWhileFolderAccess() throws MessagingException {
+    void verifyDeletingMessagesIsExceptionProofWithExceptionWhileFolderAccess() throws MessagingException {
         doReturn(Optional.of(storeAndFolder)).when(mailClient).openFolder(Folder.READ_WRITE);
 
         when(storeAndFolder.getRight()).thenReturn(folder);
@@ -203,7 +203,7 @@ public class MailClientTest {
     }
 
     @Test
-    public void verifyDeleteWorksExceptionlessWhenFolderCannotBeOpened() throws MessagingException {
+    void verifyDeleteWorksExceptionlessWhenFolderCannotBeOpened() throws MessagingException {
         doReturn(Optional.empty()).when(mailClient).openFolder(Folder.READ_WRITE);
 
         mailClient.delete();
@@ -211,7 +211,7 @@ public class MailClientTest {
     }
 
     @Test
-    public void verifyListWorksExceptionlessWhenFolderCannotBeOpened() throws MessagingException {
+    void verifyListWorksExceptionlessWhenFolderCannotBeOpened() throws MessagingException {
         doReturn(Optional.empty()).when(mailClient).openFolder(Folder.READ_ONLY);
 
         mailClient.list();
@@ -219,8 +219,8 @@ public class MailClientTest {
     }
 
     @Disabled("TODO")
-    public void openFolderInnerworkings() {
-        // test     Optional<Pair<Store, Folder>> openFolder(int mode) throws MessagingException
+    void openFolderInnerworkings() {
+        // TODO test     Optional<Pair<Store, Folder>> openFolder(int mode) throws MessagingException
     }
 
 }

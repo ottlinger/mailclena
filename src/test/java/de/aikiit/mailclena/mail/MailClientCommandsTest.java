@@ -16,24 +16,24 @@
  */
 package de.aikiit.mailclena.mail;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class MailClientCommandsTest {
+class MailClientCommandsTest {
 
     @Test
-    public void parseWithUnknownValue() {
+    void parseWithUnknownValue() {
         for (String input : Arrays.asList(null, "", "nothingNewOutHere")) {
             assertThat(MailClient.MailClientCommands.parse(input)).isEmpty();
         }
     }
 
     @Test
-    public void parseWithPossibleValuesIgnoringCasing() {
+    void parseWithPossibleValuesIgnoringCasing() {
         for (MailClient.MailClientCommands cmd : MailClient.MailClientCommands.values()) {
             assertThat(MailClient.MailClientCommands.parse(cmd.name().toLowerCase())).isEqualTo(Optional.of(cmd));
             assertThat(MailClient.MailClientCommands.parse(cmd.name().toUpperCase())).isEqualTo(Optional.of(cmd));

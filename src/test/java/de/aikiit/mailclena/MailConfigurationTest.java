@@ -16,22 +16,22 @@
  */
 package de.aikiit.mailclena;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class MailConfigurationTest {
+class MailConfigurationTest {
 
     @Test
-    public void ensurePasswordNotInToString() {
+    void ensurePasswordNotInToString() {
         String password = UUID.randomUUID().toString();
         assertThat(MailConfiguration.builder().password(password).username("username").host("host").command("cmd").build().toString()).doesNotContain(password);
     }
 
     @Test
-    public void regularObjectCreation() {
+    void regularObjectCreation() {
         final MailConfiguration configuration = new MailConfiguration("host", "username", "password", "myCommand");
         configuration.setPassword("p");
         assertThat(configuration.getPassword()).isEqualTo("p");
@@ -47,7 +47,7 @@ public class MailConfigurationTest {
     }
 
     @Test
-    public void builderForObjectCreationWithDefaultCommand() {
+    void builderForObjectCreationWithDefaultCommand() {
         final MailConfiguration configuration = MailConfiguration.builder().host("h").username("u").password("p").command("c").build();
         assertThat(configuration.getPassword()).isEqualTo("p");
         assertThat(configuration.getUsername()).isEqualTo("u");
