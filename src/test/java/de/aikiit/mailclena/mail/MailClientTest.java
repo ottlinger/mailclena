@@ -219,7 +219,9 @@ class MailClientTest {
     }
 
     @Disabled("TODO")
-    void openFolderInnerworkings() {
+    void openFolderInnerworkings() throws MessagingException {
+        mailClient.openFolder(Folder.READ_ONLY);
+
         // TODO test     Optional<Pair<Store, Folder>> openFolder(int mode) throws MessagingException
     }
 
