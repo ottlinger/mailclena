@@ -18,13 +18,10 @@ package de.aikiit.mailclena.mail;
 
 import de.aikiit.mailclena.MailConfiguration;
 import org.apache.commons.lang3.tuple.Pair;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.*;
 import org.mockito.Mock;
 import org.mockito.Spy;
-import org.mockito.junit.MockitoJUnitRunner;
 
 import javax.mail.*;
 import java.sql.Date;
@@ -33,8 +30,9 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class MailClientTest {
 
     private static final MailConfiguration CONFIGURATION = MailConfiguration.builder().host("h").username("u").password("p").command("c").build();
@@ -50,7 +48,7 @@ public class MailClientTest {
     @Mock
     private Message message;
 
-    @Before
+    @BeforeEach
     public void prepareMocks() throws MessagingException {
         when(message.getSentDate()).thenReturn(new Date(1234));
     }
@@ -220,7 +218,7 @@ public class MailClientTest {
         verifyNoMoreInteractions(store);
     }
 
-    @Ignore("TBD")
+    @Disabled("TODO")
     public void openFolderInnerworkings() {
         // test     Optional<Pair<Store, Folder>> openFolder(int mode) throws MessagingException
     }
