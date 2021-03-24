@@ -221,8 +221,7 @@ class MailClientTest {
 
     @Test
     void openFolderInnerworkings() throws MessagingException {
-        mailClient.openFolder(Folder.READ_ONLY);
-
+        assertThat(mailClient.openFolder(Folder.READ_ONLY)).isEmpty();
         // TODO test     Optional<Pair<Store, Folder>> openFolder(int mode) throws MessagingException
     }
 
