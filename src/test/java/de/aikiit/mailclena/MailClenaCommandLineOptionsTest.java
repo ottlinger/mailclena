@@ -17,13 +17,14 @@
  */
 package de.aikiit.mailclena;
 
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class MailClenaCommandLineOptionsTest {
+class MailClenaCommandLineOptionsTest {
     @Test
-    public void ensureNumberOfOptionsRemainsTheSame() {
+    void ensureNumberOfOptionsRemainsTheSame() {
         assertThat(MailClenaParameterParser.MailClenaCommandLineOptions.values()).hasSize(4);
     }
 }

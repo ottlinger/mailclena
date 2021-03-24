@@ -17,55 +17,56 @@
  */
 package de.aikiit.mailclena;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class MailClenaParameterParserTest {
+class MailClenaParameterParserTest {
 
     private MailClenaParameterParser parser;
 
-    @Before
-    public void getAFreshOne() {
+    @BeforeEach
+    void getAFreshOne() {
         parser = new MailClenaParameterParser();
     }
 
     @Test
-    public void callMainWithHostnameParameter() {
+    void callMainWithHostnameParameter() {
         assertThat(parser.extractConfiguration("-h=boo.foo.bar")).isEmpty();
     }
 
     @Test
-    public void callMainWithUsernameParameter() {
+    void callMainWithUsernameParameter() {
         assertThat(parser.extractConfiguration("-u=foo")).isEmpty();
     }
 
     @Test
-    public void callMainWithPasswordParameter() {
+    void callMainWithPasswordParameter() {
         assertThat(parser.extractConfiguration("-p=bar")).isEmpty();
     }
 
     @Test
-    public void callMainWithTwoParametersOneMissing() {
+    void callMainWithTwoParametersOneMissing() {
         assertThat(parser.extractConfiguration("-h=bar", "-u=usr")).isEmpty();
     }
 
     @Test
-    public void callWithNullOrEmptyParameter() {
+    void callWithNullOrEmptyParameter() {
         assertThat(parser.extractConfiguration((String[]) null)).isEmpty();
-        assertThat(parser.extractConfiguration(new String[] {})).isEmpty();
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void callWithoutParameterValuesButAllKeys() {
-        assertThat(parser.extractConfiguration("-h", "-u", "-p")).isEmpty();
+        assertThat(parser.extractConfiguration()).isEmpty();
     }
 
     @Test
-    public void callMainExtractParametersSuccessfully() {
+    void callWithoutParameterValuesButAllKeys() {
+        assertThrows(IllegalArgumentException.class, () -> parser.extractConfiguration("-h", "-u", "-p"));
+    }
+
+    @Test
+    void callMainExtractParametersSuccessfully() {
         final Optional<MailConfiguration> mailConfiguration = parser.extractConfiguration("-h=boo.foo.bar", "-u=foo", "-p=bar");
         assertThat(mailConfiguration).isPresent();
 
@@ -76,12 +77,12 @@ public class MailClenaParameterParserTest {
     }
 
     @Test
-    public void ensureAllOptionsAreMentionedAndParsed() {
+    void ensureAllOptionsAreMentionedAndParsed() {
         assertThat(new MailClenaParameterParser().getAvailableOptions().getOptions()).isNotEmpty().hasSize(MailClenaParameterParser.MailClenaCommandLineOptions.values().length);
     }
 
     @Test
-    public void verifyCommandIsParsedIfPresent() {
+    void verifyCommandIsParsedIfPresent() {
         final String unknown = "unknown";
         final Optional<MailConfiguration> configuration = new MailClenaParameterParser().extractConfiguration("-h=host", "-u=user", "-p=password", "-c=" + unknown);
         assertThat(configuration).isPresent();

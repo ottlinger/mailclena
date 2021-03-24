@@ -229,7 +229,7 @@
           <configuration>
             <timeoutConstant>8000</timeoutConstant>
             <threads>8</threads>
-            <coverageThreshold>80</coverageThreshold>
+            <!-- does not work with jUnit5, dependency to junit5 plugin crashes JDK: coverageThreshold>80</coverageThreshold-->
             <!--mutationThreshold>8</mutationThreshold-->
             <failWhenNoMutations>false</failWhenNoMutations>
             <verbose>true</verbose>
