@@ -30,6 +30,7 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
+
 import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
@@ -218,7 +219,7 @@ class MailClientTest {
         verifyNoMoreInteractions(store);
     }
 
-    @Disabled("TODO")
+    @Test
     void openFolderInnerworkings() throws MessagingException {
         mailClient.openFolder(Folder.READ_ONLY);
 
