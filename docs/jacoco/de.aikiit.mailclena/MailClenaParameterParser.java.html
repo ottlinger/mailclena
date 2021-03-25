@@ -79,8 +79,8 @@ public final class MailClenaParameterParser {
     Options getAvailableOptions() {
 <span class="nc" id="L80">        Options o = new Options();</span>
 
-<span class="nc bnc" id="L82" title="All 2 branches missed.">        for (MailClenaCommandLineOptions opt : MailClenaCommandLineOptions.values()) {</span>
-<span class="nc" id="L83">            o.addOption(new Option(opt.getOpt(), opt.name().toLowerCase(), true, opt.getDescription()));</span>
+<span class="nc bnc" id="L82" title="All 2 branches missed.">        for (MailClenaCommandLineOptions option : MailClenaCommandLineOptions.values()) {</span>
+<span class="nc" id="L83">            o.addOption(new Option(option.getOpt(), option.name().toLowerCase(), true, option.getDescription()));</span>
         }
 <span class="nc" id="L85">        return o;</span>
     }
