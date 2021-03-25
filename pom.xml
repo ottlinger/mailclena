@@ -126,6 +126,8 @@
             <encoding>${encoding.utf8}</encoding>
             <!-- https://bugs.java.com/bugdatabase/view_bug.do?bug_id=8212233 -->
             <source>8</source>
+            <!-- Fix problems during generation of jUnit5 tests -->
+            <additionalOptions>-package</additionalOptions>
           </configuration>
         </plugin>
         <plugin>
