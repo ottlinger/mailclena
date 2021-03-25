@@ -41,7 +41,7 @@ import static de.aikiit.mailclena.mail.MailClient.MailClientCommands.parse;
 @AllArgsConstructor
 @Log4j2
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class MailClient {
+public final class MailClient {
 
     private static final String INBOX = "INBOX";
     private static final String POP3S = "pop3s";
