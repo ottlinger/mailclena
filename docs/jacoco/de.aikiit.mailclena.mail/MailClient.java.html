@@ -38,8 +38,8 @@ import static de.aikiit.mailclena.mail.MailClient.MailClientCommands.parse;
 /**
   Encapsulates technical access to mail inbox based on the given application/mail configuration.
  */
-<span class="fc" id="L41">@AllArgsConstructor</span>
-<span class="fc" id="L42">@Log4j2</span>
+<span class="nc" id="L41">@AllArgsConstructor</span>
+<span class="nc" id="L42">@Log4j2</span>
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class MailClient {
 
@@ -49,20 +49,20 @@ public class MailClient {
     private MailConfiguration mailConfiguration;
 
     private Properties getProperties() {
-<span class="fc" id="L52">        Properties properties = new Properties();</span>
-<span class="fc" id="L53">        properties.put(&quot;mail.pop3s.host&quot;, mailConfiguration.getHost());</span>
-<span class="fc" id="L54">        properties.put(&quot;mail.pop3.starttls.enable&quot;, &quot;true&quot;);</span>
-<span class="fc" id="L55">        properties.put(&quot;mail.pop3s.port&quot;, &quot;995&quot;);</span>
-<span class="fc" id="L56">        properties.put(&quot;mail.store.protocol&quot;, &quot;pop3&quot;);</span>
-<span class="fc" id="L57">        return properties;</span>
+<span class="nc" id="L52">        Properties properties = new Properties();</span>
+<span class="nc" id="L53">        properties.put(&quot;mail.pop3s.host&quot;, mailConfiguration.getHost());</span>
+<span class="nc" id="L54">        properties.put(&quot;mail.pop3.starttls.enable&quot;, &quot;true&quot;);</span>
+<span class="nc" id="L55">        properties.put(&quot;mail.pop3s.port&quot;, &quot;995&quot;);</span>
+<span class="nc" id="L56">        properties.put(&quot;mail.store.protocol&quot;, &quot;pop3&quot;);</span>
+<span class="nc" id="L57">        return properties;</span>
     }
 
     @VisibleForTesting
     Optional&lt;Pair&lt;Store, Folder&gt;&gt; openFolder(int mode) throws MessagingException {
-<span class="fc" id="L62">        Session emailSession = Session.getDefaultInstance(getProperties());</span>
+<span class="nc" id="L62">        Session emailSession = Session.getDefaultInstance(getProperties());</span>
         // emailSession.setDebug(true);
 
-<span class="fc" id="L65">        Store store = emailSession.getStore(POP3S);</span>
+<span class="nc" id="L65">        Store store = emailSession.getStore(POP3S);</span>
 <span class="nc" id="L66">        store.connect(mailConfiguration.getHost(), mailConfiguration.getUsername(), mailConfiguration.getPassword());</span>
 
 <span class="nc" id="L68">        Folder emailFolder = store.getFolder(INBOX);</span>
@@ -74,81 +74,81 @@ public class MailClient {
     @VisibleForTesting
     void list() {
         try {
-<span class="fc" id="L77">            Optional&lt;Pair&lt;Store, Folder&gt;&gt; folder = openFolder(Folder.READ_ONLY);</span>
+<span class="nc" id="L77">            Optional&lt;Pair&lt;Store, Folder&gt;&gt; folder = openFolder(Folder.READ_ONLY);</span>
 
-<span class="fc bfc" id="L79" title="All 2 branches covered.">            if (!folder.isPresent()) {</span>
-<span class="fc" id="L80">                log.error(&quot;Unable to open folder in read-only mode to list mails, will abort.&quot;);</span>
-<span class="fc" id="L81">                return;</span>
+<span class="nc bnc" id="L79" title="All 2 branches missed.">            if (!folder.isPresent()) {</span>
+<span class="nc" id="L80">                log.error(&quot;Unable to open folder in read-only mode to list mails, will abort.&quot;);</span>
+<span class="nc" id="L81">                return;</span>
             }
 
-<span class="fc" id="L84">            Pair&lt;Store, Folder&gt; storeAndFolder = folder.get();</span>
-<span class="fc" id="L85">            List&lt;Message&gt; messages = Arrays.asList(storeAndFolder.getRight().getMessages());</span>
-<span class="fc" id="L86">            final int size = messages.size();</span>
+<span class="nc" id="L84">            Pair&lt;Store, Folder&gt; storeAndFolder = folder.get();</span>
+<span class="nc" id="L85">            List&lt;Message&gt; messages = Arrays.asList(storeAndFolder.getRight().getMessages());</span>
+<span class="nc" id="L86">            final int size = messages.size();</span>
 
-<span class="fc bfc" id="L88" title="All 2 branches covered.">            if (size == 0) {</span>
-<span class="fc" id="L89">                log.info(&quot;No messages found - nothing to be done here.&quot;);</span>
+<span class="nc bnc" id="L88" title="All 2 branches missed.">            if (size == 0) {</span>
+<span class="nc" id="L89">                log.info(&quot;No messages found - nothing to be done here.&quot;);</span>
             } else {
 
-<span class="fc" id="L92">                log.info(&quot;Found {} messages.&quot;, size);</span>
+<span class="nc" id="L92">                log.info(&quot;Found {} messages.&quot;, size);</span>
 
-<span class="fc" id="L94">                messages.forEach(m -&gt; {</span>
+<span class="nc" id="L94">                messages.forEach(m -&gt; {</span>
                     try {
-<span class="fc" id="L96">                        log.info(m.getSize() + &quot; bytes / &quot; + m.getSentDate() + &quot; / Message: &quot; + m.getSubject() + &quot; / From: &quot; + Arrays.toString(m.getFrom()));</span>
-<span class="fc" id="L97">                    } catch (MessagingException e) {</span>
-<span class="fc" id="L98">                        log.error(&quot;Error while traversing messages&quot;, e);</span>
-<span class="fc" id="L99">                    }</span>
-<span class="fc" id="L100">                });</span>
+<span class="nc" id="L96">                        log.info(m.getSize() + &quot; bytes / &quot; + m.getSentDate() + &quot; / Message: &quot; + m.getSubject() + &quot; / From: &quot; + Arrays.toString(m.getFrom()));</span>
+<span class="nc" id="L97">                    } catch (MessagingException e) {</span>
+<span class="nc" id="L98">                        log.error(&quot;Error while traversing messages&quot;, e);</span>
+<span class="nc" id="L99">                    }</span>
+<span class="nc" id="L100">                });</span>
             }
 
-<span class="fc" id="L103">            storeAndFolder.getLeft().close();</span>
-<span class="fc" id="L104">        } catch (MessagingException e) {</span>
-<span class="fc" id="L105">            log.error(e);</span>
-<span class="fc" id="L106">        }</span>
-<span class="fc" id="L107">    }</span>
+<span class="nc" id="L103">            storeAndFolder.getLeft().close();</span>
+<span class="nc" id="L104">        } catch (MessagingException e) {</span>
+<span class="nc" id="L105">            log.error(e);</span>
+<span class="nc" id="L106">        }</span>
+<span class="nc" id="L107">    }</span>
 
     @VisibleForTesting
     Optional&lt;Long&gt; delete() {
         try {
-<span class="fc" id="L112">            Optional&lt;Pair&lt;Store, Folder&gt;&gt; folder = openFolder(Folder.READ_WRITE);</span>
+<span class="nc" id="L112">            Optional&lt;Pair&lt;Store, Folder&gt;&gt; folder = openFolder(Folder.READ_WRITE);</span>
 
-<span class="fc bfc" id="L114" title="All 2 branches covered.">            if (!folder.isPresent()) {</span>
-<span class="fc" id="L115">                log.error(&quot;Unable to open folder in write mode to remove mails, will abort.&quot;);</span>
-<span class="fc" id="L116">                return Optional.empty();</span>
+<span class="nc bnc" id="L114" title="All 2 branches missed.">            if (!folder.isPresent()) {</span>
+<span class="nc" id="L115">                log.error(&quot;Unable to open folder in write mode to remove mails, will abort.&quot;);</span>
+<span class="nc" id="L116">                return Optional.empty();</span>
             }
 
-<span class="fc" id="L119">            Pair&lt;Store, Folder&gt; storeAndFolder = folder.get();</span>
-<span class="fc" id="L120">            final Folder f = storeAndFolder.getRight();</span>
-<span class="fc" id="L121">            List&lt;Message&gt; messages = Arrays.asList(f.getMessages());</span>
+<span class="nc" id="L119">            Pair&lt;Store, Folder&gt; storeAndFolder = folder.get();</span>
+<span class="nc" id="L120">            final Folder f = storeAndFolder.getRight();</span>
+<span class="nc" id="L121">            List&lt;Message&gt; messages = Arrays.asList(f.getMessages());</span>
 
-<span class="fc" id="L123">            final int count = messages.size();</span>
-<span class="fc" id="L124">            final AtomicLong mailSize = new AtomicLong(0L);</span>
-<span class="fc bfc" id="L125" title="All 2 branches covered.">            if (count == 0) {</span>
-<span class="fc" id="L126">                log.info(&quot;No messages found - nothing to be done here.&quot;);</span>
+<span class="nc" id="L123">            final int count = messages.size();</span>
+<span class="nc" id="L124">            final AtomicLong mailSize = new AtomicLong(0L);</span>
+<span class="nc bnc" id="L125" title="All 2 branches missed.">            if (count == 0) {</span>
+<span class="nc" id="L126">                log.info(&quot;No messages found - nothing to be done here.&quot;);</span>
             } else {
-<span class="fc" id="L128">                log.info(&quot;Starting to delete {} messages.&quot;, count);</span>
+<span class="nc" id="L128">                log.info(&quot;Starting to delete {} messages.&quot;, count);</span>
 
-<span class="fc" id="L130">                messages.forEach(message -&gt; {</span>
+<span class="nc" id="L130">                messages.forEach(message -&gt; {</span>
                     try {
-<span class="fc" id="L132">                        long messageSize = message.getSize();</span>
-<span class="fc" id="L133">                        log.debug(&quot;Marking for deletion &quot; + messageSize + &quot; bytes, &quot; + message.getSubject() + &quot; From: &quot; + Arrays.toString(message.getFrom()));</span>
-<span class="fc" id="L134">                        message.setFlag(Flags.Flag.DELETED, true);</span>
-<span class="fc" id="L135">                        mailSize.addAndGet(messageSize);</span>
-<span class="fc" id="L136">                    } catch (MessagingException e) {</span>
-<span class="fc" id="L137">                        log.error(&quot;Error while traversing messages for deletion&quot;, e);</span>
-<span class="fc" id="L138">                    }</span>
-<span class="fc" id="L139">                });</span>
+<span class="nc" id="L132">                        long messageSize = message.getSize();</span>
+<span class="nc" id="L133">                        log.debug(&quot;Marking for deletion &quot; + messageSize + &quot; bytes, &quot; + message.getSubject() + &quot; From: &quot; + Arrays.toString(message.getFrom()));</span>
+<span class="nc" id="L134">                        message.setFlag(Flags.Flag.DELETED, true);</span>
+<span class="nc" id="L135">                        mailSize.addAndGet(messageSize);</span>
+<span class="nc" id="L136">                    } catch (MessagingException e) {</span>
+<span class="nc" id="L137">                        log.error(&quot;Error while traversing messages for deletion&quot;, e);</span>
+<span class="nc" id="L138">                    }</span>
+<span class="nc" id="L139">                });</span>
 
-<span class="fc" id="L141">                f.close(true);</span>
-<span class="fc" id="L142">                log.info(&quot;Expunge folder to actually remove messages.&quot;);</span>
-<span class="fc" id="L143">                log.info(&quot;Finished to delete {} messages, set {} bytes free&quot;, count, mailSize.get());</span>
+<span class="nc" id="L141">                f.close(true);</span>
+<span class="nc" id="L142">                log.info(&quot;Expunge folder to actually remove messages.&quot;);</span>
+<span class="nc" id="L143">                log.info(&quot;Finished to delete {} messages, set {} bytes free&quot;, count, mailSize.get());</span>
             }
-<span class="fc" id="L145">            storeAndFolder.getLeft().close();</span>
+<span class="nc" id="L145">            storeAndFolder.getLeft().close();</span>
 
-<span class="fc" id="L147">            return Optional.of(mailSize.longValue());</span>
-<span class="fc" id="L148">        } catch (MessagingException e) {</span>
-<span class="fc" id="L149">            log.error(e);</span>
+<span class="nc" id="L147">            return Optional.of(mailSize.longValue());</span>
+<span class="nc" id="L148">        } catch (MessagingException e) {</span>
+<span class="nc" id="L149">            log.error(e);</span>
         }
-<span class="fc" id="L151">        return Optional.empty();</span>
+<span class="nc" id="L151">        return Optional.empty();</span>
     }
 
     /**
@@ -156,43 +156,43 @@ public class MailClient {
      * @param command command to execute, should be one of {@link MailClientCommands}.
      */
     public void execute(String command) {
-<span class="fc" id="L159">        Optional&lt;MailClientCommands&gt; cmd = parse(command);</span>
-<span class="fc bfc" id="L160" title="All 2 branches covered.">        if (!cmd.isPresent()) {</span>
-<span class="fc" id="L161">            log.info(&quot;No explicit command given, will fallback to 'list'&quot;);</span>
-<span class="fc" id="L162">            cmd = Optional.of(LIST);</span>
+<span class="nc" id="L159">        Optional&lt;MailClientCommands&gt; cmd = parse(command);</span>
+<span class="nc bnc" id="L160" title="All 2 branches missed.">        if (!cmd.isPresent()) {</span>
+<span class="nc" id="L161">            log.info(&quot;No explicit command given, will fallback to 'list'&quot;);</span>
+<span class="nc" id="L162">            cmd = Optional.of(LIST);</span>
         }
 
-<span class="pc bpc" id="L165" title="1 of 3 branches missed.">        switch (cmd.get()) {</span>
+<span class="nc bnc" id="L165" title="All 3 branches missed.">        switch (cmd.get()) {</span>
             case CLEAN:
-<span class="fc" id="L167">                delete();</span>
-<span class="fc" id="L168">                list();</span>
-<span class="fc" id="L169">                break;</span>
+<span class="nc" id="L167">                delete();</span>
+<span class="nc" id="L168">                list();</span>
+<span class="nc" id="L169">                break;</span>
             case LIST:
-<span class="fc" id="L171">                list();</span>
-<span class="fc" id="L172">                break;</span>
+<span class="nc" id="L171">                list();</span>
+<span class="nc" id="L172">                break;</span>
             default:
 <span class="nc" id="L174">                log.error(&quot;If you see this message, please report a bug since the CLI parser has new commands.&quot;);</span>
                 // NOOP: avoid findbugs warning
                 break;
         }
-<span class="fc" id="L178">    }</span>
+<span class="nc" id="L178">    }</span>
 
-<span class="fc" id="L180">    @VisibleForTesting</span>
+<span class="nc" id="L180">    @VisibleForTesting</span>
     enum MailClientCommands {
-<span class="fc" id="L182">        LIST,</span>
-<span class="fc" id="L183">        CLEAN;</span>
+<span class="nc" id="L182">        LIST,</span>
+<span class="nc" id="L183">        CLEAN;</span>
 
         static Optional&lt;MailClientCommands&gt; parse(String command) {
-<span class="fc bfc" id="L186" title="All 2 branches covered.">            if (!Strings.isNullOrEmpty(command)) {</span>
-<span class="fc" id="L187">                String normalized = command.trim();</span>
-<span class="fc bfc" id="L188" title="All 2 branches covered.">                for (MailClientCommands cmd : values()) {</span>
-<span class="fc bfc" id="L189" title="All 2 branches covered.">                    if (normalized.equalsIgnoreCase(cmd.toString())) {</span>
-<span class="fc" id="L190">                        return Optional.of(cmd);</span>
+<span class="nc bnc" id="L186" title="All 2 branches missed.">            if (!Strings.isNullOrEmpty(command)) {</span>
+<span class="nc" id="L187">                String normalized = command.trim();</span>
+<span class="nc bnc" id="L188" title="All 2 branches missed.">                for (MailClientCommands cmd : values()) {</span>
+<span class="nc bnc" id="L189" title="All 2 branches missed.">                    if (normalized.equalsIgnoreCase(cmd.toString())) {</span>
+<span class="nc" id="L190">                        return Optional.of(cmd);</span>
                     }
                 }
             }
 
-<span class="fc" id="L195">            return Optional.empty();</span>
+<span class="nc" id="L195">            return Optional.empty();</span>
         }
 
     }
