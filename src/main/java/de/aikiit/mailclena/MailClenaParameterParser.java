@@ -79,8 +79,8 @@ public final class MailClenaParameterParser {
     Options getAvailableOptions() {
         Options o = new Options();
 
-        for (MailClenaCommandLineOptions opt : MailClenaCommandLineOptions.values()) {
-            o.addOption(new Option(opt.getOpt(), opt.name().toLowerCase(), true, opt.getDescription()));
+        for (MailClenaCommandLineOptions option : MailClenaCommandLineOptions.values()) {
+            o.addOption(new Option(option.getOpt(), option.name().toLowerCase(), true, option.getDescription()));
         }
         return o;
     }
