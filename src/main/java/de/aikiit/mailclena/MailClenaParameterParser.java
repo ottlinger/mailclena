@@ -103,9 +103,9 @@ public final class MailClenaParameterParser {
             return desc;
         }
 
-        MailClenaCommandLineOptions(String opt, String desc) {
-            this.opt = opt;
-            this.desc = desc;
+        MailClenaCommandLineOptions(final String option, final String description) {
+            this.opt = option;
+            this.desc = description;
         }
     }
 
