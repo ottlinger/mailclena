@@ -60,20 +60,6 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/ottlinger/mailclena/checkstyle.html#de.aikiit.mailclena.MailClenaParameterParser.java">de/aikiit/mailclena/MailClenaParameterParser.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  30
-                </td>
-              </tr>
-                          <tr>
-                <td>
                   <a href="https://github.com/ottlinger/mailclena/checkstyle.html#de.aikiit.mailclena.mail.MailClient.java">de/aikiit/mailclena/mail/MailClient.java</a>
                 </td>
                 <td>
@@ -88,6 +74,20 @@ under the License.
               </tr>
                           <tr>
                 <td>
+                  <a href="https://github.com/ottlinger/mailclena/checkstyle.html#de.aikiit.mailclena.MailClenaParameterParser.java">de/aikiit/mailclena/MailClenaParameterParser.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  29
+                </td>
+              </tr>
+                          <tr>
+                <td>
                   <a href="https://github.com/ottlinger/mailclena/checkstyle.html#de.aikiit.mailclena.MailClena.java">de/aikiit/mailclena/MailClena.java</a>
                 </td>
                 <td>
@@ -97,7 +97,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  5
+                  6
                 </td>
               </tr>
                       </tbody>
