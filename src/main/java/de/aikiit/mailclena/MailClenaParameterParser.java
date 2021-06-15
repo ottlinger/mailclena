@@ -109,6 +109,9 @@ public final class MailClenaParameterParser {
          * Specify username option.
          */
         USERNAME("u", "Username - example: myuser@tld.org"),
+        /**
+         * Specify password option.
+         */
         PASSWORD("p", "Password - example: myfancypassword"),
         COMMAND("c", "Command to execute - example: 'list' or 'clean', if no operation is given defaults to 'list'");
 
