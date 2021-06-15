@@ -36,7 +36,7 @@ import static de.aikiit.mailclena.mail.MailClient.MailClientCommands.LIST;
 import static de.aikiit.mailclena.mail.MailClient.MailClientCommands.parse;
 
 /**
-  Encapsulates technical access to mail inbox based on the given application/mail configuration.
+ * Encapsulates technical access to mail inbox based on the given application/mail configuration.
  */
 @AllArgsConstructor
 @Log4j2
@@ -93,7 +93,7 @@ public final class MailClient {
 
                 messages.forEach(m -> {
                     try {
-                        log.info(m.getSize() + " bytes / " + m.getSentDate() + " / Message: " + m.getSubject() + " / From: " + Arrays.toString(m.getFrom()));
+                        log.info("{} bytes / {} / Message: {} / From: {}", m.getSize(), m.getSentDate(), m.getSubject(), Arrays.toString(m.getFrom()));
                     } catch (MessagingException e) {
                         log.error("Error while traversing messages", e);
                     }
@@ -153,6 +153,7 @@ public final class MailClient {
 
     /**
      * Execute the given command or print an error message if the command is unknown.
+     *
      * @param command command to execute, should be one of {@link MailClientCommands}.
      */
     public void execute(String command) {
