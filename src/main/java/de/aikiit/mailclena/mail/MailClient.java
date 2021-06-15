@@ -206,6 +206,12 @@ public final class MailClient {
          */
         CLEAN;
 
+        /**
+         * Tries to convert a given command into an available application command option.
+         *
+         * @param command alphanumeric representation of the command.
+         * @return a valid application command or empty if invalid.
+         */
         static Optional<MailClientCommands> parse(String command) {
             if (!Strings.isNullOrEmpty(command)) {
                 String normalized = command.trim();
