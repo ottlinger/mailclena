@@ -82,6 +82,11 @@ public final class MailClenaParameterParser {
     }
 
 
+    /**
+     * Convert enumeration elements into command-line options.
+     *
+     * @return available parameter options converted as CLI option elements.
+     */
     @VisibleForTesting
     Options getAvailableOptions() {
         Options o = new Options();
