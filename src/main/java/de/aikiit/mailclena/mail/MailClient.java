@@ -57,6 +57,13 @@ public final class MailClient {
         return properties;
     }
 
+    /**
+     * Opens a mail folder in the given mode.
+     *
+     * @param mode see @{@link Folder#open(int)} for available options.
+     * @return pair of @{@link Store} and @{@link Folder} if available.
+     * @throws MessagingException if folder cannot be opened or store is unaccessible.
+     */
     @VisibleForTesting
     Optional<Pair<Store, Folder>> openFolder(int mode) throws MessagingException {
         Session emailSession = Session.getDefaultInstance(getProperties());
