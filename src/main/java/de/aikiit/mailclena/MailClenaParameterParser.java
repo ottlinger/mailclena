@@ -81,7 +81,6 @@ public final class MailClenaParameterParser {
         formatter.printHelp("MailClena", getAvailableOptions());
     }
 
-
     /**
      * Convert enumeration elements into command-line options.
      *
@@ -115,6 +114,9 @@ public final class MailClenaParameterParser {
             this.desc = description;
         }
 
+        /**
+         * @return option shortcut of the current command-line option.
+         */
         String getOpt() {
             return opt;
         }
