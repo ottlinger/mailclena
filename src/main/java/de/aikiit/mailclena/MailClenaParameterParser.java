@@ -105,6 +105,9 @@ public final class MailClenaParameterParser {
          * Specify host name option.
          */
         HOST("h", "Hostname - example: http://imap.yourisp.org"),
+        /**
+         * Specify username option.
+         */
         USERNAME("u", "Username - example: myuser@tld.org"),
         PASSWORD("p", "Password - example: myfancypassword"),
         COMMAND("c", "Command to execute - example: 'list' or 'clean', if no operation is given defaults to 'list'");
