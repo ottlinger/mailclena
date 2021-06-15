@@ -439,6 +439,14 @@
           <!-- https://bugs.java.com/bugdatabase/view_bug.do?bug_id=8212233 -->
           <source>8</source>
         </configuration>
+        <reportSets>
+          <reportSet>
+            <reports>
+              <report>aggregate-no-fork</report>
+              <report>test-aggregate-no-fork</report>
+            </reports>
+          </reportSet>
+        </reportSets>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
