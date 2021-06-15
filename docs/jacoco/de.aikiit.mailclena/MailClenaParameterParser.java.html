@@ -32,81 +32,113 @@ import java.util.Optional;
 <span class="nc" id="L32">@NoArgsConstructor</span>
 public final class MailClenaParameterParser {
 
+    /**
+     * Extracts any given configuration parameters into a @{@link MailConfiguration}.
+     *
+     * @param args command-line arguments.
+     * @return complete mail configuration.
+     * @throws IllegalArgumentException if any parameter cannot be parsed properly.
+     */
     Optional&lt;MailConfiguration&gt; extractConfiguration(String... args) throws IllegalArgumentException {
-<span class="nc bnc" id="L36" title="All 4 branches missed.">        if (args == null || args.length == 0) {</span>
-<span class="nc" id="L37">            printHelp();</span>
+<span class="nc bnc" id="L43" title="All 4 branches missed.">        if (args == null || args.length == 0) {</span>
+<span class="nc" id="L44">            printHelp();</span>
         } else {
 
             try {
-<span class="nc" id="L41">                final CommandLineParser parser = new DefaultParser();</span>
-<span class="nc" id="L42">                final CommandLine cmd = parser.parse(getAvailableOptions(), args);</span>
-<span class="nc" id="L43">                final MailConfiguration.MailConfigurationBuilder mailConfigurationBuilder = MailConfiguration.builder();</span>
+<span class="nc" id="L48">                final CommandLineParser parser = new DefaultParser();</span>
+<span class="nc" id="L49">                final CommandLine cmd = parser.parse(getAvailableOptions(), args);</span>
+<span class="nc" id="L50">                final MailConfiguration.MailConfigurationBuilder mailConfigurationBuilder = MailConfiguration.builder();</span>
 
-<span class="nc bnc" id="L45" title="All 2 branches missed.">                if (!Strings.isNullOrEmpty(cmd.getOptionValue(MailClenaCommandLineOptions.HOST.getOpt())) &amp;&amp;</span>
-<span class="nc bnc" id="L46" title="All 2 branches missed.">                    !Strings.isNullOrEmpty(cmd.getOptionValue(MailClenaCommandLineOptions.USERNAME.getOpt())) &amp;&amp;</span>
-<span class="nc bnc" id="L47" title="All 2 branches missed.">                    !Strings.isNullOrEmpty(cmd.getOptionValue(MailClenaCommandLineOptions.PASSWORD.getOpt()))) {</span>
-<span class="nc" id="L48">                    mailConfigurationBuilder.host(cmd.getOptionValue(MailClenaCommandLineOptions.HOST.getOpt()));</span>
-<span class="nc" id="L49">                    mailConfigurationBuilder.username(cmd.getOptionValue(MailClenaCommandLineOptions.USERNAME.getOpt()));</span>
-<span class="nc" id="L50">                    mailConfigurationBuilder.password(cmd.getOptionValue(MailClenaCommandLineOptions.PASSWORD.getOpt()));</span>
+<span class="nc bnc" id="L52" title="All 2 branches missed.">                if (!Strings.isNullOrEmpty(cmd.getOptionValue(MailClenaCommandLineOptions.HOST.getOpt())) &amp;&amp;</span>
+<span class="nc bnc" id="L53" title="All 2 branches missed.">                    !Strings.isNullOrEmpty(cmd.getOptionValue(MailClenaCommandLineOptions.USERNAME.getOpt())) &amp;&amp;</span>
+<span class="nc bnc" id="L54" title="All 2 branches missed.">                    !Strings.isNullOrEmpty(cmd.getOptionValue(MailClenaCommandLineOptions.PASSWORD.getOpt()))) {</span>
+<span class="nc" id="L55">                    mailConfigurationBuilder.host(cmd.getOptionValue(MailClenaCommandLineOptions.HOST.getOpt()));</span>
+<span class="nc" id="L56">                    mailConfigurationBuilder.username(cmd.getOptionValue(MailClenaCommandLineOptions.USERNAME.getOpt()));</span>
+<span class="nc" id="L57">                    mailConfigurationBuilder.password(cmd.getOptionValue(MailClenaCommandLineOptions.PASSWORD.getOpt()));</span>
 
-<span class="nc bnc" id="L52" title="All 2 branches missed.">                    if(!Strings.isNullOrEmpty(cmd.getOptionValue(MailClenaCommandLineOptions.COMMAND.getOpt()))) {</span>
-<span class="nc" id="L53">                        mailConfigurationBuilder.command(cmd.getOptionValue(MailClenaCommandLineOptions.COMMAND.getOpt()));</span>
+<span class="nc bnc" id="L59" title="All 2 branches missed.">                    if (!Strings.isNullOrEmpty(cmd.getOptionValue(MailClenaCommandLineOptions.COMMAND.getOpt()))) {</span>
+<span class="nc" id="L60">                        mailConfigurationBuilder.command(cmd.getOptionValue(MailClenaCommandLineOptions.COMMAND.getOpt()));</span>
                     } else {
-<span class="nc" id="L55">                        mailConfigurationBuilder.command(&quot;list&quot;);</span>
+<span class="nc" id="L62">                        mailConfigurationBuilder.command(&quot;list&quot;);</span>
                     }
 
-<span class="nc" id="L58">                    final MailConfiguration mailConfiguration = mailConfigurationBuilder.build();</span>
-<span class="nc" id="L59">                    log.debug(&quot;Extracted configuration from given parameters : {}&quot;, mailConfiguration);</span>
-<span class="nc" id="L60">                    return Optional.of(mailConfiguration);</span>
+<span class="nc" id="L65">                    final MailConfiguration mailConfiguration = mailConfigurationBuilder.build();</span>
+<span class="nc" id="L66">                    log.debug(&quot;Extracted configuration from given parameters : {}&quot;, mailConfiguration);</span>
+<span class="nc" id="L67">                    return Optional.of(mailConfiguration);</span>
                 }
 
-<span class="nc" id="L63">            } catch (ParseException | NullPointerException e) {</span>
-<span class="nc" id="L64">                log.error(&quot;Unable to parse given command line parameters&quot;, e);</span>
-<span class="nc" id="L65">                printHelp();</span>
-<span class="nc" id="L66">                throw new IllegalArgumentException(&quot;Exception while parsing command line arguments&quot;);</span>
-<span class="nc" id="L67">            }</span>
+<span class="nc" id="L70">            } catch (ParseException | NullPointerException e) {</span>
+<span class="nc" id="L71">                log.error(&quot;Unable to parse given command line parameters&quot;, e);</span>
+<span class="nc" id="L72">                printHelp();</span>
+<span class="nc" id="L73">                throw new IllegalArgumentException(&quot;Exception while parsing command line arguments&quot;);</span>
+<span class="nc" id="L74">            }</span>
         }
-<span class="nc" id="L69">        return Optional.empty();</span>
+<span class="nc" id="L76">        return Optional.empty();</span>
     }
 
     private void printHelp() {
-<span class="nc" id="L73">        final HelpFormatter formatter = new HelpFormatter();</span>
-<span class="nc" id="L74">        formatter.printHelp(&quot;MailClena&quot;, getAvailableOptions());</span>
-<span class="nc" id="L75">    }</span>
+<span class="nc" id="L80">        final HelpFormatter formatter = new HelpFormatter();</span>
+<span class="nc" id="L81">        formatter.printHelp(&quot;MailClena&quot;, getAvailableOptions());</span>
+<span class="nc" id="L82">    }</span>
 
-
+    /**
+     * Convert enumeration elements into command-line options.
+     *
+     * @return available parameter options converted as CLI option elements.
+     */
     @VisibleForTesting
     Options getAvailableOptions() {
-<span class="nc" id="L80">        Options o = new Options();</span>
+<span class="nc" id="L91">        Options o = new Options();</span>
 
-<span class="nc bnc" id="L82" title="All 2 branches missed.">        for (MailClenaCommandLineOptions option : MailClenaCommandLineOptions.values()) {</span>
-<span class="nc" id="L83">            o.addOption(new Option(option.getOpt(), option.name().toLowerCase(), true, option.getDescription()));</span>
+<span class="nc bnc" id="L93" title="All 2 branches missed.">        for (MailClenaCommandLineOptions option : MailClenaCommandLineOptions.values()) {</span>
+<span class="nc" id="L94">            o.addOption(new Option(option.getOpt(), option.name().toLowerCase(), true, option.getDescription()));</span>
         }
-<span class="nc" id="L85">        return o;</span>
+<span class="nc" id="L96">        return o;</span>
     }
 
-<span class="nc" id="L88">    @VisibleForTesting</span>
+    /**
+     * Available command-line options to set MailClena's configuration parameters.
+     */
+<span class="nc" id="L102">    @VisibleForTesting</span>
     enum MailClenaCommandLineOptions {
-<span class="nc" id="L90">        HOST(&quot;h&quot;, &quot;Hostname - example: http://imap.yourisp.org&quot;),</span>
-<span class="nc" id="L91">        USERNAME(&quot;u&quot;, &quot;Username - example: myuser@tld.org&quot;),</span>
-<span class="nc" id="L92">        PASSWORD(&quot;p&quot;, &quot;Password - example: myfancypassword&quot;),</span>
-<span class="nc" id="L93">        COMMAND(&quot;c&quot;, &quot;Command to execute - example: 'list' or 'clean', if no operation is given defaults to 'list'&quot;);</span>
+        /**
+         * Specify host name option.
+         */
+<span class="nc" id="L107">        HOST(&quot;h&quot;, &quot;Hostname - example: http://imap.yourisp.org&quot;),</span>
+        /**
+         * Specify username option.
+         */
+<span class="nc" id="L111">        USERNAME(&quot;u&quot;, &quot;Username - example: myuser@tld.org&quot;),</span>
+        /**
+         * Specify password option.
+         */
+<span class="nc" id="L115">        PASSWORD(&quot;p&quot;, &quot;Password - example: myfancypassword&quot;),</span>
+        /**
+         * Specify command for execution within the application.
+         */
+<span class="nc" id="L119">        COMMAND(&quot;c&quot;, &quot;Command to execute - example: 'list' or 'clean', if no operation is given defaults to 'list'&quot;);</span>
 
         private final String opt;
         private final String desc;
 
+<span class="nc" id="L124">        MailClenaCommandLineOptions(final String option, final String description) {</span>
+<span class="nc" id="L125">            this.opt = option;</span>
+<span class="nc" id="L126">            this.desc = description;</span>
+<span class="nc" id="L127">        }</span>
+
+        /**
+         * @return option shortcut of the current command-line option.
+         */
         String getOpt() {
-<span class="nc" id="L99">            return opt;</span>
+<span class="nc" id="L133">            return opt;</span>
         }
 
+        /**
+         * @return verbal description of the current command-line option.
+         */
         String getDescription() {
-<span class="nc" id="L103">            return desc;</span>
+<span class="nc" id="L140">            return desc;</span>
         }
-
-<span class="nc" id="L106">        MailClenaCommandLineOptions(final String option, final String description) {</span>
-<span class="nc" id="L107">            this.opt = option;</span>
-<span class="nc" id="L108">            this.desc = description;</span>
-<span class="nc" id="L109">        }</span>
     }
 
 }
