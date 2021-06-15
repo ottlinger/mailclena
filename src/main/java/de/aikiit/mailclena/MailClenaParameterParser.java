@@ -113,6 +113,9 @@ public final class MailClenaParameterParser {
          * Specify password option.
          */
         PASSWORD("p", "Password - example: myfancypassword"),
+        /**
+         * Specify command for execution within the application.
+         */
         COMMAND("c", "Command to execute - example: 'list' or 'clean', if no operation is given defaults to 'list'");
 
         private final String opt;
