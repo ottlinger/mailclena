@@ -77,6 +77,9 @@ public final class MailClient {
         return Optional.of(Pair.of(store, emailFolder));
     }
 
+    /**
+     * Shows a list of messages in the mailbox' root folder. It accesses the folder in read-only mode.
+     */
     // TODO show date of mails YYYYMMDD
     @VisibleForTesting
     void list() {
