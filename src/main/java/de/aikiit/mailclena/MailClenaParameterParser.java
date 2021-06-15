@@ -32,6 +32,13 @@ import java.util.Optional;
 @NoArgsConstructor
 public final class MailClenaParameterParser {
 
+    /**
+     * Extracts any given configuration parameters into a @{@link MailConfiguration}.
+     *
+     * @param args command-line arguments.
+     * @return complete mail configuration.
+     * @throws IllegalArgumentException if any parameter cannot be parsed properly.
+     */
     Optional<MailConfiguration> extractConfiguration(String... args) throws IllegalArgumentException {
         if (args == null || args.length == 0) {
             printHelp();
