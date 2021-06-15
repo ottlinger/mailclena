@@ -186,6 +186,9 @@ public final class MailClient {
          * Option to list available mails.
          */
         LIST,
+        /**
+         * Option to purge existig mails.
+         */
         CLEAN;
 
         static Optional<MailClientCommands> parse(String command) {
