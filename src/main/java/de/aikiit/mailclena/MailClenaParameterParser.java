@@ -92,10 +92,10 @@ public final class MailClenaParameterParser {
         return o;
     }
 
+    /**
+     * Available command-line options to set MailClena's configuration parameters.
+     */
     @VisibleForTesting
-/**
- * Available command-line options to set MailClena's configuration parameters.
- */
     enum MailClenaCommandLineOptions {
         HOST("h", "Hostname - example: http://imap.yourisp.org"),
         USERNAME("u", "Username - example: myuser@tld.org"),
