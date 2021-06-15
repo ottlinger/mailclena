@@ -453,9 +453,7 @@
         <artifactId>maven-jxr-plugin</artifactId>
         <version>3.1.1</version>
         <configuration>
-          <aggregate>true</aggregate>
           <linkJavadoc>true</linkJavadoc>
-          <encoding>${encoding.utf8}</encoding>
         </configuration>
       </plugin>
       <plugin>
