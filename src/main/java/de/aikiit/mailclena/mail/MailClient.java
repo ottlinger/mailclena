@@ -106,6 +106,11 @@ public final class MailClient {
         }
     }
 
+    /**
+     * Application option to delete existing messages.
+     *
+     * @return number of messages deleted, if any. Empty otherwise.
+     */
     @VisibleForTesting
     Optional<Long> delete() {
         try {
