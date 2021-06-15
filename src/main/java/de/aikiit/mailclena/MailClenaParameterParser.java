@@ -121,6 +121,9 @@ public final class MailClenaParameterParser {
             return opt;
         }
 
+        /**
+         * @return verbal description of the current command-line option.
+         */
         String getDescription() {
             return desc;
         }
