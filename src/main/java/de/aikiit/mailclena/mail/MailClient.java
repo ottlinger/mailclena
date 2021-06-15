@@ -182,6 +182,9 @@ public final class MailClient {
      */
     @VisibleForTesting
     enum MailClientCommands {
+        /**
+         * Option to list available mails.
+         */
         LIST,
         CLEAN;
 
