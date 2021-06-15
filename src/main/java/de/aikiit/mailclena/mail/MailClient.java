@@ -177,6 +177,9 @@ public final class MailClient {
         }
     }
 
+    /**
+     * Encapsulates available application commands for MailClena.
+     */
     @VisibleForTesting
     enum MailClientCommands {
         LIST,
