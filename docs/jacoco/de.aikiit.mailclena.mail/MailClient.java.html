@@ -181,30 +181,31 @@ public final class MailClient {
 <span class="nc bnc" id="L181" title="All 3 branches missed.">        switch (cmd.get()) {</span>
             case CLEAN:
 <span class="nc" id="L183">                delete();</span>
-                // intentionally list is execute after deletion
+<span class="nc" id="L184">                list();</span>
+<span class="nc" id="L185">                break;</span>
             case LIST:
-<span class="nc" id="L186">                list();</span>
-<span class="nc" id="L187">                break;</span>
+<span class="nc" id="L187">                list();</span>
+<span class="nc" id="L188">                break;</span>
             default:
-<span class="nc" id="L189">                log.error(&quot;If you see this message, please report a bug since the CLI parser has new commands.&quot;);</span>
+<span class="nc" id="L190">                log.error(&quot;If you see this message, please report a bug since the CLI parser has new commands.&quot;);</span>
                 // NOOP: avoid findbugs warning
                 break;
         }
-<span class="nc" id="L193">    }</span>
+<span class="nc" id="L194">    }</span>
 
     /**
      * Encapsulates available application commands for MailClena.
      */
-<span class="nc" id="L198">    @VisibleForTesting</span>
+<span class="nc" id="L199">    @VisibleForTesting</span>
     enum MailClientCommands {
         /**
          * Option to list available mails.
          */
-<span class="nc" id="L203">        LIST,</span>
+<span class="nc" id="L204">        LIST,</span>
         /**
          * Option to purge existig mails.
          */
-<span class="nc" id="L207">        CLEAN;</span>
+<span class="nc" id="L208">        CLEAN;</span>
 
         /**
          * Tries to convert a given command into an available application command option.
@@ -213,16 +214,16 @@ public final class MailClient {
          * @return a valid application command or empty if invalid.
          */
         static Optional&lt;MailClientCommands&gt; parse(String command) {
-<span class="nc bnc" id="L216" title="All 2 branches missed.">            if (!Strings.isNullOrEmpty(command)) {</span>
-<span class="nc" id="L217">                String normalized = command.trim();</span>
-<span class="nc bnc" id="L218" title="All 2 branches missed.">                for (MailClientCommands cmd : values()) {</span>
-<span class="nc bnc" id="L219" title="All 2 branches missed.">                    if (normalized.equalsIgnoreCase(cmd.toString())) {</span>
-<span class="nc" id="L220">                        return Optional.of(cmd);</span>
+<span class="nc bnc" id="L217" title="All 2 branches missed.">            if (!Strings.isNullOrEmpty(command)) {</span>
+<span class="nc" id="L218">                String normalized = command.trim();</span>
+<span class="nc bnc" id="L219" title="All 2 branches missed.">                for (MailClientCommands cmd : values()) {</span>
+<span class="nc bnc" id="L220" title="All 2 branches missed.">                    if (normalized.equalsIgnoreCase(cmd.toString())) {</span>
+<span class="nc" id="L221">                        return Optional.of(cmd);</span>
                     }
                 }
             }
 
-<span class="nc" id="L225">            return Optional.empty();</span>
+<span class="nc" id="L226">            return Optional.empty();</span>
         }
 
     }
