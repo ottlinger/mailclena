@@ -45,7 +45,7 @@
   </scm>
   <properties>
     <junit.jupiter.version>5.8.1</junit.jupiter.version>
-    <junit.platform.version>1.8.1</junit.platform.version>
+    <junit.platform.version>1.8.2</junit.platform.version>
     <logger.version>2.14.1</logger.version>
     <assertj.version>3.21.0</assertj.version>
     <mockito.version>4.1.0</mockito.version>
