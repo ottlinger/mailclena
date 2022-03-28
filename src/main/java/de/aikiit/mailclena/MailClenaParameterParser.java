@@ -127,6 +127,8 @@ public final class MailClenaParameterParser {
         }
 
         /**
+         * Returns the shortcut of the current command.
+         *
          * @return option shortcut of the current command-line option.
          */
         String getOpt() {
@@ -134,6 +136,8 @@ public final class MailClenaParameterParser {
         }
 
         /**
+         * Returns a longer and verbald description of the current command.
+         *
          * @return verbal description of the current command-line option.
          */
         String getDescription() {
