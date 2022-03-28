@@ -104,7 +104,7 @@ public final class MailClenaParameterParser {
         /**
          * Specify host name option.
          */
-        HOST("h", "Hostname - example: http://imap.yourisp.org"),
+        HOST("h", "Hostname - example: https://imap.yourisp.org"),
         /**
          * Specify username option.
          */

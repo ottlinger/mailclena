@@ -43,12 +43,13 @@ $ java -jar target/mailclena-0.0.1-SNAPSHOT-executable.jar
 ```
 
 ### Command line parameters
+
 ```
-usage: MailClena
- -c,--command <arg>    Command to execute - example: list or clean, default is list.
- -h,--host <arg>       Hostname - example: http://imap.yourisp.org
- -p,--password <arg>   Password - example: myfancypassword
- -u,--username <arg>   Username - example: myuser@tld.org
+-usage: MailClena
+- -c,--command <arg>    Command to execute - example: list or clean, default is list.
+- -h,--host <arg>       Hostname - example: https://imap.yourisp.org
+- -p,--password <arg>   Password - example: myfancypassword
+- -u,--username <arg>   Username - example: myuser@tld.org
 ```
 
 ### Example call
