@@ -21,3 +21,4 @@ target
 # Prevent accidentally checking in real configurations
 **/javaconfiguration.properties
 local.sh
+dependency-reduced-pom.xml

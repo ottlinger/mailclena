@@ -310,6 +310,7 @@
               <exclude>**/*.log</exclude>
               <exclude>**/.checkstyle/**/*</exclude>
               <exclude>**/.gitignore</exclude>
+              <exclude>**/dependency-reduced-pom.xml</exclude>
             </excludes>
             <!-- approve GPL3 license -->
             <licenseFamilies>
