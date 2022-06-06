@@ -477,7 +477,7 @@
       </plugin>
       <plugin>
         <artifactId>maven-pmd-plugin</artifactId>
-        <version>3.16.0</version>
+        <version>3.17.0</version>
         <configuration>
           <linkXRef>true</linkXRef>
           <sourceEncoding>${encoding.utf8}</sourceEncoding>
