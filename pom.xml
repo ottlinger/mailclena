@@ -560,11 +560,11 @@
         <url>https://repository.apache.org/content/repositories/orgapachetamaya-1026/</url>
       </repository>
     </repositories -->
-  <!-- To be able to use the latest version/release candidate-->
+  <!-- To be able to use the latest version/release candidate
     <pluginRepositories>
       <pluginRepository>
         <id>staged-releases-rat-014</id>
         <url>https://repository.apache.org/content/repositories/orgapachecreadur-1007/</url>
       </pluginRepository>
-    </pluginRepositories>
+    </pluginRepositories -->
 </project>
