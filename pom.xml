@@ -50,7 +50,7 @@
     <assertj.version>3.23.1</assertj.version>
     <mockito.version>4.6.1</mockito.version>
     <lombok.version>1.18.24</lombok.version>
-    <javadoc.version>3.4.0</javadoc.version>
+    <javadoc.version>3.4.1</javadoc.version>
     <surefire.version>3.0.0-M7</surefire.version>
     <rat.version>0.14</rat.version>
     <guava.version>31.1-jre</guava.version>
@@ -230,7 +230,7 @@
         <plugin>
           <groupId>org.pitest</groupId>
           <artifactId>pitest-maven</artifactId>
-          <version>1.9.3</version>
+          <version>1.9.4</version>
           <configuration>
             <timeoutConstant>8000</timeoutConstant>
             <threads>8</threads>
@@ -336,7 +336,7 @@
     <dependency>
       <groupId>com.icegreen</groupId>
       <artifactId>greenmail</artifactId>
-      <version>1.6.9</version>
+      <version>1.6.10</version>
       <scope>test</scope>
     </dependency>
     <dependency>
