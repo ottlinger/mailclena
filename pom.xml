@@ -510,18 +510,35 @@
         <version>3.0.0</version>
         <configuration>
           <encoding>${encoding.utf8}</encoding>
-          <tags>
-            <tag>TODO</tag>
-            <tag>todo</tag>
-            <tag>FIXME</tag>
-            <tag>fixme</tag>
-            <tag>REFACTOR</tag>
-            <tag>refactor</tag>
-            <tag>REVIEW</tag>
-            <tag>review</tag>
-            <tag>@todo</tag>
-            <tag>@deprecated</tag>
-          </tags>
+          <tagListOptions>
+            <tagClasses>
+              <tagClass>
+                <displayName>Code Work</displayName>
+                <tags>
+                  <tag>
+                    <matchString>TODO</matchString>
+                    <matchType>ignoreCase</matchType>
+                  </tag>
+                  <tag>
+                    <matchString>FIXME</matchString>
+                    <matchType>ignoreCase</matchType>
+                  </tag>
+                  <tag>
+                    <matchString>REFACTOR</matchString>
+                    <matchType>ignoreCase</matchType>
+                  </tag>
+                  <tag>
+                    <matchString>REVIEW</matchString>
+                    <matchType>ignoreCase</matchType>
+                  </tag>
+                  <tag>
+                    <matchString>deprecated</matchString>
+                    <matchType>ignoreCase</matchType>
+                  </tag>
+                </tags>
+              </tagClass>
+            </tagClasses>
+          </tagListOptions>
         </configuration>
       </plugin>
       <plugin>
@@ -562,10 +579,10 @@
       </repository>
     </repositories -->
   <!-- To be able to use the latest version/release candidate-->
-    <pluginRepositories>
-      <pluginRepository>
-        <id>staged-releases-rat-at-asf</id>
-        <url>https://repository.apache.org/content/repositories/orgapachecreadur-1008/</url>
-      </pluginRepository>
-    </pluginRepositories>
+  <pluginRepositories>
+    <pluginRepository>
+      <id>staged-releases-rat-at-asf</id>
+      <url>https://repository.apache.org/content/repositories/orgapachecreadur-1008/</url>
+    </pluginRepository>
+  </pluginRepositories>
 </project>
