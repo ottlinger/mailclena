@@ -74,16 +74,16 @@
 <td>47</td></tr>
 <tr class="a">
 <th>Number of unique artifacts (NOA):</th>
-<td>51</td></tr>
+<td>54</td></tr>
 <tr class="b">
 <th>Number of version-conflicting artifacts (NOC):</th>
-<td>4</td></tr>
+<td>7</td></tr>
 <tr class="a">
 <th>Number of SNAPSHOT artifacts (NOS):</th>
 <td>0</td></tr>
 <tr class="b">
 <th>Convergence (NOD/NOA):</th>
-<td><img src="images/icon_error_sml.gif" alt="[Error]" />&#160;<b>92 %</b></td></tr>
+<td><img src="images/icon_error_sml.gif" alt="[Error]" />&#160;<b>87 %</b></td></tr>
 <tr class="a">
 <th>Ready for release (100% convergence and no SNAPSHOTS):</th>
 <td><img src="images/icon_error_sml.gif" alt="[Error]" />&#160;<b>Error</b><br />You do not have 100% convergence.</td></tr></table></section><section>
@@ -130,17 +130,59 @@
 <td width="25%">5.8.0</td>
 <td>
 <ol style="list-style-type: decimal">de.aikiit:mailclena:jar:0.0.1-SNAPSHOT<br />\-&#160;org.assertj:assertj-core:jar:3.23.1:compile<br />&#160;&#160;&#160;\-&#160;net.bytebuddy:byte-buddy:jar:1.12.10:compile<br />&#160;&#160;&#160;&#160;&#160;&#160;\-&#160;net.java.dev.jna:jna-platform:jar:5.8.0:provided<br /><br /></ol></td></tr></table></td></tr></table></section><section>
-<h3><a name="org.slf4j:slf4j-api"></a>org.slf4j:slf4j-api</h3>
+<h3><a name="org.junit.jupiter:junit-jupiter-api"></a>org.junit.jupiter:junit-jupiter-api</h3>
 <table border="0" class="bodyTable">
 <tr class="a">
 <td><img src="images/icon_error_sml.gif" alt="[Error]" /></td>
 <td>
 <table border="0" class="bodyTable">
 <tr class="b">
+<td width="25%">5.9.0</td>
+<td>
+<ol style="list-style-type: decimal">de.aikiit:mailclena:jar:0.0.1-SNAPSHOT<br />\-&#160;org.mockito:mockito-junit-jupiter:jar:4.8.0:test<br />&#160;&#160;&#160;\-&#160;org.junit.jupiter:junit-jupiter-api:jar:5.9.0:test<br /><br /></ol></td></tr>
+<tr class="a">
+<td width="25%">5.9.1</td>
+<td>
+<ol style="list-style-type: decimal">de.aikiit:mailclena:jar:0.0.1-SNAPSHOT<br />\-&#160;org.junit.jupiter:junit-jupiter-engine:jar:5.9.1:test<br />&#160;&#160;&#160;\-&#160;org.junit.jupiter:junit-jupiter-api:jar:5.9.1:test<br /><br /></ol></td></tr></table></td></tr></table></section><section>
+<h3><a name="org.junit.platform:junit-platform-commons"></a>org.junit.platform:junit-platform-commons</h3>
+<table border="0" class="bodyTable">
+<tr class="b">
+<td><img src="images/icon_error_sml.gif" alt="[Error]" /></td>
+<td>
+<table border="0" class="bodyTable">
+<tr class="a">
+<td width="25%">1.9.0</td>
+<td>
+<ol style="list-style-type: decimal">de.aikiit:mailclena:jar:0.0.1-SNAPSHOT<br />+-&#160;org.mockito:mockito-junit-jupiter:jar:4.8.0:test<br />|&#160;&#160;\-&#160;org.junit.jupiter:junit-jupiter-api:jar:5.9.0:test<br />|&#160;&#160;&#160;&#160;&#160;\-&#160;org.junit.platform:junit-platform-commons:jar:1.9.0:test<br />\-&#160;org.junit.platform:junit-platform-runner:jar:1.9.0:test<br />&#160;&#160;&#160;\-&#160;org.junit.platform:junit-platform-suite-api:jar:1.9.0:test<br />&#160;&#160;&#160;&#160;&#160;&#160;\-&#160;org.junit.platform:junit-platform-commons:jar:1.9.0:test<br /><br /></ol></td></tr>
+<tr class="b">
+<td width="25%">1.9.1</td>
+<td>
+<ol style="list-style-type: decimal">de.aikiit:mailclena:jar:0.0.1-SNAPSHOT<br />\-&#160;org.junit.jupiter:junit-jupiter-engine:jar:5.9.1:test<br />&#160;&#160;&#160;\-&#160;org.junit.platform:junit-platform-engine:jar:1.9.1:test<br />&#160;&#160;&#160;&#160;&#160;&#160;\-&#160;org.junit.platform:junit-platform-commons:jar:1.9.1:test<br /><br /></ol></td></tr></table></td></tr></table></section><section>
+<h3><a name="org.junit.platform:junit-platform-engine"></a>org.junit.platform:junit-platform-engine</h3>
+<table border="0" class="bodyTable">
+<tr class="a">
+<td><img src="images/icon_error_sml.gif" alt="[Error]" /></td>
+<td>
+<table border="0" class="bodyTable">
+<tr class="b">
+<td width="25%">1.9.0</td>
+<td>
+<ol style="list-style-type: decimal">de.aikiit:mailclena:jar:0.0.1-SNAPSHOT<br />\-&#160;org.junit.platform:junit-platform-runner:jar:1.9.0:test<br />&#160;&#160;&#160;+-&#160;org.junit.platform:junit-platform-launcher:jar:1.9.0:test<br />&#160;&#160;&#160;|&#160;&#160;\-&#160;org.junit.platform:junit-platform-engine:jar:1.9.0:test<br />&#160;&#160;&#160;\-&#160;org.junit.platform:junit-platform-suite-commons:jar:1.9.0:test<br />&#160;&#160;&#160;&#160;&#160;&#160;\-&#160;org.junit.platform:junit-platform-engine:jar:1.9.0:test<br /><br /></ol></td></tr>
+<tr class="a">
+<td width="25%">1.9.1</td>
+<td>
+<ol style="list-style-type: decimal">de.aikiit:mailclena:jar:0.0.1-SNAPSHOT<br />\-&#160;org.junit.jupiter:junit-jupiter-engine:jar:5.9.1:test<br />&#160;&#160;&#160;\-&#160;org.junit.platform:junit-platform-engine:jar:1.9.1:test<br /><br /></ol></td></tr></table></td></tr></table></section><section>
+<h3><a name="org.slf4j:slf4j-api"></a>org.slf4j:slf4j-api</h3>
+<table border="0" class="bodyTable">
+<tr class="b">
+<td><img src="images/icon_error_sml.gif" alt="[Error]" /></td>
+<td>
+<table border="0" class="bodyTable">
+<tr class="a">
 <td width="25%">1.7.30</td>
 <td>
 <ol style="list-style-type: decimal">de.aikiit:mailclena:jar:0.0.1-SNAPSHOT<br />\-&#160;org.apache.velocity:velocity-engine-core:jar:2.3:compile<br />&#160;&#160;&#160;\-&#160;org.slf4j:slf4j-api:jar:1.7.30:compile<br /><br /></ol></td></tr>
-<tr class="a">
+<tr class="b">
 <td width="25%">1.7.36</td>
 <td>
 <ol style="list-style-type: decimal">de.aikiit:mailclena:jar:0.0.1-SNAPSHOT<br />\-&#160;com.icegreen:greenmail:jar:1.6.10:test<br />&#160;&#160;&#160;\-&#160;org.slf4j:slf4j-api:jar:1.7.36:compile<br /><br /></ol></td></tr></table></td></tr></table></section></section>
