@@ -230,7 +230,7 @@
         <plugin>
           <groupId>org.pitest</groupId>
           <artifactId>pitest-maven</artifactId>
-          <version>1.9.5</version>
+          <version>1.9.6</version>
           <configuration>
             <timeoutConstant>8000</timeoutConstant>
             <threads>8</threads>
