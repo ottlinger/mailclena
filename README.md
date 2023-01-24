@@ -26,9 +26,7 @@ In order to just play around with it I've integrated a CI run:
 
 ### CodeQL - quality measures
 
-[![CodeQL](https://github.com/ottlinger/mailclena/workflows/codeql/badge.svg)
-
-[![CodeQL](https://github.com/ottlinger/mailclena/workflows/codeql.yml/badge.svg?branch=master&event=push)](https://github.com/ottlinger/mailclena/workflows/codeql.yml) 
+[![CodeQL](https://github.com/ottlinger/mailclena/actions/workflows/codeql.yml/badge.svg?branch=master&event=push)](https://github.com/ottlinger/mailclena/actions/workflows/codeql.yml) 
 
 ### Codacy - code quality and static analysis
 
