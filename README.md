@@ -24,9 +24,11 @@ In order to just play around with it I've integrated a CI run:
 
 [![codecov](https://codecov.io/gh/ottlinger/mailclena/branch/master/graph/badge.svg)](https://codecov.io/gh/ottlinger/mailclena)
 
-### LGTM - quality measures
+### CodeQL - quality measures
 
-[![Language grade: Java](https://img.shields.io/lgtm/grade/java/g/ottlinger/mailclena.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/ottlinger/mailclena/context:java)
+[![CodeQL](https://github.com/ottlinger/mailclena/workflows/codeql/badge.svg)
+
+[![CodeQL](https://github.com/ottlinger/mailclena/workflows/codeql.yml/badge.svg?branch=master&event=push)](https://github.com/ottlinger/mailclena/workflows/codeql.yml) 
 
 ### Codacy - code quality and static analysis
 
