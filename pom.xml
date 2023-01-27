@@ -504,7 +504,7 @@
         <artifactId>jdepend-maven-plugin</artifactId>
         <version>2.0</version>
       </plugin>
-      <!-- 202006: diabled as tools.jar is missing in newer JDKs -->
+      <!-- 202006: disabled as tools.jar is missing in newer JDKs -->
       <!-- cobertura plugin
             <plugin>
               <groupId>org.codehaus.mojo</groupId>
