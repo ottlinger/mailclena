@@ -13,10 +13,10 @@ Tool that logs into mail accounts and removes all mails.
 
 https://github.com/users/ottlinger/projects/7
 
-## Github integrations
+## GitHub integrations
 ### Travis / CI
 
-In order to just play around with it I've integrated a CI run:
+In order to just play around with it, I've integrated a CI run:
 
 [![Build Status](https://travis-ci.org/ottlinger/mailclena.svg?branch=master)](https://travis-ci.org/ottlinger/mailclena)
 
@@ -26,7 +26,7 @@ In order to just play around with it I've integrated a CI run:
 
 ### CodeQL - quality measures
 
-[![CodeQL](https://github.com/ottlinger/mailclena/actions/workflows/codeql.yml/badge.svg?branch=master&event=push)](https://github.com/ottlinger/mailclena/actions/workflows/codeql.yml) 
+[![CodeQL](https://github.com/ottlinger/mailclena/actions/workflows/codeql.yml/badge.svg?branch=master&event=push)](https://github.com/ottlinger/mailclena/actions/workflows/codeql.yml)
 
 ### Codacy - code quality and static analysis
 
@@ -34,7 +34,7 @@ In order to just play around with it I've integrated a CI run:
 
 ## How to run and use the application
 
-You need to checkout the application and build it with the help of [Java](https://java.sun.com) and [Maven](https://maven.apache.org/).
+You need to check out the application and build it with the help of [Java](https://java.sun.com) and [Maven](https://maven.apache.org/).
 
 ```
 $ mvn
