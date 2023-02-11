@@ -14,11 +14,9 @@ Tool that logs into mail accounts and removes all mails.
 https://github.com/users/ottlinger/projects/7
 
 ## GitHub integrations
-### Travis / CI
+### Github Action / CI
 
-In order to just play around with it, I've integrated a CI run:
-
-[![Build Status](https://travis-ci.org/ottlinger/mailclena.svg?branch=master)](https://travis-ci.org/ottlinger/mailclena)
+[![Github Action master branch status](https://github.com/ottlinger/mailclena/actions/workflows/maven.yml/badge.svg?branch=master)](https://github.com/ottlinger/mailclena/actions)
 
 ### Code coverage
 
