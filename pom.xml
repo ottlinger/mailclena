@@ -48,7 +48,7 @@
     <junit.platform.version>1.9.2</junit.platform.version>
     <logger.version>2.20.0</logger.version>
     <assertj.version>3.24.2</assertj.version>
-    <mockito.version>5.1.1</mockito.version>
+    <mockito.version>5.2.0</mockito.version>
     <lombok.version>1.18.26</lombok.version>
     <javadoc.version>3.5.0</javadoc.version>
     <surefire.version>3.0.0-M9</surefire.version>
