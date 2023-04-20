@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"de.aikiit.mailclena"},{"l":"de.aikiit.mailclena.mail"}];updateSearchResults();
+packageSearchIndex = [{"l":"Alle Packages","u":"allpackages-index.html"},{"l":"de.aikiit.mailclena"},{"l":"de.aikiit.mailclena.mail"}];updateSearchResults();
