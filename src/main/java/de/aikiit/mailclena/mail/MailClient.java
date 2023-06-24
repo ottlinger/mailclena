@@ -141,11 +141,10 @@ public final class MailClient {
                 log.info("No messages found - nothing to be done here.");
             } else {
                 log.info("Starting to delete {} messages.", count);
-
                 messages.forEach(message -> {
                     try {
                         long messageSize = message.getSize();
-                        log.debug("Marking for deletion " + messageSize + " bytes, " + message.getSubject() + " From: " + Arrays.toString(message.getFrom()));
+                        log.info("Marking for deletion " + messageSize + " bytes with subject: " + message.getSubject());
                         message.setFlag(Flags.Flag.DELETED, true);
                         mailSize.addAndGet(messageSize);
                     } catch (MessagingException e) {
