@@ -141,29 +141,28 @@ public final class MailClient {
 <span class="nc" id="L141">                log.info(&quot;No messages found - nothing to be done here.&quot;);</span>
             } else {
 <span class="nc" id="L143">                log.info(&quot;Starting to delete {} messages.&quot;, count);</span>
-
-<span class="nc" id="L145">                messages.forEach(message -&gt; {</span>
+<span class="nc" id="L144">                messages.forEach(message -&gt; {</span>
                     try {
-<span class="nc" id="L147">                        long messageSize = message.getSize();</span>
-<span class="nc" id="L148">                        log.debug(&quot;Marking for deletion &quot; + messageSize + &quot; bytes, &quot; + message.getSubject() + &quot; From: &quot; + Arrays.toString(message.getFrom()));</span>
-<span class="nc" id="L149">                        message.setFlag(Flags.Flag.DELETED, true);</span>
-<span class="nc" id="L150">                        mailSize.addAndGet(messageSize);</span>
-<span class="nc" id="L151">                    } catch (MessagingException e) {</span>
-<span class="nc" id="L152">                        log.error(&quot;Error while traversing messages for deletion&quot;, e);</span>
-<span class="nc" id="L153">                    }</span>
-<span class="nc" id="L154">                });</span>
+<span class="nc" id="L146">                        long messageSize = message.getSize();</span>
+<span class="nc" id="L147">                        log.info(&quot;Marking for deletion &quot; + messageSize + &quot; bytes with subject: &quot; + message.getSubject());</span>
+<span class="nc" id="L148">                        message.setFlag(Flags.Flag.DELETED, true);</span>
+<span class="nc" id="L149">                        mailSize.addAndGet(messageSize);</span>
+<span class="nc" id="L150">                    } catch (MessagingException e) {</span>
+<span class="nc" id="L151">                        log.error(&quot;Error while traversing messages for deletion&quot;, e);</span>
+<span class="nc" id="L152">                    }</span>
+<span class="nc" id="L153">                });</span>
 
-<span class="nc" id="L156">                f.close(true);</span>
-<span class="nc" id="L157">                log.info(&quot;Expunge folder to actually remove messages.&quot;);</span>
-<span class="nc" id="L158">                log.info(&quot;Finished to delete {} messages, set {} bytes free&quot;, count, mailSize.get());</span>
+<span class="nc" id="L155">                f.close(true);</span>
+<span class="nc" id="L156">                log.info(&quot;Expunge folder to actually remove messages.&quot;);</span>
+<span class="nc" id="L157">                log.info(&quot;Finished to delete {} messages, set {} bytes free&quot;, count, mailSize.get());</span>
             }
-<span class="nc" id="L160">            storeAndFolder.getLeft().close();</span>
+<span class="nc" id="L159">            storeAndFolder.getLeft().close();</span>
 
-<span class="nc" id="L162">            return Optional.of(mailSize.longValue());</span>
-<span class="nc" id="L163">        } catch (MessagingException e) {</span>
-<span class="nc" id="L164">            log.error(e);</span>
+<span class="nc" id="L161">            return Optional.of(mailSize.longValue());</span>
+<span class="nc" id="L162">        } catch (MessagingException e) {</span>
+<span class="nc" id="L163">            log.error(e);</span>
         }
-<span class="nc" id="L166">        return Optional.empty();</span>
+<span class="nc" id="L165">        return Optional.empty();</span>
     }
 
     /**
@@ -172,40 +171,40 @@ public final class MailClient {
      * @param command command to execute, should be one of {@link MailClientCommands}.
      */
     public void execute(String command) {
-<span class="nc" id="L175">        Optional&lt;MailClientCommands&gt; cmd = parse(command);</span>
-<span class="nc bnc" id="L176" title="All 2 branches missed.">        if (!cmd.isPresent()) {</span>
-<span class="nc" id="L177">            log.info(&quot;No explicit command given, will fallback to 'list'&quot;);</span>
-<span class="nc" id="L178">            cmd = Optional.of(LIST);</span>
+<span class="nc" id="L174">        Optional&lt;MailClientCommands&gt; cmd = parse(command);</span>
+<span class="nc bnc" id="L175" title="All 2 branches missed.">        if (!cmd.isPresent()) {</span>
+<span class="nc" id="L176">            log.info(&quot;No explicit command given, will fallback to 'list'&quot;);</span>
+<span class="nc" id="L177">            cmd = Optional.of(LIST);</span>
         }
 
-<span class="nc bnc" id="L181" title="All 3 branches missed.">        switch (cmd.get()) {</span>
+<span class="nc bnc" id="L180" title="All 3 branches missed.">        switch (cmd.get()) {</span>
             case CLEAN:
-<span class="nc" id="L183">                delete();</span>
-<span class="nc" id="L184">                list();</span>
-<span class="nc" id="L185">                break;</span>
+<span class="nc" id="L182">                delete();</span>
+<span class="nc" id="L183">                list();</span>
+<span class="nc" id="L184">                break;</span>
             case LIST:
-<span class="nc" id="L187">                list();</span>
-<span class="nc" id="L188">                break;</span>
+<span class="nc" id="L186">                list();</span>
+<span class="nc" id="L187">                break;</span>
             default:
-<span class="nc" id="L190">                log.error(&quot;If you see this message, please report a bug since the CLI parser has new commands.&quot;);</span>
+<span class="nc" id="L189">                log.error(&quot;If you see this message, please report a bug since the CLI parser has new commands.&quot;);</span>
                 // NOOP: avoid findbugs warning
                 break;
         }
-<span class="nc" id="L194">    }</span>
+<span class="nc" id="L193">    }</span>
 
     /**
      * Encapsulates available application commands for MailClena.
      */
-<span class="nc" id="L199">    @VisibleForTesting</span>
+<span class="nc" id="L198">    @VisibleForTesting</span>
     enum MailClientCommands {
         /**
          * Option to list available mails.
          */
-<span class="nc" id="L204">        LIST,</span>
+<span class="nc" id="L203">        LIST,</span>
         /**
          * Option to purge existig mails.
          */
-<span class="nc" id="L208">        CLEAN;</span>
+<span class="nc" id="L207">        CLEAN;</span>
 
         /**
          * Tries to convert a given command into an available application command option.
@@ -214,16 +213,16 @@ public final class MailClient {
          * @return a valid application command or empty if invalid.
          */
         static Optional&lt;MailClientCommands&gt; parse(String command) {
-<span class="nc bnc" id="L217" title="All 2 branches missed.">            if (!Strings.isNullOrEmpty(command)) {</span>
-<span class="nc" id="L218">                String normalized = command.trim();</span>
-<span class="nc bnc" id="L219" title="All 2 branches missed.">                for (MailClientCommands cmd : values()) {</span>
-<span class="nc bnc" id="L220" title="All 2 branches missed.">                    if (normalized.equalsIgnoreCase(cmd.toString())) {</span>
-<span class="nc" id="L221">                        return Optional.of(cmd);</span>
+<span class="nc bnc" id="L216" title="All 2 branches missed.">            if (!Strings.isNullOrEmpty(command)) {</span>
+<span class="nc" id="L217">                String normalized = command.trim();</span>
+<span class="nc bnc" id="L218" title="All 2 branches missed.">                for (MailClientCommands cmd : values()) {</span>
+<span class="nc bnc" id="L219" title="All 2 branches missed.">                    if (normalized.equalsIgnoreCase(cmd.toString())) {</span>
+<span class="nc" id="L220">                        return Optional.of(cmd);</span>
                     }
                 }
             }
 
-<span class="nc" id="L226">            return Optional.empty();</span>
+<span class="nc" id="L225">            return Optional.empty();</span>
         }
 
     }
