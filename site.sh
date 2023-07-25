@@ -1,6 +1,6 @@
 #!/bin/bash
 echo "Generating new mvn site ..."
-mvn clean site:site 
+./mvnw clean site:site 
 echo "DONE - ready to commit and push"
 cp -rf target/site/* docs
 git add docs/
