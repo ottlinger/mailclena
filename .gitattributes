@@ -1,0 +1,6 @@
+# All text files with LF line endings
+* text=auto eol=lf
+# Maven Wrapper cmd script
+/mvnw.cmd eol=crlf
+# Maven Wrapper need LF line endings
+/.mvn/wrapper/maven-wrapper.properties eol=lf
