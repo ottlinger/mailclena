@@ -78,7 +78,7 @@ public final class MailClient {
     }
 
     /**
-     * Shows a list of messages in the mailbox' root folder. It accesses the folder in read-only mode.
+     * Shows a list of messages in the mailbox root folder. It accesses the folder in read-only mode.
      */
     // TODO show date of mails YYYYMMDD
     @VisibleForTesting
