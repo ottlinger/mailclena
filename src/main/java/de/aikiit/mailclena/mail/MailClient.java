@@ -62,7 +62,7 @@ public final class MailClient {
      *
      * @param mode see @{@link Folder#open(int)} for available options.
      * @return pair of @{@link Store} and @{@link Folder} if available.
-     * @throws MessagingException if folder cannot be opened or store is unaccessible.
+     * @throws MessagingException if folder cannot be opened or store is inaccessible.
      */
     @VisibleForTesting
     Optional<Pair<Store, Folder>> openFolder(int mode) throws MessagingException {
