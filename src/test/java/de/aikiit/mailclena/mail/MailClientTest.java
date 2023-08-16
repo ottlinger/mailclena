@@ -223,12 +223,4 @@ class MailClientTest {
         assertThat(mailClient.openFolder(Folder.READ_ONLY)).isEmpty();
         // TODO test     Optional<Pair<Store, Folder>> openFolder(int mode) throws MessagingException
     }
-
-    @Test
-    void playWithProgressbar() {
-        for (String s : ProgressBar.wrap(Arrays.asList("A", "B", "C"), "Listing things")) {
-            assertNotNull(s);
-        }
-    }
-
 }
