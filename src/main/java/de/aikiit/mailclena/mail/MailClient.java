@@ -23,6 +23,7 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import me.tongfei.progressbar.ProgressBar;
 import org.apache.commons.lang3.tuple.Pair;
 
 import javax.mail.*;
@@ -34,7 +35,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import static de.aikiit.mailclena.mail.MailClient.MailClientCommands.LIST;
 import static de.aikiit.mailclena.mail.MailClient.MailClientCommands.parse;
-import me.tongfei.progressbar.*;
+
 /**
  * Encapsulates technical access to mail inbox based on the given application/mail configuration.
  */
@@ -101,7 +102,7 @@ public final class MailClient {
 
                 log.info("Found {} messages.", size);
 
-                for(Message m : ProgressBar.wrap(messages, "Listing")) {
+                for (Message m : ProgressBar.wrap(messages, "Listing")) {
                     try {
                         log.info("{} bytes / {} / Message: {} / From: {}", m.getSize(), m.getSentDate(), m.getSubject(), Arrays.toString(m.getFrom()));
                     } catch (MessagingException e) {
@@ -141,7 +142,8 @@ public final class MailClient {
                 log.info("No messages found - nothing to be done here.");
             } else {
                 log.info("Starting to delete {} messages.", count);
-                messages.forEach(message -> {
+
+                for (Message message : ProgressBar.wrap(messages, "Deleting")) {
                     try {
                         long messageSize = message.getSize();
                         log.info("Marking for deletion " + messageSize + " bytes with subject: " + message.getSubject());
@@ -150,7 +152,7 @@ public final class MailClient {
                     } catch (MessagingException e) {
                         log.error("Error while traversing messages for deletion", e);
                     }
-                });
+                }
 
                 f.close(true);
                 log.info("Expunge folder to actually remove messages.");

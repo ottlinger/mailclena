@@ -180,7 +180,7 @@ class MailClientTest {
         when(storeAndFolder.getLeft()).thenReturn(store);
         when(storeAndFolder.getRight()).thenReturn(folder);
         when(folder.getMessages()).thenReturn(new Message[]{message});
-        when(message.getFrom()).thenThrow(new MessagingException("verifyDeletingMessagesIsExceptionProof"));
+        when(message.getSubject()).thenThrow(new MessagingException("verifyDeletingMessagesIsExceptionProof"));
 
         mailClient.delete();
 
