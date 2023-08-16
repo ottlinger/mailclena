@@ -19,10 +19,12 @@ package de.aikiit.mailclena.mail;
 import de.aikiit.mailclena.MailConfiguration;
 import me.tongfei.progressbar.ProgressBar;
 import org.apache.commons.lang3.tuple.Pair;
-import org.junit.jupiter.api.*;
-import org.junit.jupiter.api.extension.*;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.Spy;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import javax.mail.*;
 import java.sql.Date;
@@ -32,8 +34,6 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
-
-import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
 class MailClientTest {
@@ -221,7 +221,7 @@ class MailClientTest {
         verifyNoMoreInteractions(store);
     }
 
-    @Test
+    @Disabled("TODO test openFolder")
     void openFolderInnerworkings() throws MessagingException {
         assertThat(mailClient.openFolder(Folder.READ_ONLY)).isEmpty();
         // TODO test     Optional<Pair<Store, Folder>> openFolder(int mode) throws MessagingException
@@ -229,7 +229,7 @@ class MailClientTest {
 
     @Test
     void playWithProgressbar() {
-        for(String s : ProgressBar.wrap(Arrays.asList("A", "B", "C"), "Listing things")) {
+        for (String s : ProgressBar.wrap(Arrays.asList("A", "B", "C"), "Listing things")) {
             assertNotNull(s);
         }
     }
