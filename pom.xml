@@ -22,7 +22,7 @@
   <packaging>jar</packaging>
   <version>0.0.1-SNAPSHOT</version>
   <name>mailclena</name>
-  <description>Tool to erase mails from postboxes.</description>
+  <description>Tool to erase and list mails from postboxes.</description>
   <url>https://github.com/ottlinger/mailclena</url>
   <organization>
     <name>Aiki IT</name>
