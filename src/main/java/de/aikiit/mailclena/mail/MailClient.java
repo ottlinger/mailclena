@@ -34,7 +34,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import static de.aikiit.mailclena.mail.MailClient.MailClientCommands.LIST;
 import static de.aikiit.mailclena.mail.MailClient.MailClientCommands.parse;
-
+import me.tongfei.progressbar.*;
 /**
  * Encapsulates technical access to mail inbox based on the given application/mail configuration.
  */
@@ -101,13 +101,13 @@ public final class MailClient {
 
                 log.info("Found {} messages.", size);
 
-                messages.forEach(m -> {
+                for(Message m : ProgressBar.wrap(messages, "Listing")) {
                     try {
                         log.info("{} bytes / {} / Message: {} / From: {}", m.getSize(), m.getSentDate(), m.getSubject(), Arrays.toString(m.getFrom()));
                     } catch (MessagingException e) {
                         log.error("Error while traversing messages", e);
                     }
-                });
+                }
             }
 
             storeAndFolder.getLeft().close();
@@ -202,7 +202,7 @@ public final class MailClient {
          */
         LIST,
         /**
-         * Option to purge existig mails.
+         * Option to purge existing mails.
          */
         CLEAN;
 
