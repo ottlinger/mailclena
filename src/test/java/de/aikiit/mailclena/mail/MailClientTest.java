@@ -17,6 +17,7 @@
 package de.aikiit.mailclena.mail;
 
 import de.aikiit.mailclena.MailConfiguration;
+import me.tongfei.progressbar.ProgressBar;
 import org.apache.commons.lang3.tuple.Pair;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.*;
@@ -29,6 +30,7 @@ import java.util.Arrays;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
 
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -223,6 +225,13 @@ class MailClientTest {
     void openFolderInnerworkings() throws MessagingException {
         assertThat(mailClient.openFolder(Folder.READ_ONLY)).isEmpty();
         // TODO test     Optional<Pair<Store, Folder>> openFolder(int mode) throws MessagingException
+    }
+
+    @Test
+    void playWithProgressbar() {
+        for(String s : ProgressBar.wrap(Arrays.asList("A", "B", "C"), "Listing things")) {
+            assertNotNull(s);
+        }
     }
 
 }
