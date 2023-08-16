@@ -19,6 +19,8 @@ package de.aikiit.mailclena.mail;
 import de.aikiit.mailclena.MailConfiguration;
 import me.tongfei.progressbar.ProgressBar;
 import org.apache.commons.lang3.tuple.Pair;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,7 +29,6 @@ import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import javax.mail.*;
-import java.sql.Date;
 import java.util.Arrays;
 import java.util.Optional;
 
@@ -51,12 +52,7 @@ class MailClientTest {
     @Mock
     private Message message;
 
-    // @BeforeEach
-    void prepareMocks() throws MessagingException {
-        when(message.getSentDate()).thenReturn(new Date(1234));
-    }
-
-    @Test
+    @BeforeEach
     void initWithConfig() {
         assertThat(CONFIGURATION).isNotNull();
         new MailClient(CONFIGURATION);
@@ -190,7 +186,8 @@ class MailClientTest {
 
         verify(folder).getMessages();
         verify(store).close();
-        verify(message).getFrom();
+        verify(message).getSize();
+        verify(message).getSubject();
     }
 
     @Test
