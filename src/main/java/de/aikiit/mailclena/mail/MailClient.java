@@ -16,7 +16,6 @@
  */
 package de.aikiit.mailclena.mail;
 
-import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Strings;
 import de.aikiit.mailclena.MailConfiguration;
 import lombok.AccessLevel;
@@ -25,6 +24,7 @@ import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import me.tongfei.progressbar.ProgressBar;
 import org.apache.commons.lang3.tuple.Pair;
+import org.assertj.core.util.VisibleForTesting;
 
 import javax.mail.*;
 import java.util.Arrays;
@@ -47,6 +47,7 @@ public final class MailClient {
     private static final String INBOX = "INBOX";
     private static final String POP3S = "pop3s";
 
+    @VisibleForTesting
     private MailConfiguration mailConfiguration;
 
     private Properties getProperties() {
@@ -80,16 +81,18 @@ public final class MailClient {
 
     /**
      * Shows a list of messages in the mailbox root folder. It accesses the folder in read-only mode.
+     *
+     * @return messages in given folder, -1 in case of errors.
      */
     // TODO show date of mails YYYYMMDD
     @VisibleForTesting
-    void list() {
+    long list() {
         try {
             Optional<Pair<Store, Folder>> folder = openFolder(Folder.READ_ONLY);
 
             if (!folder.isPresent()) {
                 log.error("Unable to open folder in read-only mode to list mails, will abort.");
-                return;
+                return -1;
             }
 
             Pair<Store, Folder> storeAndFolder = folder.get();
@@ -112,9 +115,11 @@ public final class MailClient {
             }
 
             storeAndFolder.getLeft().close();
+            return size;
         } catch (MessagingException e) {
             log.error(e);
         }
+        return -1;
     }
 
     /**
@@ -181,8 +186,10 @@ public final class MailClient {
 
         switch (cmd.get()) {
             case CLEAN:
-                list();
-                delete();
+                long messages = list();
+                if (messages >= 0) {
+                    delete();
+                }
                 break;
             case LIST:
                 list();

@@ -17,14 +17,13 @@
 package de.aikiit.mailclena.mail;
 
 import de.aikiit.mailclena.MailConfiguration;
-import me.tongfei.progressbar.ProgressBar;
 import org.apache.commons.lang3.tuple.Pair;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -33,7 +32,6 @@ import java.util.Arrays;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -41,7 +39,7 @@ class MailClientTest {
 
     private static final MailConfiguration CONFIGURATION = MailConfiguration.builder().host("h").username("u").password("p").command("c").build();
     @Spy
-    private MailClient mailClient;
+    private MailClient mailClient = Mockito.spy(new MailClient(CONFIGURATION));
 
     @Mock
     private Pair<Store, Folder> storeAndFolder;
@@ -133,7 +131,6 @@ class MailClientTest {
 
     @Test
     void parseUnknownCommandAndChooseFallback() {
-        doNothing().when(mailClient).list();
         mailClient.execute("notAValidOperation");
 
         verify(mailClient).list();
@@ -141,7 +138,6 @@ class MailClientTest {
 
     @Test
     void parseList() {
-        doNothing().when(mailClient).list();
         mailClient.execute("lIsT");
 
         verify(mailClient).list();
@@ -149,12 +145,13 @@ class MailClientTest {
 
     @Test
     void parseDelete() {
-        doNothing().when(mailClient).list();
         doReturn(Optional.empty()).when(mailClient).delete();
+        when(mailClient.list()).thenReturn(1234L);
         mailClient.execute("   ClEAn ");
 
-        verify(mailClient).list();
         verify(mailClient).delete();
+        // since we returned something from the list()-call above
+        verify(mailClient, times(2)).list();
     }
 
     @Test
