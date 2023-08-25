@@ -181,8 +181,8 @@ public final class MailClient {
 
         switch (cmd.get()) {
             case CLEAN:
-                delete();
                 list();
+                delete();
                 break;
             case LIST:
                 list();
