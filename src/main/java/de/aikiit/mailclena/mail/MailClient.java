@@ -144,7 +144,7 @@ public final class MailClient {
             final int count = messages.size();
             final AtomicLong mailSize = new AtomicLong(0L);
             if (count == 0) {
-                log.info("No messages found - nothing to be done here.");
+                log.info("Folder is empty already - nothing to be done here.");
             } else {
                 log.info("Starting to delete {} messages.", count);
 
@@ -187,7 +187,7 @@ public final class MailClient {
         switch (cmd.get()) {
             case CLEAN:
                 long messages = list();
-                if (messages >= 0) {
+                if (messages > 0) {
                     delete();
                 }
                 break;
