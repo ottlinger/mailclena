@@ -152,7 +152,7 @@
 <a class="jxr_linenumber" name="L144" href="#L144">144</a>             <strong class="jxr_keyword">final</strong> <strong class="jxr_keyword">int</strong> count = messages.size();
 <a class="jxr_linenumber" name="L145" href="#L145">145</a>             <strong class="jxr_keyword">final</strong> AtomicLong mailSize = <strong class="jxr_keyword">new</strong> AtomicLong(0L);
 <a class="jxr_linenumber" name="L146" href="#L146">146</a>             <strong class="jxr_keyword">if</strong> (count == 0) {
-<a class="jxr_linenumber" name="L147" href="#L147">147</a>                 log.info(<span class="jxr_string">"No messages found - nothing to be done here."</span>);
+<a class="jxr_linenumber" name="L147" href="#L147">147</a>                 log.info(<span class="jxr_string">"Folder is empty already - nothing to be done here."</span>);
 <a class="jxr_linenumber" name="L148" href="#L148">148</a>             } <strong class="jxr_keyword">else</strong> {
 <a class="jxr_linenumber" name="L149" href="#L149">149</a>                 log.info(<span class="jxr_string">"Starting to delete {} messages."</span>, count);
 <a class="jxr_linenumber" name="L150" href="#L150">150</a> 
@@ -195,7 +195,7 @@
 <a class="jxr_linenumber" name="L187" href="#L187">187</a>         <strong class="jxr_keyword">switch</strong> (cmd.get()) {
 <a class="jxr_linenumber" name="L188" href="#L188">188</a>             <strong class="jxr_keyword">case</strong> CLEAN:
 <a class="jxr_linenumber" name="L189" href="#L189">189</a>                 <strong class="jxr_keyword">long</strong> messages = list();
-<a class="jxr_linenumber" name="L190" href="#L190">190</a>                 <strong class="jxr_keyword">if</strong> (messages &gt;= 0) {
+<a class="jxr_linenumber" name="L190" href="#L190">190</a>                 <strong class="jxr_keyword">if</strong> (messages &gt; 0) {
 <a class="jxr_linenumber" name="L191" href="#L191">191</a>                     delete();
 <a class="jxr_linenumber" name="L192" href="#L192">192</a>                 }
 <a class="jxr_linenumber" name="L193" href="#L193">193</a>                 <strong class="jxr_keyword">break</strong>;

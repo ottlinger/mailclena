@@ -144,7 +144,7 @@ public final class MailClient {
 <span class="fc" id="L144">            final int count = messages.size();</span>
 <span class="fc" id="L145">            final AtomicLong mailSize = new AtomicLong(0L);</span>
 <span class="fc bfc" id="L146" title="All 2 branches covered.">            if (count == 0) {</span>
-<span class="fc" id="L147">                log.info(&quot;No messages found - nothing to be done here.&quot;);</span>
+<span class="fc" id="L147">                log.info(&quot;Folder is empty already - nothing to be done here.&quot;);</span>
             } else {
 <span class="fc" id="L149">                log.info(&quot;Starting to delete {} messages.&quot;, count);</span>
 
@@ -187,7 +187,7 @@ public final class MailClient {
 <span class="pc bpc" id="L187" title="1 of 3 branches missed.">        switch (cmd.get()) {</span>
             case CLEAN:
 <span class="fc" id="L189">                long messages = list();</span>
-<span class="pc bpc" id="L190" title="1 of 2 branches missed.">                if (messages &gt;= 0) {</span>
+<span class="pc bpc" id="L190" title="1 of 2 branches missed.">                if (messages &gt; 0) {</span>
 <span class="fc" id="L191">                    delete();</span>
                 }
                 break;
