@@ -49,7 +49,7 @@
     <assertj.version>3.24.2</assertj.version>
     <mockito.version>5.5.0</mockito.version>
     <lombok.version>1.18.28</lombok.version>
-    <javadoc.version>3.5.0</javadoc.version>
+    <javadoc.version>3.6.0</javadoc.version>
     <surefire.version>3.1.2</surefire.version>
     <rat.version>0.15</rat.version>
     <guava.version>32.1.2-jre</guava.version>
