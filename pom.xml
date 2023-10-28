@@ -60,7 +60,7 @@
   </properties>
   <build>
     <defaultGoal>clean versions:display-dependency-updates versions:display-plugin-updates
-            versions:plugin-updates-report enforcer:display-info cyclonedx:makeBom cyclonedx:makeAggregateBom install
+            versions:plugin-updates-report cyclonedx:makeBom cyclonedx:makeAggregateBom install
             org.pitest:pitest-maven:mutationCoverage
         </defaultGoal>
     <plugins>
