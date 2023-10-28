@@ -344,6 +344,7 @@
               <exclude>**/out*/**</exclude>
               <exclude>**/site*/**</exclude>
               <exclude>**/log*.xml</exclude>
+              <exclude>**/.mvn/**</exclude>
               <exclude>**/*.log</exclude>
               <exclude>**/.checkstyle/**/*</exclude>
               <exclude>**/.gitignore</exclude>
