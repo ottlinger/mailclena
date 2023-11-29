@@ -274,7 +274,7 @@
             <threads>8</threads>
             <coverageThreshold>95</coverageThreshold>
             <failWhenNoMutations>false</failWhenNoMutations>
-            <verbose>true</verbose>
+            <verbose>false</verbose>
             <targetClasses>
               <param>de.aikiit.mailclena*</param>
             </targetClasses>
@@ -464,6 +464,17 @@
   </dependencies>
   <reporting>
     <plugins>
+      <plugin>
+        <groupId>org.pitest</groupId>
+        <artifactId>pitest-maven</artifactId>
+        <reportSets>
+          <reportSet>
+            <reports>
+              <report>report</report>
+            </reports>
+          </reportSet>
+        </reportSets>
+      </plugin>
       <!-- Licence compliance for GPL -->
       <plugin>
         <groupId>org.apache.rat</groupId>
