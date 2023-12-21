@@ -40,7 +40,7 @@
   </issueManagement>
   <scm>
     <connection>scm:git:git://github.com/ottlinger/mailclena.git</connection>
-    <developerConnection>scm:git:giti@github.com:ottlinger/mailclena.git</developerConnection>
+    <developerConnection>scm:git:git@github.com:ottlinger/mailclena.git</developerConnection>
     <url>https://github.com/ottlinger/mailclena</url>
   </scm>
   <properties>
