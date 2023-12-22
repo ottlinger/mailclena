@@ -18,6 +18,7 @@ package de.aikiit.mailclena.mail;
 
 import com.google.common.base.Strings;
 import de.aikiit.mailclena.MailConfiguration;
+import jakarta.mail.*;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -26,7 +27,6 @@ import me.tongfei.progressbar.ProgressBar;
 import org.apache.commons.lang3.tuple.Pair;
 import org.assertj.core.util.VisibleForTesting;
 
-import javax.mail.*;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -71,7 +71,7 @@ public final class MailClient {
 <span class="fc" id="L71">        Session emailSession = Session.getDefaultInstance(getProperties());</span>
         // emailSession.setDebug(true);
 
-<span class="nc" id="L74">        Store store = emailSession.getStore(POP3S);</span>
+<span class="fc" id="L74">        Store store = emailSession.getStore(POP3S);</span>
 <span class="nc" id="L75">        store.connect(mailConfiguration.getHost(), mailConfiguration.getUsername(), mailConfiguration.getPassword());</span>
 
 <span class="nc" id="L77">        Folder emailFolder = store.getFolder(INBOX);</span>

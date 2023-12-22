@@ -1,1 +1,1 @@
-/home/hirsch/jdk/bin/javadoc @options @packages
+/home/hirsch/jdk-17.0.6/bin/javadoc @options @packages
