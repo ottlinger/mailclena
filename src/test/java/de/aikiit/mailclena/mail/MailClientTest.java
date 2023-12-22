@@ -17,6 +17,7 @@
 package de.aikiit.mailclena.mail;
 
 import de.aikiit.mailclena.MailConfiguration;
+import jakarta.mail.*;
 import org.apache.commons.lang3.tuple.Pair;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
@@ -27,7 +28,6 @@ import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import javax.mail.*;
 import java.util.Arrays;
 import java.util.Optional;
 
