@@ -158,7 +158,7 @@
         </plugin>
         <plugin>
           <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.12.0</version>
+          <version>3.12.1</version>
           <configuration>
             <encoding>${encoding.utf8}</encoding>
             <source>1.8</source>
