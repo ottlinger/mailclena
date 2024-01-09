@@ -51,7 +51,7 @@
     <lombok.version>1.18.30</lombok.version>
     <javadoc.version>3.6.3</javadoc.version>
     <surefire.version>3.2.3</surefire.version>
-    <rat.version>0.15</rat.version>
+    <rat.version>0.16</rat.version>
     <guava.version>33.0.0-jre</guava.version>
     <encoding.utf8>UTF-8</encoding.utf8>
     <shade.version>3.5.1</shade.version>
@@ -337,25 +337,17 @@
               <exclude>.editorconfig</exclude>
               <exclude>.travis.yml</exclude>
               <exclude>.github/**</exclude>
-              <exclude>LICENSE.txt</exclude>
               <exclude>*.md</exclude>
               <exclude>src/main/resources</exclude>
               <exclude>src/test/resources</exclude>
               <exclude>**/out*/**</exclude>
               <exclude>**/site*/**</exclude>
               <exclude>**/log*.xml</exclude>
-              <exclude>**/.mvn/**</exclude>
               <exclude>**/*.log</exclude>
               <exclude>**/.checkstyle/**/*</exclude>
               <exclude>**/.gitignore</exclude>
               <exclude>**/dependency-reduced-pom.xml</exclude>
             </excludes>
-            <!-- approve GPL3 license -->
-            <licenseFamilies>
-              <licenseFamily implementation="org.apache.rat.license.GPL3LicenseFamily">
-                <familyName>GNU General Public License, version 3</familyName>
-              </licenseFamily>
-            </licenseFamilies>
           </configuration>
         </plugin>
         <plugin>
@@ -635,7 +627,7 @@
   <pluginRepositories>
     <pluginRepository>
       <id>staged-releases-rat-at-asf</id>
-      <url>https://repository.apache.org/content/repositories/orgapachecreadur-1008/</url>
+      <url>https://repository.apache.org/content/repositories/orgapachecreadur-1010/</url>
     </pluginRepository>
   </pluginRepositories -->
 </project>
