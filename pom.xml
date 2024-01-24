@@ -46,8 +46,8 @@
   <properties>
     <junit.jupiter.version>5.10.1</junit.jupiter.version>
     <logger.version>2.22.1</logger.version>
-    <assertj.version>3.25.1</assertj.version>
-    <mockito.version>5.9.0</mockito.version>
+    <assertj.version>3.25.2</assertj.version>
+    <mockito.version>5.10.0</mockito.version>
     <lombok.version>1.18.30</lombok.version>
     <javadoc.version>3.6.3</javadoc.version>
     <surefire.version>3.2.5</surefire.version>
@@ -261,7 +261,7 @@
         <plugin>
           <groupId>org.pitest</groupId>
           <artifactId>pitest-maven</artifactId>
-          <version>1.15.4</version>
+          <version>1.15.6</version>
           <dependencies>
             <dependency>
               <groupId>org.pitest</groupId>
