@@ -51,7 +51,7 @@
     <lombok.version>1.18.30</lombok.version>
     <javadoc.version>3.6.3</javadoc.version>
     <surefire.version>3.2.5</surefire.version>
-    <rat.version>0.16.1-SNAPSHOT</rat.version>
+    <rat.version>0.16.1</rat.version>
     <guava.version>33.0.0-jre</guava.version>
     <encoding.utf8>UTF-8</encoding.utf8>
     <shade.version>3.5.1</shade.version>
@@ -617,18 +617,18 @@
       </plugin>
     </plugins>
   </reporting>
-  <!-- To be able to use the latest version/release candidate
+  <!-- To be able to use the latest version/release candidate 
     <repositories>
       <repository>
         <id>staged-releases</id>
         <url>https://repository.apache.org/content/repositories/orgapachetamaya-1026/</url>
       </repository>
     </repositories -->
-  <!-- To be able to use the latest version/release candidate
+  <!-- To be able to use the latest version/release candidate -->
   <pluginRepositories>
     <pluginRepository>
       <id>staged-releases-rat-at-asf</id>
-      <url>https://repository.apache.org/content/repositories/orgapachecreadur-1010/</url>
+      <url>https://repository.apache.org/content/repositories/orgapachecreadur-1011/</url>
     </pluginRepository>
-  </pluginRepositories -->
+  </pluginRepositories>
 </project>
