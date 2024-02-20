@@ -18,6 +18,12 @@ https://github.com/users/ottlinger/projects/7
 
 [![Github Action master branch status](https://github.com/ottlinger/mailclena/actions/workflows/maven.yml/badge.svg?branch=master)](https://github.com/ottlinger/mailclena/actions)
 
+Automatic generation of webpage:
+
+[![pages-build-deployment](https://github.com/ottlinger/mailclena/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/ottlinger/mailclena/actions/workflows/pages/pages-build-deployment)
+
+[![CI-Site](https://github.com/ottlinger/mailclena/actions/workflows/site.yml/badge.svg)](https://github.com/ottlinger/mailclena/actions/workflows/site.yml)
+
 ### Code coverage
 
 [![codecov](https://codecov.io/gh/ottlinger/mailclena/branch/master/graph/badge.svg)](https://codecov.io/gh/ottlinger/mailclena)
