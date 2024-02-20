@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MailClenaParameterParser.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">mailclena</a> &gt; <a href="index.source.html" class="el_package">de.aikiit.mailclena</a> &gt; <span class="el_source">MailClenaParameterParser.java</span></div><h1>MailClenaParameterParser.java</h1><pre class="source lang-java linenums">/*
+ MailClena - Copyright (C) 2018, Aiki IT
+
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+
+ */
+package de.aikiit.mailclena;
+
+import com.google.common.annotations.VisibleForTesting;
+import com.google.common.base.Strings;
+import lombok.NoArgsConstructor;
+import lombok.extern.log4j.Log4j2;
+import org.apache.commons.cli.*;
+
+import java.util.Optional;
+
+/**
+ * Extract application configuration from given main()-arguments.
+ */
+<span class="fc" id="L31">@Log4j2</span>
+<span class="fc" id="L32">@NoArgsConstructor</span>
+public final class MailClenaParameterParser {
+
+    /**
+     * Extracts any given configuration parameters into a @{@link MailConfiguration}.
+     *
+     * @param args command-line arguments.
+     * @return complete mail configuration.
+     * @throws IllegalArgumentException if any parameter cannot be parsed properly.
+     */
+    Optional&lt;MailConfiguration&gt; extractConfiguration(String... args) throws IllegalArgumentException {
+<span class="fc bfc" id="L43" title="All 4 branches covered.">        if (args == null || args.length == 0) {</span>
+<span class="fc" id="L44">            printHelp();</span>
+        } else {
+
+            try {
+<span class="fc" id="L48">                final CommandLineParser parser = new DefaultParser();</span>
+<span class="fc" id="L49">                final CommandLine cmd = parser.parse(getAvailableOptions(), args);</span>
+<span class="fc" id="L50">                final MailConfiguration.MailConfigurationBuilder mailConfigurationBuilder = MailConfiguration.builder();</span>
+
+<span class="fc bfc" id="L52" title="All 2 branches covered.">                if (!Strings.isNullOrEmpty(cmd.getOptionValue(MailClenaCommandLineOptions.HOST.getOpt())) &amp;&amp;</span>
+<span class="fc bfc" id="L53" title="All 2 branches covered.">                    !Strings.isNullOrEmpty(cmd.getOptionValue(MailClenaCommandLineOptions.USERNAME.getOpt())) &amp;&amp;</span>
+<span class="fc bfc" id="L54" title="All 2 branches covered.">                    !Strings.isNullOrEmpty(cmd.getOptionValue(MailClenaCommandLineOptions.PASSWORD.getOpt()))) {</span>
+<span class="fc" id="L55">                    mailConfigurationBuilder.host(cmd.getOptionValue(MailClenaCommandLineOptions.HOST.getOpt()));</span>
+<span class="fc" id="L56">                    mailConfigurationBuilder.username(cmd.getOptionValue(MailClenaCommandLineOptions.USERNAME.getOpt()));</span>
+<span class="fc" id="L57">                    mailConfigurationBuilder.password(cmd.getOptionValue(MailClenaCommandLineOptions.PASSWORD.getOpt()));</span>
+
+<span class="fc bfc" id="L59" title="All 2 branches covered.">                    if (!Strings.isNullOrEmpty(cmd.getOptionValue(MailClenaCommandLineOptions.COMMAND.getOpt()))) {</span>
+<span class="fc" id="L60">                        mailConfigurationBuilder.command(cmd.getOptionValue(MailClenaCommandLineOptions.COMMAND.getOpt()));</span>
+                    } else {
+<span class="fc" id="L62">                        mailConfigurationBuilder.command(&quot;list&quot;);</span>
+                    }
+
+<span class="fc" id="L65">                    final MailConfiguration mailConfiguration = mailConfigurationBuilder.build();</span>
+<span class="fc" id="L66">                    log.debug(&quot;Extracted configuration from given parameters : {}&quot;, mailConfiguration);</span>
+<span class="fc" id="L67">                    return Optional.of(mailConfiguration);</span>
+                }
+
+<span class="fc" id="L70">            } catch (ParseException | NullPointerException e) {</span>
+<span class="fc" id="L71">                log.error(&quot;Unable to parse given command line parameters&quot;, e);</span>
+<span class="fc" id="L72">                printHelp();</span>
+<span class="fc" id="L73">                throw new IllegalArgumentException(&quot;Exception while parsing command line arguments&quot;);</span>
+<span class="fc" id="L74">            }</span>
+        }
+<span class="fc" id="L76">        return Optional.empty();</span>
+    }
+
+    private void printHelp() {
+<span class="fc" id="L80">        final HelpFormatter formatter = new HelpFormatter();</span>
+<span class="fc" id="L81">        formatter.printHelp(&quot;MailClena&quot;, getAvailableOptions());</span>
+<span class="fc" id="L82">    }</span>
+
+    /**
+     * Convert enumeration elements into command-line options.
+     *
+     * @return available parameter options converted as CLI option elements.
+     */
+    @VisibleForTesting
+    Options getAvailableOptions() {
+<span class="fc" id="L91">        Options o = new Options();</span>
+
+<span class="fc bfc" id="L93" title="All 2 branches covered.">        for (MailClenaCommandLineOptions option : MailClenaCommandLineOptions.values()) {</span>
+<span class="fc" id="L94">            o.addOption(new Option(option.getOpt(), option.name().toLowerCase(), true, option.getDescription()));</span>
+        }
+<span class="fc" id="L96">        return o;</span>
+    }
+
+    /**
+     * Available command-line options to set MailClena's configuration parameters.
+     */
+<span class="fc" id="L102">    @VisibleForTesting</span>
+    enum MailClenaCommandLineOptions {
+        /**
+         * Specify host name option.
+         */
+<span class="fc" id="L107">        HOST(&quot;h&quot;, &quot;Hostname - example: https://imap.yourisp.org&quot;),</span>
+        /**
+         * Specify username option.
+         */
+<span class="fc" id="L111">        USERNAME(&quot;u&quot;, &quot;Username - example: myuser@tld.org&quot;),</span>
+        /**
+         * Specify password option.
+         */
+<span class="fc" id="L115">        PASSWORD(&quot;p&quot;, &quot;Password - example: myfancypassword&quot;),</span>
+        /**
+         * Specify command for execution within the application.
+         */
+<span class="fc" id="L119">        COMMAND(&quot;c&quot;, &quot;Command to execute - example: 'list' or 'clean', if no operation is given defaults to 'list'&quot;);</span>
+
+        private final String opt;
+        private final String desc;
+
+<span class="fc" id="L124">        MailClenaCommandLineOptions(final String option, final String description) {</span>
+<span class="fc" id="L125">            this.opt = option;</span>
+<span class="fc" id="L126">            this.desc = description;</span>
+<span class="fc" id="L127">        }</span>
+
+        /**
+         * Returns the shortcut of the current command.
+         *
+         * @return option shortcut of the current command-line option.
+         */
+        String getOpt() {
+<span class="fc" id="L135">            return opt;</span>
+        }
+
+        /**
+         * Returns a longer and verbald description of the current command.
+         *
+         * @return verbal description of the current command-line option.
+         */
+        String getDescription() {
+<span class="fc" id="L144">            return desc;</span>
+        }
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
