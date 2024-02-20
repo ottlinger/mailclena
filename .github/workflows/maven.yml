@@ -40,4 +40,4 @@ jobs:
         run: ./mvnw -e -B -V -ntp clean package
 
       - name: Code coverage with codecov
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v4
