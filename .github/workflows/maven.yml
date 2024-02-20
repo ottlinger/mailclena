@@ -39,5 +39,6 @@ jobs:
       - name: Build with Maven
         run: ./mvnw -e -B -V -ntp clean package
 
+    steps:
       - name: Code coverage with codecov
         uses: codecov/codecov-action@v4
