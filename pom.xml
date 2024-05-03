@@ -335,6 +335,7 @@
               <exclude>**/.mvn/**/*</exclude>
               <exclude>**/docs/**/*</exclude>
               <exclude>**/*.md</exclude>
+              <exclude>.codacy.yml</exclude>
               <exclude>.editorconfig</exclude>
               <exclude>.travis.yml</exclude>
               <exclude>.github/**</exclude>
