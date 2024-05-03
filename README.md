@@ -34,7 +34,7 @@ Automatic generation of webpage:
 
 ### Codacy - code quality and static analysis
 
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/658661b0051e42518a91298797e372bd)](https://www.codacy.com/gh/ottlinger/mailclena/dashboard)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/658661b0051e42518a91298797e372bd)](https://app.codacy.com/gh/ottlinger/mailclena/dashboard)
 
 ## How to run and use the application
 
