@@ -39,7 +39,7 @@ class MailClientTest {
 
     private static final MailConfiguration CONFIGURATION = MailConfiguration.builder().host("h").username("u").password("p").command("c").build();
     @Spy
-    private MailClient mailClient = Mockito.spy(new MailClient(CONFIGURATION));
+    private MailClient mailClient = spy(new MailClient(CONFIGURATION));
 
     @Mock
     private Pair<Store, Folder> storeAndFolder;
