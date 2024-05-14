@@ -34,6 +34,13 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
 
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: adopt
+          java-version: 17
+          cache: 'maven'
+
       # Runs a single command using the runners shell
       - name: Deploy and create maven site
         run: |
