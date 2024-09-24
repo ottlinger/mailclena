@@ -542,7 +542,7 @@
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>jdepend-maven-plugin</artifactId>
-        <version>2.0</version>
+        <version>2.1</version>
       </plugin>
       <!-- 202006: disabled as tools.jar is missing in newer JDKs -->
       <!-- cobertura plugin
