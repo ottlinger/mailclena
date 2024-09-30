@@ -47,7 +47,7 @@
     <junit.jupiter.version>5.11.1</junit.jupiter.version>
     <logger.version>2.24.0</logger.version>
     <assertj.version>3.26.3</assertj.version>
-    <mockito.version>5.14.0</mockito.version>
+    <mockito.version>5.14.1</mockito.version>
     <lombok.version>1.18.34</lombok.version>
     <javadoc.version>3.10.0</javadoc.version>
     <surefire.version>3.5.0</surefire.version>
