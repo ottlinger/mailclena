@@ -33,7 +33,7 @@ import java.util.Optional;
 public final class MailClenaParameterParser {
 
     /**
-     * Extracts any given configuration parameters into a @{@link MailConfiguration}.
+     * Extracts any given configuration parameters into a {@link MailConfiguration}.
      *
      * @param args command-line arguments.
      * @return complete mail configuration.
