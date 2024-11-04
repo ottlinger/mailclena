@@ -11,8 +11,6 @@ Tool that logs into mail accounts and removes all mails.
 
 [![GPL v3.0](https://img.shields.io/github/license/ottlinger/mailclena.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 
-https://github.com/users/ottlinger/projects/7
-
 ## GitHub integrations
 ### Github Action / CI
 
