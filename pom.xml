@@ -57,6 +57,8 @@
     <shade.version>3.6.0</shade.version>
     <project.reporting.outputEncoding>${encoding.utf8}</project.reporting.outputEncoding>
     <project.build.sourceEncoding>${encoding.utf8}</project.build.sourceEncoding>
+    <!-- enable Lombok with JDK23 -->
+    <maven.compiler.proc>full</maven.compiler.proc>
   </properties>
   <build>
     <defaultGoal>clean versions:display-dependency-updates versions:display-plugin-updates
