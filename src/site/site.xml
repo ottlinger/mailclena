@@ -30,9 +30,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
       </gitHub>
     </fluidoSkin>
   </custom>
+
   <body>
-    <menu ref="parent"/>
-    <menu ref="modules"/>
-    <menu ref="reports"/>
-  </body>
+  <menu ref="parent"/>
+  <menu ref="modules"/>
+  <menu ref="reports"/>
+</body>
+
 </site>
