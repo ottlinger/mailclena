@@ -59,6 +59,9 @@
     <project.build.sourceEncoding>${encoding.utf8}</project.build.sourceEncoding>
     <!-- enable Lombok with JDK23 -->
     <maven.compiler.proc>full</maven.compiler.proc>
+    <!-- MSITE-1018: nil out timestamp in order to get current build timestamp -->
+    <project.build.outputTimestamp>a</project.build.outputTimestamp>
+
   </properties>
   <build>
     <defaultGoal>clean versions:display-dependency-updates versions:display-plugin-updates
