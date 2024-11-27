@@ -575,7 +575,6 @@
         <artifactId>taglist-maven-plugin</artifactId>
         <version>3.2.1</version>
         <configuration>
-          <encoding>${encoding.utf8}</encoding>
           <tagListOptions>
             <tagClasses>
               <tagClass>
