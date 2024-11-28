@@ -1,3 +1,4 @@
+<!-- markdownlint-disable-file MD013 -->
 # mailclena
 
 Tool that logs into mail accounts and removes all mails.
