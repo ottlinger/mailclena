@@ -1,4 +1,5 @@
 # mailclena
+
 Tool that logs into mail accounts and removes all mails.
 
 ## Integrations
@@ -12,6 +13,7 @@ Tool that logs into mail accounts and removes all mails.
 [![GPL v3.0](https://img.shields.io/github/license/ottlinger/mailclena.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
 
 ## GitHub integrations
+
 ### Github Action / CI
 
 [![Github Action master branch status](https://github.com/ottlinger/mailclena/actions/workflows/maven.yml/badge.svg?branch=master)](https://github.com/ottlinger/mailclena/actions)
@@ -62,9 +64,9 @@ $ mvn wrapper:wrapper
 ### Example call
 
 #### Operation: clean
+
 ```
 $ java -jar target/mailclena-0.0.1-SNAPSHOT-executable.jar -h=host.tld.org -u=yourmail@yourtld.org -p=yourpassword -c=clean
-
 00:04:20.144 [main] INFO  de.aikiit.mailclena.MailClena - MailClena is launching with the given configuration ....
 00:04:20.972 [main] INFO  de.aikiit.mailclena.mail.MailClient - Found 0 messages.
 00:04:21.422 [main] INFO  de.aikiit.mailclena.mail.MailClient - Starting to delete 0 messages.
