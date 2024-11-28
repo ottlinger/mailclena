@@ -4,8 +4,7 @@ Tool that logs into mail accounts and removes all mails.
 
 ## Integrations
 
-[![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/ottlinger/mailclena.svg)]
-(http://isitmaintained.com/project/ottlinger/mailclena "Average time to resolve an issue")
+[![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/ottlinger/mailclena.svg)](http://isitmaintained.com/project/ottlinger/mailclena "Average time to resolve an issue")
 
 [![Percentage of issues still open](http://isitmaintained.com/badge/open/ottlinger/mailclena.svg)](http://isitmaintained.com/project/ottlinger/mailclena "Percentage of issues still open")
 
