@@ -42,13 +42,14 @@ You need to check out the application and build it with the help of [Java](https
 
 ```
 $ ./mvnw
+Project is being built.
 $ java -jar target/mailclena-0.0.1-SNAPSHOT-executable.jar
 22:58:33.294 [main] INFO  de.aikiit.mailclena.MailClena - Hello World :-)
 ```
 
 Init the Maven wrapper via:
 ```
-$ mvn wrapper:wrapper
+mvn wrapper:wrapper
 ```
 
 ### Command line parameters
