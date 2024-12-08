@@ -337,6 +337,11 @@
             </execution>
           </executions>
           <configuration>
+<config>
+            <approvedLicenses>
+              <id>GPL3</id>
+            </approvedLicenses>
+          </config>
             <consoleOutput>true</consoleOutput>
             <ignoreErrors>false</ignoreErrors>
             <useDefaultExcludes>true</useDefaultExcludes>
