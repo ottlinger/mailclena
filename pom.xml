@@ -338,9 +338,9 @@
           </executions>
           <configuration>
             <config>
-              <licenseApproveds>
-                <licenseApproval>GPL3</licenseApproval>
-              </licenseApproveds>
+              <licensesApproveds>
+                <licenseApproved>GPL3</licenseApproved>
+              </licensesApproveds>
             </config>
             <consoleOutput>true</consoleOutput>
             <ignoreErrors>false</ignoreErrors>
