@@ -337,19 +337,17 @@
             </execution>
           </executions>
           <configuration>
-            <config>
-              <licenseApproveds>
-                <licenseApproval>GPL3</licenseApproval>
-              </licenseApproveds>
-            </config>
+             <licensesApproved>GPL3</licensesApproved>
             <consoleOutput>true</consoleOutput>
             <ignoreErrors>false</ignoreErrors>
-            <useDefaultExcludes>true</useDefaultExcludes>
-            <useEclipseDefaultExcludes>true</useEclipseDefaultExcludes>
-            <useMavenDefaultExcludes>true</useMavenDefaultExcludes>
-            <useIdeaDefaultExcludes>true</useIdeaDefaultExcludes>
-            <addDefaultLicenseMatchers>true</addDefaultLicenseMatchers>
-            <excludes>
+            <inputExcludeStds>
+              <exclude>STANDARD_PATTERNS</exclude>
+              <exclude>STANDARD_SCMS</exclude>
+              <exclude>MAVEN</exclude>
+              <exclude>IDEA</exclude>
+	    </inputExcludeStds>
+	    <inputExcludeParsedScm>GIT</inputExcludeParsedScm>
+            <inputExcludes>
               <exclude>**/.mvn/**/*</exclude>
               <exclude>**/docs/**/*</exclude>
               <exclude>**/*.md</exclude>
@@ -367,7 +365,7 @@
               <exclude>**/.checkstyle/**/*</exclude>
               <exclude>**/.gitignore</exclude>
               <exclude>**/dependency-reduced-pom.xml</exclude>
-            </excludes>
+            </inputExcludes>
           </configuration>
         </plugin>
         <plugin>
