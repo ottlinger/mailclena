@@ -151,7 +151,7 @@ public final class MailClient {
 <span class="fc bfc" id="L151" title="All 2 branches covered.">                for (Message message : ProgressBar.wrap(messages, &quot;Deleting&quot;)) {</span>
                     try {
 <span class="fc" id="L153">                        long messageSize = message.getSize();</span>
-<span class="fc" id="L154">                        log.info(&quot;Marking for deletion &quot; + messageSize + &quot; bytes with subject: &quot; + message.getSubject());</span>
+<span class="fc" id="L154">                        log.info(&quot;Marking for deletion {} bytes with subject: {}&quot;, messageSize, message.getSubject());</span>
 <span class="fc" id="L155">                        message.setFlag(Flags.Flag.DELETED, true);</span>
 <span class="fc" id="L156">                        mailSize.addAndGet(messageSize);</span>
 <span class="fc" id="L157">                    } catch (MessagingException e) {</span>
