@@ -45,8 +45,8 @@ jobs:
     - name: Set up JDK
       uses: actions/setup-java@v4
       with:
-        distribution: temurin
-        java-version: 21 
+        distribution: "temurin"
+        java-version: "17"
         cache: 'maven'
 
     # Initializes the CodeQL tools for scanning.
