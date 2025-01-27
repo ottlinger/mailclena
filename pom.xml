@@ -337,7 +337,7 @@
             </execution>
           </executions>
           <configuration>
-             <licensesApproved>GPL3</licensesApproved>
+            <licensesApproved>GPL3</licensesApproved>
             <consoleOutput>true</consoleOutput>
             <ignoreErrors>false</ignoreErrors>
             <inputExcludeStds>
