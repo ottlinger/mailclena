@@ -345,8 +345,8 @@
               <exclude>STANDARD_SCMS</exclude>
               <exclude>MAVEN</exclude>
               <exclude>IDEA</exclude>
-	    </inputExcludeStds>
-	    <inputExcludeParsedScm>GIT</inputExcludeParsedScm>
+            </inputExcludeStds>
+            <inputExcludeParsedScm>GIT</inputExcludeParsedScm>
             <inputExcludes>
               <exclude>**/.mvn/**/*</exclude>
               <exclude>**/docs/**/*</exclude>
