@@ -33,15 +33,15 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          distribution: temurin
-          java-version: 21 
+          distribution: "temurin"
+          java-version: "21" 
           cache: 'maven'
 
       # Runs a single command using the runners shell
       - name: Deploy and create maven site
         run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
           ./site.sh
 
       - name: Deploy 🚀

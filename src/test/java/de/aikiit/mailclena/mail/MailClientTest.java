@@ -24,7 +24,6 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -39,7 +38,7 @@ class MailClientTest {
 
     private static final MailConfiguration CONFIGURATION = MailConfiguration.builder().host("h").username("u").password("p").command("c").build();
     @Spy
-    private MailClient mailClient = spy(new MailClient(CONFIGURATION));
+    private final MailClient mailClient = spy(new MailClient(CONFIGURATION));
 
     @Mock
     private Pair<Store, Folder> storeAndFolder;

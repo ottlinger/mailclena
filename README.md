@@ -15,9 +15,9 @@ Tool that logs into mail accounts and removes all mails.
 
 ## GitHub integrations
 
-### Github Action / CI
+### GitHub Action / CI
 
-[![Github Action master branch status](https://github.com/ottlinger/mailclena/actions/workflows/maven.yml/badge.svg?branch=master)](https://github.com/ottlinger/mailclena/actions)
+[![GitHub Action master branch status](https://github.com/ottlinger/mailclena/actions/workflows/maven.yml/badge.svg?branch=master)](https://github.com/ottlinger/mailclena/actions)
 
 Automatic generation of webpage:
 
