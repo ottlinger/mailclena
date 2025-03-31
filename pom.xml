@@ -48,7 +48,7 @@
     <logger.version>2.24.3</logger.version>
     <assertj.version>3.27.3</assertj.version>
     <mockito.version>5.16.1</mockito.version>
-    <lombok.version>1.18.36</lombok.version>
+    <lombok.version>1.18.38</lombok.version>
     <javadoc.version>3.11.2</javadoc.version>
     <surefire.version>3.5.2</surefire.version>
     <rat.version>0.16.1</rat.version>
