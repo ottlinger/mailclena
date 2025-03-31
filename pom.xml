@@ -50,7 +50,7 @@
     <mockito.version>5.16.1</mockito.version>
     <lombok.version>1.18.36</lombok.version>
     <javadoc.version>3.11.2</javadoc.version>
-    <surefire.version>3.5.2</surefire.version>
+    <surefire.version>3.5.3</surefire.version>
     <rat.version>0.16.1</rat.version>
     <guava.version>33.4.6-jre</guava.version>
     <encoding.utf8>UTF-8</encoding.utf8>
