@@ -50,15 +50,9 @@
     <mockito.version>5.16.1</mockito.version>
     <lombok.version>1.18.38</lombok.version>
     <javadoc.version>3.11.2</javadoc.version>
-<<<<<<< HEAD
-    <surefire.version>3.5.2</surefire.version>
-    <rat.version>0.17-SNAPSHOT</rat.version>
-    <guava.version>33.4.5-jre</guava.version>
-=======
     <surefire.version>3.5.3</surefire.version>
-    <rat.version>0.16.1</rat.version>
+    <rat.version>0.17-SNAPSHOT</rat.version>
     <guava.version>33.4.6-jre</guava.version>
->>>>>>> origin/master
     <encoding.utf8>UTF-8</encoding.utf8>
     <shade.version>3.6.0</shade.version>
     <project.reporting.outputEncoding>${encoding.utf8}</project.reporting.outputEncoding>
