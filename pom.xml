@@ -51,7 +51,7 @@
     <lombok.version>1.18.38</lombok.version>
     <javadoc.version>3.11.2</javadoc.version>
     <surefire.version>3.5.3</surefire.version>
-    <rat.version>0.16.1</rat.version>
+    <rat.version>0.17-SNAPSHOT</rat.version>
     <guava.version>33.4.8-jre</guava.version>
     <encoding.utf8>UTF-8</encoding.utf8>
     <shade.version>3.6.0</shade.version>
@@ -337,14 +337,17 @@
             </execution>
           </executions>
           <configuration>
+            <licensesApproved>GPL3</licensesApproved>
             <consoleOutput>true</consoleOutput>
             <ignoreErrors>false</ignoreErrors>
-            <useDefaultExcludes>true</useDefaultExcludes>
-            <useEclipseDefaultExcludes>true</useEclipseDefaultExcludes>
-            <useMavenDefaultExcludes>true</useMavenDefaultExcludes>
-            <useIdeaDefaultExcludes>true</useIdeaDefaultExcludes>
-            <addDefaultLicenseMatchers>true</addDefaultLicenseMatchers>
-            <excludes>
+            <inputExcludeStds>
+              <exclude>STANDARD_PATTERNS</exclude>
+              <exclude>STANDARD_SCMS</exclude>
+              <exclude>MAVEN</exclude>
+              <exclude>IDEA</exclude>
+            </inputExcludeStds>
+            <inputExcludeParsedScm>GIT</inputExcludeParsedScm>
+            <inputExcludes>
               <exclude>**/.mvn/**/*</exclude>
               <exclude>**/docs/**/*</exclude>
               <exclude>**/*.md</exclude>
@@ -362,7 +365,7 @@
               <exclude>**/.checkstyle/**/*</exclude>
               <exclude>**/.gitignore</exclude>
               <exclude>**/dependency-reduced-pom.xml</exclude>
-            </excludes>
+            </inputExcludes>
           </configuration>
         </plugin>
         <plugin>
