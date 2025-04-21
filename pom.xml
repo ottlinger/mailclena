@@ -44,15 +44,20 @@
     <url>https://github.com/ottlinger/mailclena</url>
   </scm>
   <properties>
-    <junit.jupiter.version>5.12.1</junit.jupiter.version>
+    <junit.jupiter.version>5.12.2</junit.jupiter.version>
     <logger.version>2.24.3</logger.version>
     <assertj.version>3.27.3</assertj.version>
     <mockito.version>5.17.0</mockito.version>
     <lombok.version>1.18.38</lombok.version>
     <javadoc.version>3.11.2</javadoc.version>
     <surefire.version>3.5.3</surefire.version>
+<<<<<<< HEAD
     <rat.version>0.17-SNAPSHOT</rat.version>
     <guava.version>33.4.6-jre</guava.version>
+=======
+    <rat.version>0.16.1</rat.version>
+    <guava.version>33.4.8-jre</guava.version>
+>>>>>>> origin/master
     <encoding.utf8>UTF-8</encoding.utf8>
     <shade.version>3.6.0</shade.version>
     <project.reporting.outputEncoding>${encoding.utf8}</project.reporting.outputEncoding>
@@ -138,7 +143,7 @@
               <plugin>
                 <groupId>com.h3xstream.findsecbugs</groupId>
                 <artifactId>findsecbugs-plugin</artifactId>
-                <version>1.13.0</version>
+                <version>1.14.0</version>
               </plugin>
             </plugins>
           </configuration>
