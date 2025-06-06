@@ -40,6 +40,6 @@ jobs:
         run: ./mvnw -e -B -V -ntp clean package
 
       - name: Code coverage with codecov
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
