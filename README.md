@@ -90,4 +90,4 @@ $ java -jar target/mailclena-0.0.1-SNAPSHOT-executable.jar -h=host.tld.org -u=yo
 
 ## Project webpage
 
-A Maven-generated site report is also available [here](https://ottlinger.github.io/mailclena/).
+A Maven-generated site report is also available via [this page](https://ottlinger.github.io/mailclena/).
