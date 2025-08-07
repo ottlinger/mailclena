@@ -45,7 +45,7 @@
   </scm>
   <properties>
     <logger.version>2.25.1</logger.version>
-    <assertj.version>3.27.3</assertj.version>
+    <assertj.version>3.27.4</assertj.version>
     <mockito.version>5.18.0</mockito.version>
     <lombok.version>1.18.38</lombok.version>
     <javadoc.version>3.11.2</javadoc.version>
