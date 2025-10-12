@@ -348,7 +348,6 @@
             </inputExcludeStds>
             <inputExcludeParsedScm>GIT</inputExcludeParsedScm>
             <inputExcludes>
-              <exclude>**/.mvn/**/*</exclude>
               <exclude>**/docs/**/*</exclude>
               <exclude>**/*.md</exclude>
               <exclude>.codacy.yml</exclude>
