@@ -44,17 +44,15 @@
     <url>https://github.com/ottlinger/mailclena</url>
   </scm>
   <properties>
-    <junit.jupiter.version>5.12.2</junit.jupiter.version>
-    <logger.version>2.24.3</logger.version>
-    <assertj.version>3.27.3</assertj.version>
-    <mockito.version>5.17.0</mockito.version>
-    <lombok.version>1.18.38</lombok.version>
-    <javadoc.version>3.11.2</javadoc.version>
-    <surefire.version>3.5.3</surefire.version>
-    <rat.version>0.17-SNAPSHOT</rat.version>
-    <guava.version>33.4.8-jre</guava.version>
+    <assertj.version>3.27.6</assertj.version>
+    <mockito.version>5.20.0</mockito.version>
+    <lombok.version>1.18.42</lombok.version>
+    <javadoc.version>3.12.0</javadoc.version>
+    <surefire.version>3.5.4</surefire.version>
+    <rat.version>0.17</rat.version>
+    <guava.version>33.5.0-jre</guava.version>
     <encoding.utf8>UTF-8</encoding.utf8>
-    <shade.version>3.6.0</shade.version>
+    <shade.version>3.6.1</shade.version>
     <project.reporting.outputEncoding>${encoding.utf8}</project.reporting.outputEncoding>
     <project.build.sourceEncoding>${encoding.utf8}</project.build.sourceEncoding>
     <!-- enable Lombok with JDK23 -->
@@ -130,7 +128,7 @@
         <plugin>
           <groupId>com.github.spotbugs</groupId>
           <artifactId>spotbugs-maven-plugin</artifactId>
-          <version>4.9.3.0</version>
+          <version>4.9.7.0</version>
           <configuration>
             <!--includeFilterFile>spotbugs-security-include.xml</includeFilterFile>
                   <excludeFilterFile>spotbugs-security-exclude.xml</excludeFilterFile-->
@@ -167,7 +165,7 @@
         </plugin>
         <plugin>
           <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.14.0</version>
+          <version>3.14.1</version>
           <configuration>
             <encoding>${encoding.utf8}</encoding>
             <source>1.8</source>
@@ -176,7 +174,7 @@
         </plugin>
         <plugin>
           <artifactId>maven-dependency-plugin</artifactId>
-          <version>3.8.1</version>
+          <version>3.9.0</version>
         </plugin>
         <plugin>
           <artifactId>maven-resources-plugin</artifactId>
@@ -184,7 +182,7 @@
         </plugin>
         <plugin>
           <artifactId>maven-clean-plugin</artifactId>
-          <version>3.4.1</version>
+          <version>3.5.0</version>
         </plugin>
         <plugin>
           <artifactId>maven-site-plugin</artifactId>
@@ -193,7 +191,7 @@
         <plugin>
           <groupId>org.jacoco</groupId>
           <artifactId>jacoco-maven-plugin</artifactId>
-          <version>0.8.13</version>
+          <version>0.8.14</version>
           <executions>
             <execution>
               <goals>
@@ -274,12 +272,12 @@
         <plugin>
           <groupId>org.pitest</groupId>
           <artifactId>pitest-maven</artifactId>
-          <version>1.19.1</version>
+          <version>1.21.0</version>
           <dependencies>
             <dependency>
               <groupId>org.pitest</groupId>
               <artifactId>pitest-junit5-plugin</artifactId>
-              <version>1.2.2</version>
+              <version>1.2.3</version>
             </dependency>
           </dependencies>
           <configuration>
@@ -307,7 +305,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-enforcer-plugin</artifactId>
-          <version>3.5.0</version>
+          <version>3.6.2</version>
           <executions>
             <execution>
               <id>enforce-maven</id>
@@ -374,16 +372,34 @@
       </plugins>
     </pluginManagement>
   </build>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-bom</artifactId>
+        <version>2.25.2</version>
+        <scope>import</scope>
+        <type>pom</type>
+      </dependency>
+      <dependency>
+        <groupId>org.junit</groupId>
+        <artifactId>junit-bom</artifactId>
+        <version>6.0.0</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
   <dependencies>
     <dependency>
       <groupId>jakarta.mail</groupId>
       <artifactId>jakarta.mail-api</artifactId>
-      <version>2.1.3</version>
+      <version>2.1.5</version>
     </dependency>
     <dependency>
       <groupId>org.eclipse.angus</groupId>
       <artifactId>jakarta.mail</artifactId>
-      <version>2.0.3</version>
+      <version>2.0.5</version>
     </dependency>
     <dependency>
       <groupId>me.tongfei</groupId>
@@ -393,13 +409,13 @@
     <dependency>
       <groupId>com.icegreen</groupId>
       <artifactId>greenmail</artifactId>
-      <version>2.1.3</version>
+      <version>2.1.7</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>commons-cli</groupId>
       <artifactId>commons-cli</artifactId>
-      <version>1.9.0</version>
+      <version>1.10.0</version>
     </dependency>
     <dependency>
       <groupId>org.projectlombok</groupId>
@@ -414,7 +430,7 @@
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-csv</artifactId>
-      <version>1.14.0</version>
+      <version>1.14.1</version>
     </dependency>
     <dependency>
       <groupId>org.assertj</groupId>
@@ -441,29 +457,24 @@
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
-      <version>${junit.jupiter.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-engine</artifactId>
-      <version>${junit.jupiter.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.apache.logging.log4j</groupId>
       <artifactId>log4j-core</artifactId>
-      <version>${logger.version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.logging.log4j</groupId>
       <artifactId>log4j-1.2-api</artifactId>
-      <version>${logger.version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.logging.log4j</groupId>
       <artifactId>log4j-api</artifactId>
-      <version>${logger.version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.velocity</groupId>
@@ -492,7 +503,7 @@
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>versions-maven-plugin</artifactId>
-        <version>2.18.0</version>
+        <version>2.19.1</version>
         <reportSets>
           <reportSet>
             <reports>
@@ -537,11 +548,11 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-report-plugin</artifactId>
-        <version>3.5.3</version>
+        <version>3.5.4</version>
       </plugin>
       <plugin>
         <artifactId>maven-pmd-plugin</artifactId>
-        <version>3.26.0</version>
+        <version>3.28.0</version>
         <configuration>
           <linkXRef>true</linkXRef>
           <minimumTokens>100</minimumTokens>

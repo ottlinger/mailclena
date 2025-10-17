@@ -19,7 +19,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Configure artifact caching
         uses: actions/cache@v4
@@ -30,7 +30,7 @@ jobs:
             ${{ runner.os }}-maven-
 
       - name: Set up JDK
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: ${{ matrix.java }}
@@ -40,6 +40,6 @@ jobs:
         run: ./mvnw -e -B -V -ntp clean package
 
       - name: Code coverage with codecov
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
