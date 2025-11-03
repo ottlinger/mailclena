@@ -339,10 +339,7 @@
             <consoleOutput>true</consoleOutput>
             <ignoreErrors>false</ignoreErrors>
             <inputExcludeStds>
-              <exclude>STANDARD_PATTERNS</exclude>
-              <exclude>STANDARD_SCMS</exclude>
-              <exclude>MAVEN</exclude>
-              <exclude>IDEA</exclude>
+              <exclude>ALL</exclude>
             </inputExcludeStds>
             <inputExcludeParsedScm>GIT</inputExcludeParsedScm>
             <inputExcludes>
