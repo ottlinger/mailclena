@@ -38,7 +38,7 @@ jobs:
           cache: 'maven'
 
       # Runs a single command using the runners shell
-      - name: Deploy and create maven site
+      - name: Deploy and create Maven site
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
