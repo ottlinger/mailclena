@@ -189,23 +189,34 @@
           <version>3.21.0</version>
         </plugin>
         <plugin>
-          <groupId>org.jacoco</groupId>
-          <artifactId>jacoco-maven-plugin</artifactId>
-          <version>0.8.14</version>
-          <executions>
-            <execution>
-              <goals>
-                <goal>prepare-agent</goal>
-              </goals>
-            </execution>
-            <execution>
-              <id>report</id>
-              <phase>test</phase>
-              <goals>
-                <goal>report</goal>
-              </goals>
-            </execution>
-          </executions>
+                                <groupId>org.jacoco</groupId>
+                                <artifactId>jacoco-maven-plugin</artifactId>
+                                <version>0.8.14</version>
+                                <executions>
+                                        <!-- Prepare agent for tests -->
+                                        <execution>
+                                                <goals>
+                                                        <goal>prepare-agent</goal>
+                                                </goals>
+                                        </execution>
+                                        <execution>
+                                                <id>report</id>
+                                                <phase>test</phase>
+                                                <goals>
+                                                        <goal>report</goal>
+                                                </goals>
+                                        </execution>
+                                        <execution>
+                                                <id>report-xml</id>
+                                                <phase>verify</phase>
+                                                <goals>
+                                                        <goal>report</goal>
+                                                </goals>
+                                                <configuration>
+                                                        <outputDirectory>${project.build.directory}/jacoco</outputDirectory>
+                                                </configuration>
+                                        </execution>
+                                </executions>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
