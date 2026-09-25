@@ -54,8 +54,11 @@ public final class MailClient {
         Properties properties = new Properties();
         properties.put("mail.pop3s.host", mailConfiguration.getHost());
         properties.put("mail.pop3.starttls.enable", "true");
+        properties.put("mail.pop3.starttls.required", "true");
         properties.put("mail.pop3s.port", "995");
         properties.put("mail.store.protocol", "pop3");
+        // in case of Goneo certificate errors: enable debug
+        // properties.put("mail.debug", "true");
         return properties;
     }
 
