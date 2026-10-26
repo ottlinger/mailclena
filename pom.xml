@@ -48,7 +48,7 @@
     <mockito.version>5.24.0</mockito.version>
     <lombok.version>1.18.48</lombok.version>
     <javadoc.version>3.12.0</javadoc.version>
-    <surefire.version>3.6.0</surefire.version>
+    <surefire.version>3.6.1</surefire.version>
     <rat.version>0.18</rat.version>
     <guava.version>33.7.2-jre</guava.version>
     <encoding.utf8>UTF-8</encoding.utf8>
