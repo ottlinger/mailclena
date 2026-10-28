@@ -31,7 +31,7 @@
 <a class="jxr_linenumber" name="L23" href="#L23">23</a>  <strong class="jxr_keyword">import</strong> java.util.Optional;
 <a class="jxr_linenumber" name="L24" href="#L24">24</a>  
 <a class="jxr_linenumber" name="L25" href="#L25">25</a>  <strong class="jxr_keyword">import</strong> <strong class="jxr_keyword">static</strong> org.assertj.core.api.Assertions.assertThat;
-<a class="jxr_linenumber" name="L26" href="#L26">26</a>  <strong class="jxr_keyword">import</strong> <strong class="jxr_keyword">static</strong> org.junit.jupiter.api.Assertions.assertThrows;
+<a class="jxr_linenumber" name="L26" href="#L26">26</a>  <strong class="jxr_keyword">import</strong> <strong class="jxr_keyword">static</strong> org.assertj.core.api.Assertions.assertThatThrownBy;
 <a class="jxr_linenumber" name="L27" href="#L27">27</a>  
 <a class="jxr_linenumber" name="L28" href="#L28">28</a>  <strong class="jxr_keyword">class</strong> <a name="MailClenaParameterParserTest" href="../../../de/aikiit/mailclena/MailClenaParameterParserTest.html#MailClenaParameterParserTest">MailClenaParameterParserTest</a> {
 <a class="jxr_linenumber" name="L29" href="#L29">29</a>  
@@ -70,34 +70,35 @@
 <a class="jxr_linenumber" name="L62" href="#L62">62</a>  
 <a class="jxr_linenumber" name="L63" href="#L63">63</a>      @Test
 <a class="jxr_linenumber" name="L64" href="#L64">64</a>      <strong class="jxr_keyword">void</strong> callWithoutParameterValuesButAllKeys() {
-<a class="jxr_linenumber" name="L65" href="#L65">65</a>          assertThrows(IllegalArgumentException.<strong class="jxr_keyword">class</strong>, () -&gt; parser.extractConfiguration(<span class="jxr_string">"-h"</span>, <span class="jxr_string">"-u"</span>, <span class="jxr_string">"-p"</span>));
-<a class="jxr_linenumber" name="L66" href="#L66">66</a>      }
-<a class="jxr_linenumber" name="L67" href="#L67">67</a>  
-<a class="jxr_linenumber" name="L68" href="#L68">68</a>      @Test
-<a class="jxr_linenumber" name="L69" href="#L69">69</a>      <strong class="jxr_keyword">void</strong> callMainExtractParametersSuccessfully() {
-<a class="jxr_linenumber" name="L70" href="#L70">70</a>          <strong class="jxr_keyword">final</strong> Optional&lt;MailConfiguration&gt; mailConfiguration = parser.extractConfiguration(<span class="jxr_string">"-h=boo.foo.bar"</span>, <span class="jxr_string">"-u=foo"</span>, <span class="jxr_string">"-p=bar"</span>);
-<a class="jxr_linenumber" name="L71" href="#L71">71</a>          assertThat(mailConfiguration).isPresent();
-<a class="jxr_linenumber" name="L72" href="#L72">72</a>  
-<a class="jxr_linenumber" name="L73" href="#L73">73</a>          <strong class="jxr_keyword">final</strong> MailConfiguration configuration = mailConfiguration.get();
-<a class="jxr_linenumber" name="L74" href="#L74">74</a>          assertThat(configuration.getPassword()).isEqualTo(<span class="jxr_string">"bar"</span>);
-<a class="jxr_linenumber" name="L75" href="#L75">75</a>          assertThat(configuration.getUsername()).isEqualTo(<span class="jxr_string">"foo"</span>);
-<a class="jxr_linenumber" name="L76" href="#L76">76</a>          assertThat(configuration.getHost()).isEqualTo(<span class="jxr_string">"boo.foo.bar"</span>);
-<a class="jxr_linenumber" name="L77" href="#L77">77</a>      }
-<a class="jxr_linenumber" name="L78" href="#L78">78</a>  
-<a class="jxr_linenumber" name="L79" href="#L79">79</a>      @Test
-<a class="jxr_linenumber" name="L80" href="#L80">80</a>      <strong class="jxr_keyword">void</strong> ensureAllOptionsAreMentionedAndParsed() {
-<a class="jxr_linenumber" name="L81" href="#L81">81</a>          assertThat(<strong class="jxr_keyword">new</strong> MailClenaParameterParser().getAvailableOptions().getOptions()).isNotEmpty().hasSize(MailClenaParameterParser.MailClenaCommandLineOptions.values().length);
-<a class="jxr_linenumber" name="L82" href="#L82">82</a>      }
-<a class="jxr_linenumber" name="L83" href="#L83">83</a>  
-<a class="jxr_linenumber" name="L84" href="#L84">84</a>      @Test
-<a class="jxr_linenumber" name="L85" href="#L85">85</a>      <strong class="jxr_keyword">void</strong> verifyCommandIsParsedIfPresent() {
-<a class="jxr_linenumber" name="L86" href="#L86">86</a>          <strong class="jxr_keyword">final</strong> String unknown = <span class="jxr_string">"unknown"</span>;
-<a class="jxr_linenumber" name="L87" href="#L87">87</a>          <strong class="jxr_keyword">final</strong> Optional&lt;MailConfiguration&gt; configuration = <strong class="jxr_keyword">new</strong> MailClenaParameterParser().extractConfiguration(<span class="jxr_string">"-h=host"</span>, <span class="jxr_string">"-u=user"</span>, <span class="jxr_string">"-p=password"</span>, <span class="jxr_string">"-c="</span> + unknown);
-<a class="jxr_linenumber" name="L88" href="#L88">88</a>          assertThat(configuration).isPresent();
-<a class="jxr_linenumber" name="L89" href="#L89">89</a>          assertThat(configuration.get().getCommand()).isEqualTo(unknown);
-<a class="jxr_linenumber" name="L90" href="#L90">90</a>      }
-<a class="jxr_linenumber" name="L91" href="#L91">91</a>  
-<a class="jxr_linenumber" name="L92" href="#L92">92</a>  }
+<a class="jxr_linenumber" name="L65" href="#L65">65</a>          assertThatThrownBy(() -&gt; parser.extractConfiguration(<span class="jxr_string">"-h"</span>, <span class="jxr_string">"-u"</span>, <span class="jxr_string">"-p"</span>))
+<a class="jxr_linenumber" name="L66" href="#L66">66</a>                  .isInstanceOf(IllegalArgumentException.<strong class="jxr_keyword">class</strong>);
+<a class="jxr_linenumber" name="L67" href="#L67">67</a>      }
+<a class="jxr_linenumber" name="L68" href="#L68">68</a>  
+<a class="jxr_linenumber" name="L69" href="#L69">69</a>      @Test
+<a class="jxr_linenumber" name="L70" href="#L70">70</a>      <strong class="jxr_keyword">void</strong> callMainExtractParametersSuccessfully() {
+<a class="jxr_linenumber" name="L71" href="#L71">71</a>          <strong class="jxr_keyword">final</strong> Optional&lt;MailConfiguration&gt; mailConfiguration = parser.extractConfiguration(<span class="jxr_string">"-h=boo.foo.bar"</span>, <span class="jxr_string">"-u=foo"</span>, <span class="jxr_string">"-p=bar"</span>);
+<a class="jxr_linenumber" name="L72" href="#L72">72</a>          assertThat(mailConfiguration).isPresent();
+<a class="jxr_linenumber" name="L73" href="#L73">73</a>  
+<a class="jxr_linenumber" name="L74" href="#L74">74</a>          <strong class="jxr_keyword">final</strong> MailConfiguration configuration = mailConfiguration.get();
+<a class="jxr_linenumber" name="L75" href="#L75">75</a>          assertThat(configuration.getPassword()).isEqualTo(<span class="jxr_string">"bar"</span>);
+<a class="jxr_linenumber" name="L76" href="#L76">76</a>          assertThat(configuration.getUsername()).isEqualTo(<span class="jxr_string">"foo"</span>);
+<a class="jxr_linenumber" name="L77" href="#L77">77</a>          assertThat(configuration.getHost()).isEqualTo(<span class="jxr_string">"boo.foo.bar"</span>);
+<a class="jxr_linenumber" name="L78" href="#L78">78</a>      }
+<a class="jxr_linenumber" name="L79" href="#L79">79</a>  
+<a class="jxr_linenumber" name="L80" href="#L80">80</a>      @Test
+<a class="jxr_linenumber" name="L81" href="#L81">81</a>      <strong class="jxr_keyword">void</strong> ensureAllOptionsAreMentionedAndParsed() {
+<a class="jxr_linenumber" name="L82" href="#L82">82</a>          assertThat(<strong class="jxr_keyword">new</strong> MailClenaParameterParser().getAvailableOptions().getOptions()).isNotEmpty().hasSize(MailClenaParameterParser.MailClenaCommandLineOptions.values().length);
+<a class="jxr_linenumber" name="L83" href="#L83">83</a>      }
+<a class="jxr_linenumber" name="L84" href="#L84">84</a>  
+<a class="jxr_linenumber" name="L85" href="#L85">85</a>      @Test
+<a class="jxr_linenumber" name="L86" href="#L86">86</a>      <strong class="jxr_keyword">void</strong> verifyCommandIsParsedIfPresent() {
+<a class="jxr_linenumber" name="L87" href="#L87">87</a>          <strong class="jxr_keyword">final</strong> String unknown = <span class="jxr_string">"unknown"</span>;
+<a class="jxr_linenumber" name="L88" href="#L88">88</a>          <strong class="jxr_keyword">final</strong> Optional&lt;MailConfiguration&gt; configuration = <strong class="jxr_keyword">new</strong> MailClenaParameterParser().extractConfiguration(<span class="jxr_string">"-h=host"</span>, <span class="jxr_string">"-u=user"</span>, <span class="jxr_string">"-p=password"</span>, <span class="jxr_string">"-c="</span> + unknown);
+<a class="jxr_linenumber" name="L89" href="#L89">89</a>          assertThat(configuration).isPresent();
+<a class="jxr_linenumber" name="L90" href="#L90">90</a>          assertThat(configuration.get().getCommand()).isEqualTo(unknown);
+<a class="jxr_linenumber" name="L91" href="#L91">91</a>      }
+<a class="jxr_linenumber" name="L92" href="#L92">92</a>  
+<a class="jxr_linenumber" name="L93" href="#L93">93</a>  }
 </pre>
 <hr/>
 <div id="footer">© 2026 <a href="https://www.aiki-it.de">AIKI IT</a></div>
