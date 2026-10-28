@@ -32,9 +32,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   </custom>
 
   <body>
-  <menu ref="parent"/>
-  <menu ref="modules"/>
-  <menu ref="reports"/>
-</body>
+    <menu name="Documentation">
+      <item name="README" href="README.html"/>
+    </menu>
+    <menu ref="parent"/>
+    <menu ref="modules"/>
+    <menu ref="reports"/>
+  </body>
 
 </site>
