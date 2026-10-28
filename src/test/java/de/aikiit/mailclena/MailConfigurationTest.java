@@ -55,7 +55,25 @@ class MailConfigurationTest {
     @Test
     void toStringIncludesOnlyNonSecretConfiguration() {
         assertThat(new MailConfiguration("host", "username", "secret", "list").toString())
-                .isEqualTo("MailConfiguration[host=host, username=username, command=list]");
+                .isEqualTo("MailConfiguration[host=host, username=username, command=list, isPasswordSet=true]")
+                .doesNotContain("secret");
+    }
+
+    @Test
+    void toStringReportsEmptyPasswordAsNotSet() {
+        assertThat(new MailConfiguration("host", "username", "", "list").toString())
+                .isEqualTo("MailConfiguration[host=host, username=username, command=list, isPasswordSet=false]");
+    }
+
+    @Test
+    void toStringDoesNotRevealWhichPasswordIsSet() {
+        MailConfiguration first = new MailConfiguration("host", "username", "first-secret", "list");
+        MailConfiguration second = new MailConfiguration("host", "username", "second-secret", "list");
+
+        assertThat(first.toString())
+                .isEqualTo(second.toString())
+                .contains("isPasswordSet=true")
+                .doesNotContain("first-secret", "second-secret");
     }
 
     @Test

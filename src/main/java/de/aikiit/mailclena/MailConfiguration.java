@@ -18,6 +18,7 @@
 package de.aikiit.mailclena;
 
 import lombok.Builder;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.Objects;
 
@@ -50,6 +51,6 @@ public record MailConfiguration(String host, String username, String password, S
 
     @Override
     public String toString() {
-        return "MailConfiguration[host=" + host + ", username=" + username + ", command=" + command + "]";
+        return "MailConfiguration[host=" + host + ", username=" + username + ", command=" + command + ", isPasswordSet=" + StringUtils.isNotEmpty(password) + "]";
     }
 }
