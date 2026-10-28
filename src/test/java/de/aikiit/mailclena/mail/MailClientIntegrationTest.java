@@ -154,6 +154,14 @@ class MailClientIntegrationTest {
     }
 
     @Test
+    void cleanCommandHandlesEmptyInbox() {
+        mailClient.execute("clean");
+
+        assertThat(mailClient.list()).isZero();
+        assertThat(greenMail.getReceivedMessages()).isEmpty();
+    }
+
+    @Test
     void listCommandPreservesDeliveredMessages() {
         sendMessages();
 

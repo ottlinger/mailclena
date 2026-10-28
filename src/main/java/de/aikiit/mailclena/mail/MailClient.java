@@ -166,7 +166,8 @@ public final class MailClient {
                 for (Message message : ProgressBar.wrap(messages, "Deleting")) {
                     try {
                         long messageSize = message.getSize();
-                        log.info("Marking for deletion {} bytes with subject: {}", messageSize, message.getSubject());
+                        log.info("Marking for deletion: {} bytes / {} / Message: {} / From: {}",
+                                messageSize, message.getSentDate(), message.getSubject(), Arrays.toString(message.getFrom()));
                         message.setFlag(Flags.Flag.DELETED, true);
                         mailSize.addAndGet(messageSize);
                     } catch (MessagingException e) {
@@ -201,10 +202,7 @@ public final class MailClient {
 
         switch (cmd.get()) {
             case CLEAN:
-                long messages = list();
-                if (messages > 0) {
-                    delete();
-                }
+                delete();
                 break;
             case LIST:
                 list();

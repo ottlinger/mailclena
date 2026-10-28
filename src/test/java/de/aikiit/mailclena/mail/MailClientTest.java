@@ -36,6 +36,7 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -114,7 +115,9 @@ class MailClientTest {
         verify(folder).close(true);
         for (Message m : Arrays.asList(message1, message2)) {
             verify(m).getSize();
+            verify(m).getSentDate();
             verify(m).getSubject();
+            verify(m).getFrom();
             verify(m).setFlag(Flags.Flag.DELETED, true);
         }
         verify(store).close();
@@ -154,12 +157,50 @@ class MailClientTest {
     @Test
     void parseDelete() {
         doReturn(Optional.empty()).when(mailClient).delete();
-        when(mailClient.list()).thenReturn(1234L);
         mailClient.execute("   ClEAn ");
 
         verify(mailClient).delete();
-        // since we returned something from the list()-call above
-        verify(mailClient, times(2)).list();
+        verify(mailClient, never()).list();
+    }
+
+    @Test
+    void cleanOpensPopulatedInboxOnlyOnce() throws MessagingException {
+        doReturn(Optional.of(storeAndFolder)).when(mailClient).openFolder(Folder.READ_WRITE);
+        when(storeAndFolder.getLeft()).thenReturn(store);
+        when(storeAndFolder.getRight()).thenReturn(folder);
+        when(folder.getMessages()).thenReturn(new Message[]{message});
+        when(message.getSize()).thenReturn(42);
+
+        mailClient.execute("clean");
+
+        verify(mailClient).openFolder(Folder.READ_WRITE);
+        verify(mailClient, never()).openFolder(Folder.READ_ONLY);
+        verify(mailClient, never()).list();
+        verify(message).getSize();
+        verify(message).getSentDate();
+        verify(message).getSubject();
+        verify(message).getFrom();
+        verify(message).setFlag(Flags.Flag.DELETED, true);
+        verify(folder).close(true);
+        verify(store).close();
+    }
+
+    @Test
+    void cleanOpensEmptyInboxOnlyOnce() throws MessagingException {
+        doReturn(Optional.of(storeAndFolder)).when(mailClient).openFolder(Folder.READ_WRITE);
+        when(storeAndFolder.getLeft()).thenReturn(store);
+        when(storeAndFolder.getRight()).thenReturn(folder);
+        when(folder.getMessages()).thenReturn(new Message[]{});
+
+        mailClient.execute("clean");
+
+        verify(mailClient).openFolder(Folder.READ_WRITE);
+        verify(mailClient, never()).openFolder(Folder.READ_ONLY);
+        verify(mailClient, never()).list();
+        verify(folder).getMessages();
+        verify(folder, never()).close(true);
+        verifyNoMoreInteractions(message);
+        verify(store).close();
     }
 
     @Test
