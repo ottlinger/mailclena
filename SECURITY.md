@@ -2,20 +2,10 @@
 
 ## Supported Versions
 
-Use this section to tell people about which versions of your project are
-currently being supported with security updates.
-
-| Version | Supported          |
-|---------|--------------------|
-| 5.1.x   | :white_check_mark: |
-| 5.0.x   | :x:                |
-| 4.0.x   | :white_check_mark: |
-| < 4.0   | :x:                |
+Only the latest version of this tool is supported. Older versions are not supported and may contain security vulnerabilities.
 
 ## Reporting a Vulnerability
 
-Use this section to tell people how to report a vulnerability.
+This tool is developed as is and no older version is supported.
 
-Tell them where to go, how often they can expect to get an update on a
-reported vulnerability, what to expect if the vulnerability is accepted or
-declined, etc.
+If you discover a security vulnerability in this project, please report it to the maintainer via filing an issue here.
