@@ -166,25 +166,26 @@ public final class MailClient {
 <span class="fc bfc" id="L166" title="All 2 branches covered.">                for (Message message : ProgressBar.wrap(messages, &quot;Deleting&quot;)) {</span>
                     try {
 <span class="fc" id="L168">                        long messageSize = message.getSize();</span>
-<span class="fc" id="L169">                        log.info(&quot;Marking for deletion {} bytes with subject: {}&quot;, messageSize, message.getSubject());</span>
-<span class="fc" id="L170">                        message.setFlag(Flags.Flag.DELETED, true);</span>
-<span class="fc" id="L171">                        mailSize.addAndGet(messageSize);</span>
-<span class="fc" id="L172">                    } catch (MessagingException e) {</span>
-<span class="fc" id="L173">                        log.error(&quot;Error while traversing messages for deletion&quot;, e);</span>
-<span class="fc" id="L174">                    }</span>
-<span class="fc" id="L175">                }</span>
+<span class="fc" id="L169">                        log.info(&quot;Marking for deletion: {} bytes / {} / Message: {} / From: {}&quot;,</span>
+<span class="fc" id="L170">                                messageSize, message.getSentDate(), message.getSubject(), Arrays.toString(message.getFrom()));</span>
+<span class="fc" id="L171">                        message.setFlag(Flags.Flag.DELETED, true);</span>
+<span class="fc" id="L172">                        mailSize.addAndGet(messageSize);</span>
+<span class="fc" id="L173">                    } catch (MessagingException e) {</span>
+<span class="fc" id="L174">                        log.error(&quot;Error while traversing messages for deletion&quot;, e);</span>
+<span class="fc" id="L175">                    }</span>
+<span class="fc" id="L176">                }</span>
 
-<span class="fc" id="L177">                f.close(true);</span>
-<span class="fc" id="L178">                log.info(&quot;Expunge folder to actually remove messages.&quot;);</span>
-<span class="fc" id="L179">                log.info(&quot;Finished to delete {} messages, set {} bytes free&quot;, count, mailSize.get());</span>
+<span class="fc" id="L178">                f.close(true);</span>
+<span class="fc" id="L179">                log.info(&quot;Expunge folder to actually remove messages.&quot;);</span>
+<span class="fc" id="L180">                log.info(&quot;Finished to delete {} messages, set {} bytes free&quot;, count, mailSize.get());</span>
             }
-<span class="fc" id="L181">            storeAndFolder.getLeft().close();</span>
+<span class="fc" id="L182">            storeAndFolder.getLeft().close();</span>
 
-<span class="fc" id="L183">            return Optional.of(mailSize.longValue());</span>
-<span class="fc" id="L184">        } catch (MessagingException e) {</span>
-<span class="fc" id="L185">            log.error(e);</span>
+<span class="fc" id="L184">            return Optional.of(mailSize.longValue());</span>
+<span class="fc" id="L185">        } catch (MessagingException e) {</span>
+<span class="fc" id="L186">            log.error(e);</span>
         }
-<span class="fc" id="L187">        return Optional.empty();</span>
+<span class="fc" id="L188">        return Optional.empty();</span>
     }
 
     /**
@@ -193,42 +194,39 @@ public final class MailClient {
      * @param command command to execute, should be one of {@link MailClientCommands}.
      */
     public void execute(String command) {
-<span class="fc" id="L196">        Optional&lt;MailClientCommands&gt; cmd = parse(command);</span>
-<span class="fc bfc" id="L197" title="All 2 branches covered.">        if (!cmd.isPresent()) {</span>
-<span class="fc" id="L198">            log.info(&quot;No explicit command given, will fallback to 'list'&quot;);</span>
-<span class="fc" id="L199">            cmd = Optional.of(LIST);</span>
+<span class="fc" id="L197">        Optional&lt;MailClientCommands&gt; cmd = parse(command);</span>
+<span class="fc bfc" id="L198" title="All 2 branches covered.">        if (!cmd.isPresent()) {</span>
+<span class="fc" id="L199">            log.info(&quot;No explicit command given, will fallback to 'list'&quot;);</span>
+<span class="fc" id="L200">            cmd = Optional.of(LIST);</span>
         }
 
-<span class="pc bpc" id="L202" title="1 of 3 branches missed.">        switch (cmd.get()) {</span>
+<span class="pc bpc" id="L203" title="1 of 3 branches missed.">        switch (cmd.get()) {</span>
             case CLEAN:
-<span class="fc" id="L204">                long messages = list();</span>
-<span class="pc bpc" id="L205" title="1 of 2 branches missed.">                if (messages &gt; 0) {</span>
-<span class="fc" id="L206">                    delete();</span>
-                }
-                break;
+<span class="fc" id="L205">                delete();</span>
+<span class="fc" id="L206">                break;</span>
             case LIST:
-<span class="fc" id="L210">                list();</span>
-<span class="fc" id="L211">                break;</span>
+<span class="fc" id="L208">                list();</span>
+<span class="fc" id="L209">                break;</span>
             default:
-<span class="nc" id="L213">                log.error(&quot;If you see this message, please report a bug since the CLI parser has new commands.&quot;);</span>
+<span class="nc" id="L211">                log.error(&quot;If you see this message, please report a bug since the CLI parser has new commands.&quot;);</span>
                 // NOOP: avoid findbugs warning
                 break;
         }
-<span class="fc" id="L217">    }</span>
+<span class="fc" id="L215">    }</span>
 
     /**
      * Encapsulates available application commands for MailClena.
      */
-<span class="fc" id="L222">    @VisibleForTesting</span>
+<span class="fc" id="L220">    @VisibleForTesting</span>
     enum MailClientCommands {
         /**
          * Option to list available mails.
          */
-<span class="fc" id="L227">        LIST,</span>
+<span class="fc" id="L225">        LIST,</span>
         /**
          * Option to purge existing mails.
          */
-<span class="fc" id="L231">        CLEAN;</span>
+<span class="fc" id="L229">        CLEAN;</span>
 
         /**
          * Tries to convert a given command into an available application command option.
@@ -237,16 +235,16 @@ public final class MailClient {
          * @return a valid application command or empty if invalid.
          */
         static Optional&lt;MailClientCommands&gt; parse(String command) {
-<span class="fc bfc" id="L240" title="All 2 branches covered.">            if (!Strings.isNullOrEmpty(command)) {</span>
-<span class="fc" id="L241">                String normalized = command.trim();</span>
-<span class="fc bfc" id="L242" title="All 2 branches covered.">                for (MailClientCommands cmd : values()) {</span>
-<span class="fc bfc" id="L243" title="All 2 branches covered.">                    if (normalized.equalsIgnoreCase(cmd.toString())) {</span>
-<span class="fc" id="L244">                        return Optional.of(cmd);</span>
+<span class="fc bfc" id="L238" title="All 2 branches covered.">            if (!Strings.isNullOrEmpty(command)) {</span>
+<span class="fc" id="L239">                String normalized = command.trim();</span>
+<span class="fc bfc" id="L240" title="All 2 branches covered.">                for (MailClientCommands cmd : values()) {</span>
+<span class="fc bfc" id="L241" title="All 2 branches covered.">                    if (normalized.equalsIgnoreCase(cmd.toString())) {</span>
+<span class="fc" id="L242">                        return Optional.of(cmd);</span>
                     }
                 }
             }
 
-<span class="fc" id="L249">            return Optional.empty();</span>
+<span class="fc" id="L247">            return Optional.empty();</span>
         }
 
     }
