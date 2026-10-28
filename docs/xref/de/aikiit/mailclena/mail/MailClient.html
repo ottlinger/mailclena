@@ -75,7 +75,7 @@
 <a class="jxr_linenumber" name="L67" href="#L67">67</a>  
 <a class="jxr_linenumber" name="L68" href="#L68">68</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> Properties getProperties(<a name="MailConfiguration" href="../../../../de/aikiit/mailclena/MailConfiguration.html#MailConfiguration">MailConfiguration</a> mailConfiguration) {
 <a class="jxr_linenumber" name="L69" href="#L69">69</a>          Properties properties = <strong class="jxr_keyword">new</strong> Properties();
-<a class="jxr_linenumber" name="L70" href="#L70">70</a>          properties.put(<span class="jxr_string">"mail.pop3s.host"</span>, mailConfiguration.getHost());
+<a class="jxr_linenumber" name="L70" href="#L70">70</a>          properties.put(<span class="jxr_string">"mail.pop3s.host"</span>, mailConfiguration.host());
 <a class="jxr_linenumber" name="L71" href="#L71">71</a>          properties.put(<span class="jxr_string">"mail.pop3.starttls.enable"</span>, <span class="jxr_string">"true"</span>);
 <a class="jxr_linenumber" name="L72" href="#L72">72</a>          properties.put(<span class="jxr_string">"mail.pop3.starttls.required"</span>, <span class="jxr_string">"true"</span>);
 <a class="jxr_linenumber" name="L73" href="#L73">73</a>          properties.put(<span class="jxr_string">"mail.pop3s.port"</span>, <span class="jxr_string">"995"</span>);
@@ -95,7 +95,7 @@
 <a class="jxr_linenumber" name="L87" href="#L87">87</a>      @VisibleForTesting
 <a class="jxr_linenumber" name="L88" href="#L88">88</a>      Optional&lt;Pair&lt;Store, Folder&gt;&gt; openFolder(<strong class="jxr_keyword">int</strong> mode) <strong class="jxr_keyword">throws</strong> MessagingException {
 <a class="jxr_linenumber" name="L89" href="#L89">89</a>          Store store = emailSession.getStore(POP3S);
-<a class="jxr_linenumber" name="L90" href="#L90">90</a>          store.connect(mailConfiguration.getHost(), mailConfiguration.getUsername(), mailConfiguration.getPassword());
+<a class="jxr_linenumber" name="L90" href="#L90">90</a>          store.connect(mailConfiguration.host(), mailConfiguration.username(), mailConfiguration.password());
 <a class="jxr_linenumber" name="L91" href="#L91">91</a>  
 <a class="jxr_linenumber" name="L92" href="#L92">92</a>          Folder emailFolder = store.getFolder(INBOX);
 <a class="jxr_linenumber" name="L93" href="#L93">93</a>          emailFolder.open(mode);
