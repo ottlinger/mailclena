@@ -39,7 +39,7 @@ Automatic generation of webpage:
 
 ## How to run and use the application
 
-You need to check out the application and build it with the help of [Java](https://java.sun.com) and [Maven](https://maven.apache.org/).
+You need to check out the application and build it with the help of [Java](https://java.sun.com) **17 or newer** and [Maven](https://maven.apache.org/).
 
 ```bash
 $ ./mvnw

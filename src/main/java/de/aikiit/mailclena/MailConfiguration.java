@@ -18,23 +18,38 @@
 package de.aikiit.mailclena;
 
 import lombok.Builder;
-import lombok.Data;
-import lombok.NonNull;
-import lombok.ToString;
+
+import java.util.Objects;
 
 /**
- * All available configuration options of this application.
+ * Immutable configuration of this application.
+ *
+ * @param host mail server hostname.
+ * @param username mailbox username.
+ * @param password mailbox password, excluded from {@link #toString()}.
+ * @param command command to execute.
  */
-@Data
 @Builder
-@ToString(exclude = "password")
-public class MailConfiguration {
-    @NonNull
-    private String host;
-    @NonNull
-    private String username;
-    @NonNull
-    private String password;
-    @NonNull
-    private String command;
+public record MailConfiguration(String host, String username, String password, String command) {
+
+    /**
+     * Creates a configuration with all required values.
+     *
+     * @param host mail server hostname.
+     * @param username mailbox username.
+     * @param password mailbox password.
+     * @param command command to execute.
+     * @throws NullPointerException if any value is null.
+     */
+    public MailConfiguration {
+        Objects.requireNonNull(host, "host");
+        Objects.requireNonNull(username, "username");
+        Objects.requireNonNull(password, "password");
+        Objects.requireNonNull(command, "command");
+    }
+
+    @Override
+    public String toString() {
+        return "MailConfiguration[host=" + host + ", username=" + username + ", command=" + command + "]";
+    }
 }

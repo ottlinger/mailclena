@@ -57,6 +57,7 @@
     <project.build.sourceEncoding>${encoding.utf8}</project.build.sourceEncoding>
     <!-- enable Lombok with JDK23 -->
     <maven.compiler.proc>full</maven.compiler.proc>
+    <maven.compiler.release>17</maven.compiler.release>
     <!-- MSITE-1018: nil out timestamp in order to get current build timestamp -->
     <project.build.outputTimestamp>a</project.build.outputTimestamp>
   </properties>
@@ -246,8 +247,7 @@
           </executions>
           <configuration>
             <encoding>${encoding.utf8}</encoding>
-            <!-- https://bugs.java.com/bugdatabase/view_bug.do?bug_id=8212233 -->
-            <source>8</source>
+            <source>${maven.compiler.release}</source>
             <!-- Fix problems during generation of jUnit5 tests -->
             <additionalOptions>-package</additionalOptions>
           </configuration>
@@ -257,8 +257,7 @@
           <version>3.16.0</version>
           <configuration>
             <encoding>${encoding.utf8}</encoding>
-            <source>1.8</source>
-            <target>1.8</target>
+            <release>${maven.compiler.release}</release>
           </configuration>
         </plugin>
         <plugin>
@@ -635,7 +634,7 @@
         <configuration>
           <encoding>${encoding.utf8}</encoding>
           <!-- https://bugs.java.com/bugdatabase/view_bug.do?bug_id=8212233 -->
-          <source>8</source>
+          <source>${maven.compiler.release}</source>
         </configuration>
         <reportSets>
           <reportSet>
@@ -665,7 +664,7 @@
         <configuration>
           <linkXRef>true</linkXRef>
           <minimumTokens>100</minimumTokens>
-          <targetJdk>1.8</targetJdk>
+          <targetJdk>${maven.compiler.release}</targetJdk>
           <excludes>
             <exclude>**/generated/**/*.java</exclude>
             <exclude>**/target/clover/**/*.java</exclude>

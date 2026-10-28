@@ -21,6 +21,7 @@ import org.junit.jupiter.api.Test;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatNullPointerException;
 
 class MailConfigurationTest {
 
@@ -33,25 +34,55 @@ class MailConfigurationTest {
     @Test
     void regularObjectCreation() {
         final MailConfiguration configuration = new MailConfiguration("host", "username", "password", "myCommand");
-        configuration.setPassword("p");
-        assertThat(configuration.getPassword()).isEqualTo("p");
-
-        configuration.setUsername("u");
-        assertThat(configuration.getUsername()).isEqualTo("u");
-
-        configuration.setHost("h");
-        assertThat(configuration.getHost()).isEqualTo("h");
-
-        configuration.setCommand("c");
-        assertThat(configuration.getCommand()).isEqualTo("c");
+        assertThat(configuration.host()).isEqualTo("host");
+        assertThat(configuration.username()).isEqualTo("username");
+        assertThat(configuration.password()).isEqualTo("password");
+        assertThat(configuration.command()).isEqualTo("myCommand");
     }
 
     @Test
-    void builderForObjectCreationWithDefaultCommand() {
+    void builderCreatesEquivalentRecord() {
         final MailConfiguration configuration = MailConfiguration.builder().host("h").username("u").password("p").command("c").build();
-        assertThat(configuration.getPassword()).isEqualTo("p");
-        assertThat(configuration.getUsername()).isEqualTo("u");
-        assertThat(configuration.getHost()).isEqualTo("h");
-        assertThat(configuration.getCommand()).isEqualTo("c");
+        assertThat(configuration.host()).isEqualTo("h");
+        assertThat(configuration.username()).isEqualTo("u");
+        assertThat(configuration.password()).isEqualTo("p");
+        assertThat(configuration.command()).isEqualTo("c");
+        assertThat(configuration).isEqualTo(new MailConfiguration("h", "u", "p", "c"));
+        assertThat(configuration.hashCode()).isEqualTo(new MailConfiguration("h", "u", "p", "c").hashCode());
+        assertThat(configuration).isNotEqualTo(new MailConfiguration("h", "u", "different", "c"));
+    }
+
+    @Test
+    void toStringIncludesOnlyNonSecretConfiguration() {
+        assertThat(new MailConfiguration("host", "username", "secret", "list").toString())
+                .isEqualTo("MailConfiguration[host=host, username=username, command=list]");
+    }
+
+    @Test
+    void constructorRejectsNullValues() {
+        assertThatNullPointerException().isThrownBy(() -> new MailConfiguration(null, "u", "p", "c"))
+                .withMessage("host");
+        assertThatNullPointerException().isThrownBy(() -> new MailConfiguration("h", null, "p", "c"))
+                .withMessage("username");
+        assertThatNullPointerException().isThrownBy(() -> new MailConfiguration("h", "u", null, "c"))
+                .withMessage("password");
+        assertThatNullPointerException().isThrownBy(() -> new MailConfiguration("h", "u", "p", null))
+                .withMessage("command");
+    }
+
+    @Test
+    void builderRejectsMissingValues() {
+        assertThatNullPointerException()
+                .isThrownBy(() -> MailConfiguration.builder().username("u").password("p").command("c").build())
+                .withMessage("host");
+        assertThatNullPointerException()
+                .isThrownBy(() -> MailConfiguration.builder().host("h").password("p").command("c").build())
+                .withMessage("username");
+        assertThatNullPointerException()
+                .isThrownBy(() -> MailConfiguration.builder().host("h").username("u").command("c").build())
+                .withMessage("password");
+        assertThatNullPointerException()
+                .isThrownBy(() -> MailConfiguration.builder().host("h").username("u").password("p").build())
+                .withMessage("command");
     }
 }

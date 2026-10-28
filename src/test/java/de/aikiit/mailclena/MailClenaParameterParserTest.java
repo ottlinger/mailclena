@@ -72,9 +72,9 @@ class MailClenaParameterParserTest {
         assertThat(mailConfiguration).isPresent();
 
         final MailConfiguration configuration = mailConfiguration.get();
-        assertThat(configuration.getPassword()).isEqualTo("bar");
-        assertThat(configuration.getUsername()).isEqualTo("foo");
-        assertThat(configuration.getHost()).isEqualTo("boo.foo.bar");
+        assertThat(configuration.password()).isEqualTo("bar");
+        assertThat(configuration.username()).isEqualTo("foo");
+        assertThat(configuration.host()).isEqualTo("boo.foo.bar");
     }
 
     @Test
@@ -87,7 +87,7 @@ class MailClenaParameterParserTest {
         final String unknown = "unknown";
         final Optional<MailConfiguration> configuration = new MailClenaParameterParser().extractConfiguration("-h=host", "-u=user", "-p=password", "-c=" + unknown);
         assertThat(configuration).isPresent();
-        assertThat(configuration.get().getCommand()).isEqualTo(unknown);
+        assertThat(configuration.get().command()).isEqualTo(unknown);
     }
 
 }

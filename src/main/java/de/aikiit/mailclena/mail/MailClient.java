@@ -67,7 +67,7 @@ public final class MailClient {
 
     private static Properties getProperties(MailConfiguration mailConfiguration) {
         Properties properties = new Properties();
-        properties.put("mail.pop3s.host", mailConfiguration.getHost());
+        properties.put("mail.pop3s.host", mailConfiguration.host());
         properties.put("mail.pop3.starttls.enable", "true");
         properties.put("mail.pop3.starttls.required", "true");
         properties.put("mail.pop3s.port", "995");
@@ -87,7 +87,7 @@ public final class MailClient {
     @VisibleForTesting
     Optional<Pair<Store, Folder>> openFolder(int mode) throws MessagingException {
         Store store = emailSession.getStore(POP3S);
-        store.connect(mailConfiguration.getHost(), mailConfiguration.getUsername(), mailConfiguration.getPassword());
+        store.connect(mailConfiguration.host(), mailConfiguration.username(), mailConfiguration.password());
 
         Folder emailFolder = store.getFolder(INBOX);
         emailFolder.open(mode);

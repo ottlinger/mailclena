@@ -42,7 +42,7 @@ public final class MailClena {
             log.info("MailClena is launching with the given configuration ....");
             final MailConfiguration configuration = mailConfiguration.get();
             final MailClient client = new MailClient(configuration);
-            client.execute(configuration.getCommand());
+            client.execute(configuration.command());
         }
         log.info("MailClena is shutting down .... bye bye :-)");
     }
