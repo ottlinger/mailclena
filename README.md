@@ -91,14 +91,11 @@ $ java -jar target/mailclena-0.0.1-SNAPSHOT-executable.jar -h=host.tld.org -u=yo
 ## Project webpage
 
 A Maven-generated site report is also available via [this page](https://ottlinger.github.io/mailclena/).
-The site includes this README under **Documentation → README**. During `./mvnw site`,
-the root `README.md` is copied into the generated site sources and rendered as
-`target/site/README.html`; no separate documentation copy needs to be maintained.
 
 ### Software Bill of Materials
 
 CycloneDX generates an SBOM in XML and JSON during `./mvnw package` and
 `./mvnw site`, excluding test-scoped dependencies. The files are written to
 `target/bom.xml` and `target/bom.json`. The site build publishes both under
-**Documentation → Software Bill of Materials** with download links on the
+**Documentation → SBOM** with download links on the
 [SBOM page](https://ottlinger.github.io/mailclena/sbom.html).
