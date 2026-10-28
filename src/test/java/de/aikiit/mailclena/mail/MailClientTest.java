@@ -20,7 +20,6 @@ import de.aikiit.mailclena.MailConfiguration;
 import jakarta.mail.*;
 import org.apache.commons.lang3.tuple.Pair;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -212,11 +211,5 @@ class MailClientTest {
 
         mailClient.list();
         verifyNoMoreInteractions(store);
-    }
-
-    @Disabled("TODO test openFolder")
-    void openFolderInnerworkings() throws MessagingException {
-        assertThat(mailClient.openFolder(Folder.READ_ONLY)).isEmpty();
-        // TODO test     Optional<Pair<Store, Folder>> openFolder(int mode) throws MessagingException
     }
 }

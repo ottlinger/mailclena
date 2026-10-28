@@ -19,9 +19,6 @@ package de.aikiit.mailclena.mail;
 import com.google.common.base.Strings;
 import de.aikiit.mailclena.MailConfiguration;
 import jakarta.mail.*;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import me.tongfei.progressbar.ProgressBar;
 import org.apache.commons.lang3.tuple.Pair;
@@ -39,18 +36,31 @@ import static de.aikiit.mailclena.mail.MailClient.MailClientCommands.parse;
 /**
  * Encapsulates technical access to mail inbox based on the given application/mail configuration.
  */
-@AllArgsConstructor
 @Log4j2
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class MailClient {
 
     private static final String INBOX = "INBOX";
     private static final String POP3S = "pop3s";
 
-    @VisibleForTesting
-    private MailConfiguration mailConfiguration;
+    private final MailConfiguration mailConfiguration;
+    private final Session emailSession;
 
-    private Properties getProperties() {
+    /**
+     * Creates a client using the default POP3S connection settings.
+     *
+     * @param mailConfiguration credentials and host of the mailbox.
+     */
+    public MailClient(MailConfiguration mailConfiguration) {
+        this(mailConfiguration, Session.getInstance(getProperties(mailConfiguration)));
+    }
+
+    @VisibleForTesting
+    MailClient(MailConfiguration mailConfiguration, Session emailSession) {
+        this.mailConfiguration = mailConfiguration;
+        this.emailSession = emailSession;
+    }
+
+    private static Properties getProperties(MailConfiguration mailConfiguration) {
         Properties properties = new Properties();
         properties.put("mail.pop3s.host", mailConfiguration.getHost());
         properties.put("mail.pop3.starttls.enable", "true");
@@ -71,9 +81,6 @@ public final class MailClient {
      */
     @VisibleForTesting
     Optional<Pair<Store, Folder>> openFolder(int mode) throws MessagingException {
-        Session emailSession = Session.getDefaultInstance(getProperties());
-        // emailSession.setDebug(true);
-
         Store store = emailSession.getStore(POP3S);
         store.connect(mailConfiguration.getHost(), mailConfiguration.getUsername(), mailConfiguration.getPassword());
 

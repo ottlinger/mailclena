@@ -88,6 +88,14 @@ $ java -jar target/mailclena-0.0.1-SNAPSHOT-executable.jar -h=host.tld.org -u=yo
 17:19:11.410 [main] INFO  de.aikiit.mailclena.MailClena - MailClena is shutting down .... bye bye :-)
 ```
 
+## Integration tests
+
+`MailClientIntegrationTest` uses GreenMail 2.x to send messages via SMTP and
+exercise the client's POP3S mailbox access, listing and deletion. Each test starts
+its own local servers on dynamically assigned ports; no external mail account is
+needed. Trust for GreenMail's self-signed TLS certificate is restricted to the
+test session and does not change the application's TLS settings.
+
 ## Project webpage
 
 A Maven-generated site report is also available via [this page](https://ottlinger.github.io/mailclena/).
