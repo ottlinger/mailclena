@@ -67,7 +67,7 @@ public final class MailClient {
 
     private static Properties getProperties(MailConfiguration mailConfiguration) {
 <span class="fc" id="L69">        Properties properties = new Properties();</span>
-<span class="fc" id="L70">        properties.put(&quot;mail.pop3s.host&quot;, mailConfiguration.getHost());</span>
+<span class="fc" id="L70">        properties.put(&quot;mail.pop3s.host&quot;, mailConfiguration.host());</span>
 <span class="fc" id="L71">        properties.put(&quot;mail.pop3.starttls.enable&quot;, &quot;true&quot;);</span>
 <span class="fc" id="L72">        properties.put(&quot;mail.pop3.starttls.required&quot;, &quot;true&quot;);</span>
 <span class="fc" id="L73">        properties.put(&quot;mail.pop3s.port&quot;, &quot;995&quot;);</span>
@@ -87,7 +87,7 @@ public final class MailClient {
     @VisibleForTesting
     Optional&lt;Pair&lt;Store, Folder&gt;&gt; openFolder(int mode) throws MessagingException {
 <span class="fc" id="L89">        Store store = emailSession.getStore(POP3S);</span>
-<span class="fc" id="L90">        store.connect(mailConfiguration.getHost(), mailConfiguration.getUsername(), mailConfiguration.getPassword());</span>
+<span class="fc" id="L90">        store.connect(mailConfiguration.host(), mailConfiguration.username(), mailConfiguration.password());</span>
 
 <span class="fc" id="L92">        Folder emailFolder = store.getFolder(INBOX);</span>
 <span class="fc" id="L93">        emailFolder.open(mode);</span>

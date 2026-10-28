@@ -80,9 +80,9 @@
 <a class="jxr_linenumber" name="L72" href="#L72">72</a>          assertThat(mailConfiguration).isPresent();
 <a class="jxr_linenumber" name="L73" href="#L73">73</a>  
 <a class="jxr_linenumber" name="L74" href="#L74">74</a>          <strong class="jxr_keyword">final</strong> MailConfiguration configuration = mailConfiguration.get();
-<a class="jxr_linenumber" name="L75" href="#L75">75</a>          assertThat(configuration.getPassword()).isEqualTo(<span class="jxr_string">"bar"</span>);
-<a class="jxr_linenumber" name="L76" href="#L76">76</a>          assertThat(configuration.getUsername()).isEqualTo(<span class="jxr_string">"foo"</span>);
-<a class="jxr_linenumber" name="L77" href="#L77">77</a>          assertThat(configuration.getHost()).isEqualTo(<span class="jxr_string">"boo.foo.bar"</span>);
+<a class="jxr_linenumber" name="L75" href="#L75">75</a>          assertThat(configuration.password()).isEqualTo(<span class="jxr_string">"bar"</span>);
+<a class="jxr_linenumber" name="L76" href="#L76">76</a>          assertThat(configuration.username()).isEqualTo(<span class="jxr_string">"foo"</span>);
+<a class="jxr_linenumber" name="L77" href="#L77">77</a>          assertThat(configuration.host()).isEqualTo(<span class="jxr_string">"boo.foo.bar"</span>);
 <a class="jxr_linenumber" name="L78" href="#L78">78</a>      }
 <a class="jxr_linenumber" name="L79" href="#L79">79</a>  
 <a class="jxr_linenumber" name="L80" href="#L80">80</a>      @Test
@@ -95,7 +95,7 @@
 <a class="jxr_linenumber" name="L87" href="#L87">87</a>          <strong class="jxr_keyword">final</strong> String unknown = <span class="jxr_string">"unknown"</span>;
 <a class="jxr_linenumber" name="L88" href="#L88">88</a>          <strong class="jxr_keyword">final</strong> Optional&lt;MailConfiguration&gt; configuration = <strong class="jxr_keyword">new</strong> MailClenaParameterParser().extractConfiguration(<span class="jxr_string">"-h=host"</span>, <span class="jxr_string">"-u=user"</span>, <span class="jxr_string">"-p=password"</span>, <span class="jxr_string">"-c="</span> + unknown);
 <a class="jxr_linenumber" name="L89" href="#L89">89</a>          assertThat(configuration).isPresent();
-<a class="jxr_linenumber" name="L90" href="#L90">90</a>          assertThat(configuration.get().getCommand()).isEqualTo(unknown);
+<a class="jxr_linenumber" name="L90" href="#L90">90</a>          assertThat(configuration.get().command()).isEqualTo(unknown);
 <a class="jxr_linenumber" name="L91" href="#L91">91</a>      }
 <a class="jxr_linenumber" name="L92" href="#L92">92</a>  
 <a class="jxr_linenumber" name="L93" href="#L93">93</a>  }

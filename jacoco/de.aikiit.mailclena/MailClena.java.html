@@ -42,7 +42,7 @@ public final class MailClena {
 <span class="fc" id="L42">            log.info(&quot;MailClena is launching with the given configuration ....&quot;);</span>
 <span class="fc" id="L43">            final MailConfiguration configuration = mailConfiguration.get();</span>
 <span class="fc" id="L44">            final MailClient client = new MailClient(configuration);</span>
-<span class="fc" id="L45">            client.execute(configuration.getCommand());</span>
+<span class="fc" id="L45">            client.execute(configuration.command());</span>
         }
 <span class="fc" id="L47">        log.info(&quot;MailClena is shutting down .... bye bye :-)&quot;);</span>
 <span class="fc" id="L48">    }</span>
