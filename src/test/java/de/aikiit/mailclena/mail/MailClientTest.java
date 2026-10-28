@@ -22,20 +22,24 @@ import jakarta.mail.Folder;
 import jakarta.mail.Message;
 import jakarta.mail.MessagingException;
 import jakarta.mail.Store;
+import me.tongfei.progressbar.ProgressBar;
 import org.apache.commons.lang3.tuple.Pair;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
+import org.mockito.MockedStatic;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.mockStatic;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
@@ -63,6 +67,28 @@ class MailClientTest {
     void initWithConfig() {
         assertThat(CONFIGURATION).isNotNull();
         new MailClient(CONFIGURATION);
+    }
+
+    @Test
+    void headlessProgressDoesNotInitializeTerminal() {
+        List<Message> messages = Arrays.asList(message);
+        try (MockedStatic<ProgressBar> progressBar = mockStatic(ProgressBar.class)) {
+            assertThat(MailClient.withProgress(messages, "Listing", false)).isSameAs(messages);
+            assertThat(MailClient.withProgress(messages, "Deleting", false)).isSameAs(messages);
+            progressBar.verifyNoInteractions();
+        }
+    }
+
+    @Test
+    void interactiveProgressUsesProgressBar() {
+        List<Message> messages = Arrays.asList(message);
+        try (MockedStatic<ProgressBar> progressBar = mockStatic(ProgressBar.class)) {
+            progressBar.when(() -> ProgressBar.wrap(messages, "Listing")).thenReturn(messages);
+
+            assertThat(MailClient.withProgress(messages, "Listing", true)).isSameAs(messages);
+
+            progressBar.verify(() -> ProgressBar.wrap(messages, "Listing"));
+        }
     }
 
     @Test

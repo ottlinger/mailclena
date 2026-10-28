@@ -94,6 +94,12 @@ public final class MailClient {
         return Optional.of(Pair.of(store, emailFolder));
     }
 
+    // Terminal detection can block on headless Windows runners while the POP3 session times out.
+    @VisibleForTesting
+    static Iterable<Message> withProgress(List<Message> messages, String task, boolean interactive) {
+        return interactive ? ProgressBar.wrap(messages, task) : messages;
+    }
+
     /**
      * Shows a list of messages in the mailbox root folder. It accesses the folder in read-only mode.
      *
@@ -120,7 +126,7 @@ public final class MailClient {
 
                 log.info("Found {} messages.", size);
 
-                for (Message m : ProgressBar.wrap(messages, "Listing")) {
+                for (Message m : withProgress(messages, "Listing", System.console() != null)) {
                     try {
                         log.info("{} bytes / {} / Message: {} / From: {}", m.getSize(), m.getSentDate(), m.getSubject(), Arrays.toString(m.getFrom()));
                     } catch (MessagingException e) {
@@ -163,7 +169,7 @@ public final class MailClient {
             } else {
                 log.info("Starting to delete {} messages.", count);
 
-                for (Message message : ProgressBar.wrap(messages, "Deleting")) {
+                for (Message message : withProgress(messages, "Deleting", System.console() != null)) {
                     try {
                         long messageSize = message.getSize();
                         log.info("Marking for deletion: {} bytes / {} / Message: {} / From: {}",
