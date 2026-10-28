@@ -59,7 +59,7 @@ mvn wrapper:wrapper
 ```bash
 -usage: MailClena
 - -c,--command <arg>    Command to execute - example: list or clean, default is list.
-- -h,--host <arg>       Hostname - example: https://imap.yourisp.org
+- -h,--host <arg>       Hostname - example: imap.yourisp.org
 - -p,--password <arg>   Password - example: myfancypassword
 - -u,--username <arg>   Username - example: myuser@tld.org
 ```
@@ -91,11 +91,4 @@ $ java -jar target/mailclena-0.0.1-SNAPSHOT-executable.jar -h=host.tld.org -u=yo
 ## Project webpage
 
 A Maven-generated site report is also available via [this page](https://ottlinger.github.io/mailclena/).
-
-### Software Bill of Materials
-
-CycloneDX generates an SBOM in XML and JSON during `./mvnw package` and
-`./mvnw site`, excluding test-scoped dependencies. The files are written to
-`target/bom.xml` and `target/bom.json`. The site build publishes both under
-**Documentation → SBOM** with download links on the
-[SBOM page](https://ottlinger.github.io/mailclena/sbom.html).
+The site build publishes a software bill of materials on the [SBOM page](https://ottlinger.github.io/mailclena/sbom.html).
