@@ -18,7 +18,12 @@ package de.aikiit.mailclena.mail;
 
 import com.google.common.base.Strings;
 import de.aikiit.mailclena.MailConfiguration;
-import jakarta.mail.*;
+import jakarta.mail.Flags;
+import jakarta.mail.Folder;
+import jakarta.mail.Message;
+import jakarta.mail.MessagingException;
+import jakarta.mail.Session;
+import jakarta.mail.Store;
 import lombok.extern.log4j.Log4j2;
 import me.tongfei.progressbar.ProgressBar;
 import org.apache.commons.lang3.tuple.Pair;

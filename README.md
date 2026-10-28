@@ -88,6 +88,13 @@ $ java -jar target/mailclena-0.0.1-SNAPSHOT-executable.jar -h=host.tld.org -u=yo
 17:19:11.410 [main] INFO  de.aikiit.mailclena.MailClena - MailClena is shutting down .... bye bye :-)
 ```
 
+## Java imports
+
+Use explicit imports, including for static members. Wildcard imports are forbidden.
+Maven enforces this with Checkstyle during the `validate` phase for both main and
+test sources, so violations also fail the CI build. The shared `.editorconfig`
+configures IntelliJ IDEA to keep imports explicit when organizing them.
+
 ## Integration tests
 
 `MailClientIntegrationTest` uses GreenMail 2.x to send messages via SMTP and
