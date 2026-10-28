@@ -4,4 +4,4 @@ mailclena,de.aikiit.mailclena.mail,MailClient,7,316,3,20,1,81,3,18,0,9
 mailclena,de.aikiit.mailclena,MailClenaParameterParser,0,152,0,14,0,31,0,11,0,4
 mailclena,de.aikiit.mailclena,MailClena,0,33,0,2,0,9,0,3,0,2
 mailclena,de.aikiit.mailclena,MailClenaParameterParser.MailClenaCommandLineOptions,0,52,0,0,0,11,0,4,0,4
-mailclena,de.aikiit.mailclena,MailConfiguration,0,39,0,0,0,7,0,2,0,2
+mailclena,de.aikiit.mailclena,MailConfiguration,0,42,0,0,0,7,0,2,0,2

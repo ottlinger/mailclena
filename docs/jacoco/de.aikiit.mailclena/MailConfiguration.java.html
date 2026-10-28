@@ -18,6 +18,7 @@
 package de.aikiit.mailclena;
 
 import lombok.Builder;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.Objects;
 
@@ -41,16 +42,16 @@ public record MailConfiguration(String host, String username, String password, S
      * @param command command to execute.
      * @throws NullPointerException if any value is null.
      */
-<span class="fc" id="L44">    public MailConfiguration {</span>
-<span class="fc" id="L45">        Objects.requireNonNull(host, &quot;host&quot;);</span>
-<span class="fc" id="L46">        Objects.requireNonNull(username, &quot;username&quot;);</span>
-<span class="fc" id="L47">        Objects.requireNonNull(password, &quot;password&quot;);</span>
-<span class="fc" id="L48">        Objects.requireNonNull(command, &quot;command&quot;);</span>
-<span class="fc" id="L49">    }</span>
+<span class="fc" id="L45">    public MailConfiguration {</span>
+<span class="fc" id="L46">        Objects.requireNonNull(host, &quot;host&quot;);</span>
+<span class="fc" id="L47">        Objects.requireNonNull(username, &quot;username&quot;);</span>
+<span class="fc" id="L48">        Objects.requireNonNull(password, &quot;password&quot;);</span>
+<span class="fc" id="L49">        Objects.requireNonNull(command, &quot;command&quot;);</span>
+<span class="fc" id="L50">    }</span>
 
     @Override
     public String toString() {
-<span class="fc" id="L53">        return &quot;MailConfiguration[host=&quot; + host + &quot;, username=&quot; + username + &quot;, command=&quot; + command + &quot;]&quot;;</span>
+<span class="fc" id="L54">        return &quot;MailConfiguration[host=&quot; + host + &quot;, username=&quot; + username + &quot;, command=&quot; + command + &quot;, isPasswordSet=&quot; + StringUtils.isNotEmpty(password) + &quot;]&quot;;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.15.202606040825</span></div></body></html>
