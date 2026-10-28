@@ -62,7 +62,7 @@
   </properties>
   <build>
     <defaultGoal>clean versions:display-dependency-updates versions:display-plugin-updates
-            versions:plugin-updates-report cyclonedx:makeBom cyclonedx:makeAggregateBom install
+            versions:plugin-updates-report install
             org.pitest:pitest-maven:mutationCoverage
         </defaultGoal>
     <plugins>
@@ -98,6 +98,31 @@
       <plugin>
         <groupId>org.cyclonedx</groupId>
         <artifactId>cyclonedx-maven-plugin</artifactId>
+        <configuration>
+          <outputFormat>all</outputFormat>
+          <outputName>bom</outputName>
+          <outputDirectory>${project.build.directory}</outputDirectory>
+          <includeTestScope>false</includeTestScope>
+        </configuration>
+        <executions>
+          <execution>
+            <id>generate-sbom</id>
+            <phase>package</phase>
+            <goals>
+              <goal>makeAggregateBom</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>generate-sbom-for-site</id>
+            <phase>pre-site</phase>
+            <goals>
+              <goal>makeAggregateBom</goal>
+            </goals>
+            <configuration>
+              <skipAttach>true</skipAttach>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -126,6 +151,26 @@
       <plugin>
         <artifactId>maven-resources-plugin</artifactId>
         <executions>
+          <execution>
+            <id>include-sbom-in-site</id>
+            <phase>pre-site</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${project.reporting.outputDirectory}/sbom</outputDirectory>
+              <resources>
+                <resource>
+                  <directory>${project.build.directory}</directory>
+                  <filtering>false</filtering>
+                  <includes>
+                    <include>bom.xml</include>
+                    <include>bom.json</include>
+                  </includes>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
           <execution>
             <id>include-readme-in-site</id>
             <phase>pre-site</phase>
