@@ -23,7 +23,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class MailClenaParameterParserTest {
 
@@ -62,7 +62,8 @@ class MailClenaParameterParserTest {
 
     @Test
     void callWithoutParameterValuesButAllKeys() {
-        assertThrows(IllegalArgumentException.class, () -> parser.extractConfiguration("-h", "-u", "-p"));
+        assertThatThrownBy(() -> parser.extractConfiguration("-h", "-u", "-p"))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
