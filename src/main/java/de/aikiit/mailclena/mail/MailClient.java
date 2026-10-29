@@ -29,8 +29,12 @@ import me.tongfei.progressbar.ProgressBar;
 import org.apache.commons.lang3.tuple.Pair;
 import org.assertj.core.util.VisibleForTesting;
 
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.Properties;
 import java.util.concurrent.atomic.AtomicLong;
@@ -46,6 +50,8 @@ public final class MailClient {
 
     private static final String INBOX = "INBOX";
     private static final String POP3S = "pop3s";
+    private static final DateTimeFormatter SENT_DATE_FORMATTER =
+            DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm:ss", Locale.ROOT);
 
     private final MailConfiguration mailConfiguration;
     private final Session emailSession;
@@ -105,7 +111,6 @@ public final class MailClient {
      *
      * @return messages in given folder, -1 in case of errors.
      */
-    // TODO show date of mails YYYYMMDD
     @VisibleForTesting
     long list() {
         try {
@@ -128,7 +133,11 @@ public final class MailClient {
 
                 for (Message m : withProgress(messages, "Listing", System.console() != null)) {
                     try {
-                        log.info("{} bytes / {} / Message: {} / From: {}", m.getSize(), m.getSentDate(), m.getSubject(), Arrays.toString(m.getFrom()));
+                        Date sentDate = m.getSentDate();
+                        String formattedDate = sentDate == null ? null : SENT_DATE_FORMATTER
+                                .format(sentDate.toInstant().atZone(ZoneId.systemDefault()));
+                        log.info("{} bytes / {}{}Subject: {} / From: {}",
+                                m.getSize(), formattedDate, System.lineSeparator(), m.getSubject(), Arrays.toString(m.getFrom()));
                     } catch (MessagingException e) {
                         log.error("Error while traversing messages", e);
                     }

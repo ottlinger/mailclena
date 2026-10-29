@@ -24,6 +24,10 @@ import jakarta.mail.MessagingException;
 import jakarta.mail.Store;
 import me.tongfei.progressbar.ProgressBar;
 import org.apache.commons.lang3.tuple.Pair;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.core.Appender;
+import org.apache.logging.log4j.core.LogEvent;
+import org.apache.logging.log4j.core.Logger;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -32,11 +36,17 @@ import org.mockito.MockedStatic;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.mockStatic;
@@ -105,6 +115,47 @@ class MailClientTest {
         verify(message).getFrom();
         verify(message).getSubject();
         verify(store).close();
+    }
+
+    @Test
+    void listShowsIsoSentDateWithTime() throws MessagingException {
+        for (String date : Arrays.asList("2026-03-05 09:07:03", "2019-12-30 23:59:59",
+                "2021-01-01 00:00:00", "2024-02-29 12:34:56")) {
+            assertListShowsSentDate(date);
+        }
+    }
+
+    @Test
+    void listHandlesMissingSentDate() throws MessagingException {
+        assertListShowsSentDate(null);
+    }
+
+    private void assertListShowsSentDate(String date) throws MessagingException {
+        doReturn(Optional.of(storeAndFolder)).when(mailClient).openFolder(Folder.READ_ONLY);
+        when(storeAndFolder.getLeft()).thenReturn(store);
+        when(storeAndFolder.getRight()).thenReturn(folder);
+        when(folder.getMessages()).thenReturn(new Message[]{message});
+        when(message.getSentDate()).thenReturn(date == null ? null
+                : Date.from(LocalDateTime.parse(date.replace(' ', 'T')).atZone(ZoneId.systemDefault()).toInstant()));
+
+        List<String> output = new ArrayList<>();
+        Appender appender = mock(Appender.class);
+        when(appender.getName()).thenReturn("iso-date-test");
+        when(appender.isStarted()).thenReturn(true);
+        doAnswer(invocation -> {
+            LogEvent event = invocation.getArgument(0);
+            output.add(event.getMessage().getFormattedMessage());
+            return null;
+        }).when(appender).append(any(LogEvent.class));
+        Logger logger = (Logger) LogManager.getLogger(MailClient.class);
+        logger.addAppender(appender);
+        try {
+            assertThat(mailClient.list()).isEqualTo(1);
+
+            assertThat(output).contains("0 bytes / " + date + System.lineSeparator() + "Subject: null / From: null");
+        } finally {
+            logger.removeAppender(appender);
+        }
     }
 
     @Test
