@@ -65,6 +65,12 @@ public final class MailClient {
         this(mailConfiguration, Session.getInstance(getProperties(mailConfiguration)));
     }
 
+    /**
+     * Creates a client with a given email session, useful for testing.
+     *
+     * @param mailConfiguration credentials and host of the mailbox.
+     * @param emailSession email session to use for connecting to the mailbox.
+     */
     @VisibleForTesting
     MailClient(MailConfiguration mailConfiguration, Session emailSession) {
         this.mailConfiguration = mailConfiguration;
