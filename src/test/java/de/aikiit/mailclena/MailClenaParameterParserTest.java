@@ -17,13 +17,29 @@
  */
 package de.aikiit.mailclena;
 
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.help.HelpFormatter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import org.mockito.MockedStatic;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.io.UncheckedIOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.ArgumentMatchers.isNull;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.mockStatic;
+import static org.mockito.Mockito.when;
 
 class MailClenaParameterParserTest {
 
@@ -56,14 +72,47 @@ class MailClenaParameterParserTest {
 
     @Test
     void callWithNullOrEmptyParameter() {
-        assertThat(parser.extractConfiguration((String[]) null)).isEmpty();
-        assertThat(parser.extractConfiguration()).isEmpty();
+        assertHelpOutput(() -> assertThat(parser.extractConfiguration((String[]) null)).isEmpty());
+        assertHelpOutput(() -> assertThat(parser.extractConfiguration()).isEmpty());
     }
 
     @Test
     void callWithoutParameterValuesButAllKeys() {
-        assertThatThrownBy(() -> parser.extractConfiguration("-h", "-u", "-p"))
-                .isInstanceOf(IllegalArgumentException.class);
+        assertHelpOutput(() -> assertThatThrownBy(() -> parser.extractConfiguration("-h", "-u", "-p"))
+                .isInstanceOf(IllegalArgumentException.class));
+    }
+
+    @Test
+    void helpOutputFailureRetainsCause() throws IOException {
+        final HelpFormatter formatter = mock(HelpFormatter.class);
+        final HelpFormatter.Builder builder = mock(HelpFormatter.Builder.class);
+        final IOException failure = new IOException("Output unavailable");
+        when(builder.setShowSince(false)).thenReturn(builder);
+        when(builder.get()).thenReturn(formatter);
+        doThrow(failure).when(formatter).printHelp(eq("MailClena"), isNull(), any(Options.class), isNull(), eq(false));
+
+        try (MockedStatic<HelpFormatter> formatters = mockStatic(HelpFormatter.class)) {
+            formatters.when(HelpFormatter::builder).thenReturn(builder);
+            assertThatThrownBy(() -> parser.extractConfiguration())
+                    .isInstanceOf(UncheckedIOException.class)
+                    .hasMessage("Unable to print command line help")
+                    .hasCause(failure);
+        }
+    }
+
+    private void assertHelpOutput(Runnable invocation) {
+        final PrintStream originalOut = System.out;
+        final ByteArrayOutputStream output = new ByteArrayOutputStream();
+        try (PrintStream capturedOut = new PrintStream(output, true, StandardCharsets.UTF_8)) {
+            System.setOut(capturedOut);
+            invocation.run();
+        } finally {
+            System.setOut(originalOut);
+        }
+        assertThat(output.toString(StandardCharsets.UTF_8))
+                .contains("MailClena", "--host", "--username", "--password", "--command",
+                        "Hostname", "Username", "Password", "Command to execute")
+                .doesNotContain("Since");
     }
 
     @Test
