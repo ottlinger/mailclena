@@ -25,7 +25,10 @@ import jakarta.mail.MessagingException;
 import jakarta.mail.Session;
 import jakarta.mail.Store;
 import lombok.extern.log4j.Log4j2;
+import me.tongfei.progressbar.DelegatingProgressBarConsumer;
 import me.tongfei.progressbar.ProgressBar;
+import me.tongfei.progressbar.ProgressBarBuilder;
+import me.tongfei.progressbar.ProgressBarStyle;
 import org.apache.commons.lang3.tuple.Pair;
 import org.assertj.core.util.VisibleForTesting;
 
@@ -117,7 +120,14 @@ public final class MailClient {
     @VisibleForTesting
     // Terminal detection can block on headless Windows runners while the POP3 session times out.
     static Iterable<Message> withProgress(List<Message> messages, String task, boolean interactive) {
-        return interactive ? ProgressBar.wrap(messages, task) : messages;
+        if (!interactive) {
+            return messages;
+        }
+        // Cursor-based rendering would overwrite the last line of multiline mail logs.
+        return ProgressBar.wrap(messages, new ProgressBarBuilder()
+                .setTaskName(task)
+                .setStyle(ProgressBarStyle.ASCII)
+                .setConsumer(new DelegatingProgressBarConsumer(log::info, 100)));
     }
 
     /**

@@ -43,6 +43,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -90,14 +91,33 @@ class MailClientTest {
     }
 
     @Test
-    void interactiveProgressUsesProgressBar() {
-        List<Message> messages = Arrays.asList(message);
-        try (MockedStatic<ProgressBar> progressBar = mockStatic(ProgressBar.class)) {
-            progressBar.when(() -> ProgressBar.wrap(messages, "Listing")).thenReturn(messages);
+    void interactiveProgressDoesNotOverwriteMultilineMailLogs() {
+        List<Message> messages = Arrays.asList(message, message);
+        List<String> output = new CopyOnWriteArrayList<>();
+        Appender appender = mock(Appender.class);
+        when(appender.getName()).thenReturn("interactive-progress-test");
+        when(appender.isStarted()).thenReturn(true);
+        doAnswer(invocation -> {
+            LogEvent event = invocation.getArgument(0);
+            output.add(event.getMessage().getFormattedMessage());
+            return null;
+        }).when(appender).append(any(LogEvent.class));
+        Logger logger = (Logger) LogManager.getLogger(MailClient.class);
+        logger.addAppender(appender);
+        String mailDetails = "Marking for deletion: 42 bytes / null"
+                + System.lineSeparator() + "Subject: Test subject / From: sender@example.test";
+        try {
+            for (Message current : MailClient.withProgress(messages, "Deleting", true)) {
+                assertThat(current).isSameAs(message);
+                logger.info(mailDetails);
+            }
 
-            assertThat(MailClient.withProgress(messages, "Listing", true)).isSameAs(messages);
-
-            progressBar.verify(() -> ProgressBar.wrap(messages, "Listing"));
+            assertThat(output).contains(mailDetails);
+            assertThat(output.stream().filter(line -> line.startsWith("Deleting"))).isNotEmpty();
+            assertThat(output.stream().filter(line -> line.startsWith("Deleting")))
+                    .allSatisfy(line -> assertThat(line).doesNotContain("\r", "\u001B"));
+        } finally {
+            logger.removeAppender(appender);
         }
     }
 
