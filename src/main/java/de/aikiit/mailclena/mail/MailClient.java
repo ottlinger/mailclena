@@ -181,8 +181,8 @@ public final class MailClient {
                 for (Message message : withProgress(messages, "Deleting", System.console() != null)) {
                     try {
                         long messageSize = message.getSize();
-                        log.info("Marking for deletion: {} bytes / {} / Message: {} / From: {}",
-                                messageSize, message.getSentDate(), message.getSubject(), Arrays.toString(message.getFrom()));
+                        log.info("Marking for deletion: {} bytes / {}{}Subject: {} / From: {}",
+                                messageSize, message.getSentDate(), System.lineSeparator(), message.getSubject(), Arrays.toString(message.getFrom()));
                         message.setFlag(Flags.Flag.DELETED, true);
                         mailSize.addAndGet(messageSize);
                     } catch (MessagingException e) {

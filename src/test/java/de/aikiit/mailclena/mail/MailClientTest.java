@@ -201,6 +201,35 @@ class MailClientTest {
     }
 
     @Test
+    void deleteShowsSubjectOnNewLine() throws MessagingException {
+        doReturn(Optional.of(storeAndFolder)).when(mailClient).openFolder(Folder.READ_WRITE);
+        when(storeAndFolder.getLeft()).thenReturn(store);
+        when(storeAndFolder.getRight()).thenReturn(folder);
+        when(folder.getMessages()).thenReturn(new Message[]{message});
+        when(message.getSubject()).thenReturn("Test subject");
+
+        List<String> output = new ArrayList<>();
+        Appender appender = mock(Appender.class);
+        when(appender.getName()).thenReturn("delete-subject-test");
+        when(appender.isStarted()).thenReturn(true);
+        doAnswer(invocation -> {
+            LogEvent event = invocation.getArgument(0);
+            output.add(event.getMessage().getFormattedMessage());
+            return null;
+        }).when(appender).append(any(LogEvent.class));
+        Logger logger = (Logger) LogManager.getLogger(MailClient.class);
+        logger.addAppender(appender);
+        try {
+            assertThat(mailClient.delete()).isPresent().hasValue(0L);
+
+            assertThat(output).contains("Marking for deletion: 0 bytes / null"
+                    + System.lineSeparator() + "Subject: Test subject / From: null");
+        } finally {
+            logger.removeAppender(appender);
+        }
+    }
+
+    @Test
     void deleteWithMockedMailInteractionAndNoMessages() throws MessagingException {
         doReturn(Optional.of(storeAndFolder)).when(mailClient).openFolder(Folder.READ_WRITE);
 
