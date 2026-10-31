@@ -100,8 +100,16 @@ public final class MailClient {
         return Optional.of(Pair.of(store, emailFolder));
     }
 
-    // Terminal detection can block on headless Windows runners while the POP3 session times out.
+     /**
+     * Wraps a list of messages into a progress bar if the application is running in an interactive terminal.
+     *
+     * @param messages list of messages to wrap.
+     * @param task name of the task to display in the progress bar.
+     * @param interactive {@code true} if the application is running in an interactive terminal, {@code false} otherwise.
+     * @return iterable of messages with or without progress bar.
+     */
     @VisibleForTesting
+    // Terminal detection can block on headless Windows runners while the POP3 session times out.
     static Iterable<Message> withProgress(List<Message> messages, String task, boolean interactive) {
         return interactive ? ProgressBar.wrap(messages, task) : messages;
     }
@@ -116,7 +124,7 @@ public final class MailClient {
         try {
             Optional<Pair<Store, Folder>> folder = openFolder(Folder.READ_ONLY);
 
-            if (!folder.isPresent()) {
+            if (folder.isEmpty()) {
                 log.error("Unable to open folder in read-only mode to list mails, will abort.");
                 return -1;
             }
@@ -162,7 +170,7 @@ public final class MailClient {
         try {
             Optional<Pair<Store, Folder>> folder = openFolder(Folder.READ_WRITE);
 
-            if (!folder.isPresent()) {
+            if (folder.isEmpty()) {
                 log.error("Unable to open folder in write mode to remove mails, will abort.");
                 return Optional.empty();
             }
@@ -210,7 +218,7 @@ public final class MailClient {
      */
     public void execute(String command) {
         Optional<MailClientCommands> cmd = parse(command);
-        if (!cmd.isPresent()) {
+        if (cmd.isEmpty()) {
             log.info("No explicit command given, will fallback to 'list'");
             cmd = Optional.of(LIST);
         }
