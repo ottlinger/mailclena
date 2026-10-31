@@ -181,8 +181,8 @@ public final class MailClient {
 <span class="pc bpc" id="L181" title="1 of 4 branches missed.">                for (Message message : withProgress(messages, &quot;Deleting&quot;, System.console() != null)) {</span>
                     try {
 <span class="fc" id="L183">                        long messageSize = message.getSize();</span>
-<span class="fc" id="L184">                        log.info(&quot;Marking for deletion: {} bytes / {} / Message: {} / From: {}&quot;,</span>
-<span class="fc" id="L185">                                messageSize, message.getSentDate(), message.getSubject(), Arrays.toString(message.getFrom()));</span>
+<span class="fc" id="L184">                        log.info(&quot;Marking for deletion: {} bytes / {}{}Subject: {} / From: {}&quot;,</span>
+<span class="fc" id="L185">                                messageSize, message.getSentDate(), System.lineSeparator(), message.getSubject(), Arrays.toString(message.getFrom()));</span>
 <span class="fc" id="L186">                        message.setFlag(Flags.Flag.DELETED, true);</span>
 <span class="fc" id="L187">                        mailSize.addAndGet(messageSize);</span>
 <span class="fc" id="L188">                    } catch (MessagingException e) {</span>
