@@ -830,30 +830,30 @@ file comparators, endian transformation classes, and much more.</description>
         </reference>
       </externalReferences>
     </component>
-    <component type="library" bom-ref="pkg:maven/com.google.guava/guava@33.7.2-jre?type=jar">
+    <component type="library" bom-ref="pkg:maven/com.google.guava/guava@33.8.0-jre?type=jar">
       <group>com.google.guava</group>
       <name>guava</name>
-      <version>33.7.2-jre</version>
+      <version>33.8.0-jre</version>
       <description>Guava is a suite of core and expanded libraries that include
     utility classes, Google's collections, I/O classes, and
     much more.</description>
       <scope>required</scope>
       <hashes>
-        <hash alg="MD5">b07f61705f717d9ae7946c7fdb1efd7a</hash>
-        <hash alg="SHA-1">e70def5b06cfb109ea050de99870e79c8ce80dbc</hash>
-        <hash alg="SHA-256">b530942257fb935f8b2cfaa5f8eb5bd59c555fd8e8d01b8ce98912e077ea606c</hash>
-        <hash alg="SHA-512">bd663dc02f2293a552d82829518435b8cfcd77b7c73eeb638aef93918ef7613ad2a869003b09d1afb4446fa74308041daa7a6aea85c1bedb17db1f5f0c2c5c0b</hash>
-        <hash alg="SHA-384">7c1d8db6504620e2feb70d56e4bffb479e5ba292c1d911da060cb66f2ac3d4050c718a72e6cfd6c82a36fd840c499942</hash>
-        <hash alg="SHA3-384">13dcb7e8318a75368b33e1abc3a5b9b674bed950d6cfe1e7ca8be8f42f642816e69ae5d39d5ddbe998fe2c9acbf6ee28</hash>
-        <hash alg="SHA3-256">adee2b0b99a4777a1fb04eb1a26d6b44aa47457c850dbf43d743d17801615c18</hash>
-        <hash alg="SHA3-512">5bff0e702aaa6bfbf3fdd8fb963b6242d5dbecd8b7601afc0bfe158314887352d48c79c4ef9e256a0510474ac39493c59ca277bd1989a04705a723c6045fe4b7</hash>
+        <hash alg="MD5">6cab07839b624bf0a3de7338c9bafcee</hash>
+        <hash alg="SHA-1">bb3b79346325315062192205fa6636dd5873151f</hash>
+        <hash alg="SHA-256">97b79ec3f2c0a6313a0c2df51ce1abdf8907e6531803467b81efcaaf99b35161</hash>
+        <hash alg="SHA-512">ef92dc2efc21f7e6a453ca3a905e25853e1fc375a5ec51b375815f55ea72248a062534a8961d756ea1de7d95f1b8d0eca5a2dc32aeaebea6f0c808e00c476c82</hash>
+        <hash alg="SHA-384">fc47fdce7bd427580a31f350aa93fa3b4e35701f121af072159fd9fab3c3d1f978905e070bf268ff5aeff8a0d684633a</hash>
+        <hash alg="SHA3-384">ebee6b14c5914076220b507469f8a5a106c0ce6799f4384ba38e5b700af11df3f46a2fc8f0eecf2c5647f138f22ba95b</hash>
+        <hash alg="SHA3-256">06a4042eb73c404e68e84706d79a0178b6fb50346f8008397055193a493bf256</hash>
+        <hash alg="SHA3-512">ac4a6c0ac067e73cf118611f45e646bc220b8b6edf04b5759bb8b5d2b5540196886d82f06261cc6c5e2e7f29f841f9c4e2d04ee4e6d6b34dd10974d11e2aa831</hash>
       </hashes>
       <licenses>
         <license>
           <id>Apache-2.0</id>
         </license>
       </licenses>
-      <purl>pkg:maven/com.google.guava/guava@33.7.2-jre?type=jar</purl>
+      <purl>pkg:maven/com.google.guava/guava@33.8.0-jre?type=jar</purl>
       <externalReferences>
         <reference type="website">
           <url>https://github.com/google/guava</url>
@@ -1002,29 +1002,29 @@ file comparators, endian transformation classes, and much more.</description>
         </reference>
       </externalReferences>
     </component>
-    <component type="library" bom-ref="pkg:maven/com.google.errorprone/error_prone_annotations@2.50.0?type=jar">
+    <component type="library" bom-ref="pkg:maven/com.google.errorprone/error_prone_annotations@2.52.0?type=jar">
       <publisher>Google LLC</publisher>
       <group>com.google.errorprone</group>
       <name>error_prone_annotations</name>
-      <version>2.50.0</version>
+      <version>2.52.0</version>
       <description>Error Prone is a static analysis tool for Java that catches common programming mistakes at compile-time.</description>
       <scope>required</scope>
       <hashes>
-        <hash alg="MD5">1ded1848cfd4f5167e00824faf9c4d3b</hash>
-        <hash alg="SHA-1">74ba43e49ab1184d41634af2ef0047e82c4064b0</hash>
-        <hash alg="SHA-256">4667724877f1d37a689202da191e23efa7657c62eef93ccdac406eccfe5cdd0a</hash>
-        <hash alg="SHA-512">f867b1a1fbc057fcfc37c2fa86082f5965ad6a1c45373eac6cfa6ec058cedbf7b348ab4f3d4fea2d4d105ecc401c14f24d9b16f344507e126a221d50532cb8b2</hash>
-        <hash alg="SHA-384">2986b161379c30e9805f3bcff197d7861b8c0690a021e2d7464707e57028b1953d24eefd1a36722f3c04665190b3cb48</hash>
-        <hash alg="SHA3-384">597fe452ff7e21149da3c537b61d8e1b17df792f67bcd80fbccd6647acca571a94fa8bbcf4840826a37814bb2ef0249a</hash>
-        <hash alg="SHA3-256">5447d9786f79d7dc20e8f75ac93f3a05181f3707faf6e91696dd326cdd5f5754</hash>
-        <hash alg="SHA3-512">b51065218c88f5ce0b94e6607dee42d6c01aeb69a87b6e1c656dd406f2196cc999150ce87f56fbeeecbed7e1e354ed285589fa560012e9fb5858a97dc17d2129</hash>
+        <hash alg="MD5">cf0439bb26f5593a79ae144c3068fb3f</hash>
+        <hash alg="SHA-1">83177bbb5db5bfe120666ae93fdaf44625ad7a7d</hash>
+        <hash alg="SHA-256">24822b246a2da324006fc5a1c940b1d2cf9cd716e530155c39fea695d5ab01c4</hash>
+        <hash alg="SHA-512">43b7708a96b064d86eb41d52370152bd76dc090ec1e010cc1ef9e8f17280cc9116c228c4de2e3d02c3302b1e01e8fded6fcaf2e2c79e8c2131d5b9dd59c342e3</hash>
+        <hash alg="SHA-384">c4ceb32d69f2efeb9de7a449dafd717ff142f2fa90211d4fe72d2432d925db383e2587443ce98143da59cbc32633d9f4</hash>
+        <hash alg="SHA3-384">1eb974e66e8d2385af077abc30b8ddd71b712876929caecdcb7d47bcd13d159762cd5f39d4beb5d920ad44e3af698e9c</hash>
+        <hash alg="SHA3-256">d7345c75e7c7b2af03a9f62fc432427ebed75f101e1a8f95289ca3f12019a8b4</hash>
+        <hash alg="SHA3-512">8b16f76b03cdc7512b56b67bde5ce9b5afa7c3b2d85635c761055eee3e91736bec100123d935343d8e0dc563bd97087bcd9760bb9fd627f2846bd11f10cb19bb</hash>
       </hashes>
       <licenses>
         <license>
           <id>Apache-2.0</id>
         </license>
       </licenses>
-      <purl>pkg:maven/com.google.errorprone/error_prone_annotations@2.50.0?type=jar</purl>
+      <purl>pkg:maven/com.google.errorprone/error_prone_annotations@2.52.0?type=jar</purl>
       <externalReferences>
         <reference type="website">
           <url>https://errorprone.info/error_prone_annotations</url>
@@ -1309,7 +1309,7 @@ file comparators, endian transformation classes, and much more.</description>
       <dependency ref="pkg:maven/org.apache.tamaya/tamaya-core@0.4-incubating?type=jar"/>
       <dependency ref="pkg:maven/org.apache.commons/commons-csv@1.14.1?type=jar"/>
       <dependency ref="pkg:maven/org.assertj/assertj-core@3.27.7?type=jar"/>
-      <dependency ref="pkg:maven/com.google.guava/guava@33.7.2-jre?type=jar"/>
+      <dependency ref="pkg:maven/com.google.guava/guava@33.8.0-jre?type=jar"/>
       <dependency ref="pkg:maven/org.apache.logging.log4j/log4j-core@2.26.1?type=jar"/>
       <dependency ref="pkg:maven/org.apache.logging.log4j/log4j-1.2-api@2.26.1?type=jar"/>
       <dependency ref="pkg:maven/org.apache.logging.log4j/log4j-api@2.26.1?type=jar"/>
@@ -1358,17 +1358,17 @@ file comparators, endian transformation classes, and much more.</description>
       <dependency ref="pkg:maven/net.bytebuddy/byte-buddy@1.18.3?type=jar"/>
     </dependency>
     <dependency ref="pkg:maven/net.bytebuddy/byte-buddy@1.18.3?type=jar"/>
-    <dependency ref="pkg:maven/com.google.guava/guava@33.7.2-jre?type=jar">
+    <dependency ref="pkg:maven/com.google.guava/guava@33.8.0-jre?type=jar">
       <dependency ref="pkg:maven/com.google.guava/failureaccess@1.0.3?type=jar"/>
       <dependency ref="pkg:maven/com.google.guava/listenablefuture@9999.0-empty-to-avoid-conflict-with-guava?type=jar"/>
       <dependency ref="pkg:maven/org.jspecify/jspecify@1.0.1?type=jar"/>
-      <dependency ref="pkg:maven/com.google.errorprone/error_prone_annotations@2.50.0?type=jar"/>
+      <dependency ref="pkg:maven/com.google.errorprone/error_prone_annotations@2.52.0?type=jar"/>
       <dependency ref="pkg:maven/com.google.j2objc/j2objc-annotations@3.1?type=jar"/>
     </dependency>
     <dependency ref="pkg:maven/com.google.guava/failureaccess@1.0.3?type=jar"/>
     <dependency ref="pkg:maven/com.google.guava/listenablefuture@9999.0-empty-to-avoid-conflict-with-guava?type=jar"/>
     <dependency ref="pkg:maven/org.jspecify/jspecify@1.0.1?type=jar"/>
-    <dependency ref="pkg:maven/com.google.errorprone/error_prone_annotations@2.50.0?type=jar"/>
+    <dependency ref="pkg:maven/com.google.errorprone/error_prone_annotations@2.52.0?type=jar"/>
     <dependency ref="pkg:maven/com.google.j2objc/j2objc-annotations@3.1?type=jar"/>
     <dependency ref="pkg:maven/org.apache.logging.log4j/log4j-core@2.26.1?type=jar">
       <dependency ref="pkg:maven/org.apache.logging.log4j/log4j-api@2.26.1?type=jar"/>
