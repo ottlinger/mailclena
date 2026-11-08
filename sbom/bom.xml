@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bom serialNumber="urn:uuid:e129d8c1-b834-37cb-9361-562e21b83ac9" version="1" xmlns="http://cyclonedx.org/schema/bom/1.6">
+<bom serialNumber="urn:uuid:7fad79a7-c3be-34a1-9e59-298a2ff28f1c" version="1" xmlns="http://cyclonedx.org/schema/bom/1.6">
   <metadata>
     <lifecycles>
       <lifecycle>
@@ -27,11 +27,11 @@
         </component>
       </components>
     </tools>
-    <component type="library" bom-ref="pkg:maven/de.aikiit/mailclena@0.0.1-SNAPSHOT?type=jar">
+    <component type="library" bom-ref="pkg:maven/de.aikiit/mailclena@0.0.1?type=jar">
       <publisher>AIKI IT</publisher>
       <group>de.aikiit</group>
       <name>mailclena</name>
-      <version>0.0.1-SNAPSHOT</version>
+      <version>0.0.1</version>
       <description>Tool to erase and list mails from postboxes.</description>
       <licenses>
         <license>
@@ -39,7 +39,7 @@
           <url>https://www.gnu.org/licenses/gpl-3.0.txt</url>
         </license>
       </licenses>
-      <purl>pkg:maven/de.aikiit/mailclena@0.0.1-SNAPSHOT?type=jar</purl>
+      <purl>pkg:maven/de.aikiit/mailclena@0.0.1?type=jar</purl>
       <externalReferences>
         <reference type="website">
           <url>https://github.com/ottlinger/mailclena</url>
@@ -1300,7 +1300,7 @@ file comparators, endian transformation classes, and much more.</description>
     </component>
   </components>
   <dependencies>
-    <dependency ref="pkg:maven/de.aikiit/mailclena@0.0.1-SNAPSHOT?type=jar">
+    <dependency ref="pkg:maven/de.aikiit/mailclena@0.0.1?type=jar">
       <dependency ref="pkg:maven/jakarta.mail/jakarta.mail-api@2.1.5?type=jar"/>
       <dependency ref="pkg:maven/org.eclipse.angus/jakarta.mail@2.0.5?type=jar"/>
       <dependency ref="pkg:maven/me.tongfei/progressbar@0.10.2?type=jar"/>
