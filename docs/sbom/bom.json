@@ -1,7 +1,7 @@
 {
   "bomFormat" : "CycloneDX",
   "specVersion" : "1.6",
-  "serialNumber" : "urn:uuid:e129d8c1-b834-37cb-9361-562e21b83ac9",
+  "serialNumber" : "urn:uuid:7fad79a7-c3be-34a1-9e59-298a2ff28f1c",
   "version" : 1,
   "metadata" : {
     "lifecycles" : [
@@ -57,11 +57,11 @@
     },
     "component" : {
       "type" : "library",
-      "bom-ref" : "pkg:maven/de.aikiit/mailclena@0.0.1-SNAPSHOT?type=jar",
+      "bom-ref" : "pkg:maven/de.aikiit/mailclena@0.0.1?type=jar",
       "publisher" : "AIKI IT",
       "group" : "de.aikiit",
       "name" : "mailclena",
-      "version" : "0.0.1-SNAPSHOT",
+      "version" : "0.0.1",
       "description" : "Tool to erase and list mails from postboxes.",
       "licenses" : [
         {
@@ -71,7 +71,7 @@
           }
         }
       ],
-      "purl" : "pkg:maven/de.aikiit/mailclena@0.0.1-SNAPSHOT?type=jar",
+      "purl" : "pkg:maven/de.aikiit/mailclena@0.0.1?type=jar",
       "externalReferences" : [
         {
           "type" : "website",
@@ -2279,7 +2279,7 @@
   ],
   "dependencies" : [
     {
-      "ref" : "pkg:maven/de.aikiit/mailclena@0.0.1-SNAPSHOT?type=jar",
+      "ref" : "pkg:maven/de.aikiit/mailclena@0.0.1?type=jar",
       "dependsOn" : [
         "pkg:maven/jakarta.mail/jakarta.mail-api@2.1.5?type=jar",
         "pkg:maven/org.eclipse.angus/jakarta.mail@2.0.5?type=jar",
