@@ -20,7 +20,7 @@
   <groupId>de.aikiit</groupId>
   <artifactId>mailclena</artifactId>
   <packaging>jar</packaging>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.1</version>
   <name>mailclena</name>
   <description>Tool to erase and list mails from postboxes.</description>
   <url>https://github.com/ottlinger/mailclena</url>
