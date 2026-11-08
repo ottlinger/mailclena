@@ -3,6 +3,8 @@
 
 Tool that logs into mail accounts and removes all mails.
 
+Current development version: **1.0.0-SNAPSHOT**.
+
 ## Integrations
 
 [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/ottlinger/mailclena.svg)](http://isitmaintained.com/project/ottlinger/mailclena "Average time to resolve an issue")
@@ -44,7 +46,7 @@ You need to check out the application and build it with the help of [Java](https
 ```bash
 $ ./mvnw
 Project is being built.
-$ java -jar target/mailclena-0.0.1-SNAPSHOT-executable.jar
+$ java -jar target/mailclena-1.0.0-SNAPSHOT-executable.jar
 22:58:33.294 [main] INFO  de.aikiit.mailclena.MailClena - Hello World :-)
 ```
 
@@ -69,7 +71,7 @@ mvn wrapper:wrapper
 #### Operation: clean
 
 ```bash
-$ java -jar target/mailclena-0.0.1-SNAPSHOT-executable.jar -h=host.tld.org -u=yourmail@yourtld.org -p=yourpassword -c=clean
+$ java -jar target/mailclena-1.0.0-SNAPSHOT-executable.jar -h=host.tld.org -u=yourmail@yourtld.org -p=yourpassword -c=clean
 00:04:20.144 [main] INFO  de.aikiit.mailclena.MailClena - MailClena is launching with the given configuration ....
 00:04:20.972 [main] INFO  de.aikiit.mailclena.mail.MailClient - Found 0 messages.
 00:04:21.422 [main] INFO  de.aikiit.mailclena.mail.MailClient - Starting to delete 0 messages.
@@ -82,7 +84,7 @@ $ java -jar target/mailclena-0.0.1-SNAPSHOT-executable.jar -h=host.tld.org -u=yo
 #### no operation / defaults to list
 
 ```bash
-$ java -jar target/mailclena-0.0.1-SNAPSHOT-executable.jar -h=host.tld.org -u=yourmail@yourtld.org -p=yourpassword
+$ java -jar target/mailclena-1.0.0-SNAPSHOT-executable.jar -h=host.tld.org -u=yourmail@yourtld.org -p=yourpassword
 17:19:09.802 [main] INFO  de.aikiit.mailclena.MailClena - MailClena is launching with the given configuration ....
 17:19:11.410 [main] INFO  de.aikiit.mailclena.mail.MailClient - No messages found - nothing to be done here.
 17:19:11.410 [main] INFO  de.aikiit.mailclena.MailClena - MailClena is shutting down .... bye bye :-)
